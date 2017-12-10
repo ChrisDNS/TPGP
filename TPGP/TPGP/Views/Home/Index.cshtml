@@ -1,4 +1,5 @@
 ﻿
+@model TPGP.Models.Jobs.User
 @{
     ViewBag.Title = "Index";
     Layout = null;
@@ -42,27 +43,33 @@
             </div>
         </nav>
 
-        <!-- Page Content -->
-        <div class="container">
-            <form class="form-signin">
-                <h2 class="form-signin-heading">Please sign in</h2>
-                <label for="inputEmail" class="sr-only">Email address</label>
-                <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-                <label for="inputPassword" class="sr-only">Password</label>
-                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-                <button class="btn btn-lg btn-block" type="submit">Sign in</button>
-            </form>
-        </div> <!-- /container -->
+        <section class="container">
+            <section class="login-form">
+                @using (Html.BeginForm("Login", "Home", FormMethod.Post, new { role = "login" }))
+                {
+                    <img src="~/Content/logo.png" class="img-responsive" alt="" />
+                    @Html.TextBoxFor(m => m.Username, new { @class = "form-control input-lg", type = "text", placeholder = "Username" })
+                    @Html.ValidationMessageFor(m => m.Username)
+                    @Html.PasswordFor(m => m.PasswordHash, new { @class = "form-control input-lg", type = "password", placeholder = "Password" })
+                    @Html.ValidationMessageFor(m => m.PasswordHash)
+                    @Html.ValidationSummary(true, "", new { @class = "text-danager" })
+                    <button class="btn btn-lg btn-primary btn-block" type="submit" name="submit" value="Login">Sign in</button>
+                }
+            </section>
+        </section>
+    </div>
 
-        <footer class="footer">
-            <div class="container">
-                <span class="text-muted">FOOOOOOOOOOOTTTTTTEEEEEEEEEERRRRRRRRRRR.</span>
-            </div>
-        </footer>
+    <footer class="footer">
+        <div class="container">
+            <span class="text-muted">FOOOOOOOOOOOTTTTTTEEEEEEEEEERRRRRRRRRRR.</span>
+        </div>
+    </footer>
     </div>
 
     <!-- Bootstrap core JavaScript -->
     <script src="~/scripts/vendor/jquery/jquery-3.2.1.min.js"></script>
     <script src="~/scripts/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/scripts/jquery.validate.min.js"></script>
+    <script src="~/scripts/jquery.validate.unobtrusive.min.js"></script>
 </body>
 </html>

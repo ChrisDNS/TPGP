@@ -10,9 +10,7 @@ namespace TPGP.Models.DAL.Interfaces
     {
         IEnumerable<T> GetAll();
 
-        IEnumerable<T> GetBy(Expression<Func<T, bool>> filter = null, Func<IQueryable<T>,
-                             IOrderedQueryable<T>> orderBy = null,
-                             string includeProperties = "");
+        IEnumerable<T> GetBy(Expression<Func<T, bool>> filter);
 
         T GetById(long id);
 
@@ -21,5 +19,7 @@ namespace TPGP.Models.DAL.Interfaces
         void Update(T entity);
 
         void Delete(long id);
+
+        void SaveChanges();
     }
 }

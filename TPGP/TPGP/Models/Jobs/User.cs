@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace TPGP.Models.Jobs
 {
@@ -8,9 +9,16 @@ namespace TPGP.Models.Jobs
 
         public string Firstname { get; set; }
         public string Lastname { get; set; }
+
+        [Required(ErrorMessage = "Username field is required.")]
         public string Username { get; set; }
+
         public string EmailAddress { get; set; }
+
+        [Required(ErrorMessage = "Password field is required.")]
+        [DataType(DataType.Password)]
         public string PasswordHash { get; set; }
+
         public string PasswordSalt { get; set; }
         public string Level { get; set; }
 
@@ -18,7 +26,7 @@ namespace TPGP.Models.Jobs
         {
         }
 
-        public User(long id, string firstname, string lastname, string username, string emailAddress, 
+        public User(long id, string firstname, string lastname, string username, string emailAddress,
                     string passwordHash, string passwordSalt, string level)
         {
             Id = id;
