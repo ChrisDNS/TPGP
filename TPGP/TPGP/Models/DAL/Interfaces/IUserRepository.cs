@@ -8,6 +8,5 @@ namespace TPGP.Models.DAL.Interfaces
 {
     public interface IUserRepository : IRepository<User>
     {
-        //fonction specifiques aux Users
     }
 }

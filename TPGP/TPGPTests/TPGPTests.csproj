@@ -60,6 +60,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="LDAPTests\LDAPTests.cs" />
+    <Compile Include="HomeControllerTests\HomeControllerTests.cs" />
     <Compile Include="RouteTests\RouteTester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -68,6 +70,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\LDAP\LDAP.csproj">
+      <Project>{cf9d47d3-c21a-4e37-ab93-50aa1b66d23b}</Project>
+      <Name>LDAP</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TPGP\TPGP.csproj">
       <Project>{18e8cd56-7824-4b32-9dc7-57c70bac4736}</Project>
       <Name>TPGP</Name>

@@ -20,13 +20,6 @@ namespace TPGPTests.RouteTests
             //Assert.AreEqual(UrlParameter.Optional, routeData.Values["id"]);
         }
 
-        [TestMethod]
-        public void Routes_FakeURL_ReturnNull()
-        {
-            RouteData routeData = CreateURL("/blabla/bloblo/okokok");
-            Assert.IsNull(routeData);
-        }
-
         private static RouteData CreateURL(string url)
         {
             Mock<HttpContextBase> mockContext = new Mock<HttpContextBase>();

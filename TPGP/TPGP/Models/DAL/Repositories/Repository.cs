@@ -10,7 +10,7 @@ namespace TPGP.Models.DAL.Repositories
 {
     public class Repository<T> : IRepository<T> where T : class
     {
-        private TPGPContext dbContext;
+        protected TPGPContext dbContext;
         private DbSet<T> dbSet;
 
         public Repository(TPGPContext ctx)
