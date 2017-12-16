@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LDAP;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,9 +7,10 @@ using System.Web.Mvc;
 
 namespace TPGP.Controllers
 {
-    public class UnauthorisedController : Controller
+    [CustomAuthorize]
+    public class AdminController : Controller
     {
-        // GET: Unauthorised
+        // GET: Admin
         public ActionResult Index()
         {
             return View();

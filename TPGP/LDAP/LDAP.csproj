@@ -62,7 +62,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AuthAttribute.cs" />
     <Compile Include="LDAPService.cs" />
     <Compile Include="LDAPUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

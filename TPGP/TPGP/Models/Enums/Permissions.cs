@@ -5,7 +5,7 @@ using System.Web;
 
 namespace TPGP.Models.Enums
 {
-    public enum Permission
+    public enum Permissions
     {
 
     }

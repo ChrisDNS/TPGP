@@ -34,7 +34,7 @@ namespace LDAP
         public LDAPUser AuthenticationAndIdentification(string login, string password)
         {
             LDAPUser user = null;
-            if ((user = users.Find(u => u.Username == login)) == null) return user;
+            if ((user = users.Find(u => u.Username == login)) == null) return null;
             else
             {
                 if (user.Password == password)

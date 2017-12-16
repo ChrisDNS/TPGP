@@ -1,41 +1,63 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using TPGP.Models.DAL.Context;
+using TPGP.Models.DAL.Interfaces;
+using TPGP.Models.DAL.Repositories;
+using TPGP.Models.Enums;
+using TPGP.Models.Jobs;
 
 namespace TPGP.Models
 {
     public class RBACUser
     {
-        public int User_Id { get; set; }
-        public bool IsSysAdmin { get; set; }
+        public long Id { get; set; }
+
+        public bool IsAdmin { get; set; }
         public string Username { get; set; }
         public UserRole Role { get; set; }
 
-        public RBACUser(string _username)
-        {
-            this.Username = _username;
-            this.IsSysAdmin = false;
-            Role = new UserRole();
-            GetDatabaseUserRolesPermissions();
-        }
+        private readonly IUserRepository userRepository;
 
-        private void GetDatabaseUserRolesPermissions()
+        public RBACUser(string username)
         {
-            //Get user roles and permissions from database tables...      
+            this.Username = username;
+            this.IsAdmin = false;
+
+            userRepository = new UserRepository(new TPGPContext());
+
+            GetUserRolePermissions();
         }
 
         public bool HasPermission(string requiredPermission) => Role.Permissions.Where(
-                                                                p => p.PermissionDescription == requiredPermission).ToList().Count > 0;
+                                                                p => p.PermissionName == requiredPermission).ToList().Count > 0;
 
-        public bool HasRole(string role) => Role.RoleName == role;
+        public bool HasRole(Roles role) => Role.RoleName == role;
+
+        private void GetUserRolePermissions()
+        {
+            User user = userRepository.GetBy(u => u.Username == Username).FirstOrDefault();
+            if (user != null)
+            {
+                Id = user.Id;
+                UserRole userRole = new UserRole { Id = user.Role.Id, RoleName = user.Role.RoleName };
+                foreach (var permission in user.Role.Permissions)
+                {
+                    userRole.Permissions.Add(new RolePermission { Id = permission.Id, PermissionName = permission.Name});
+                }
+
+                Role = userRole;
+
+                if (!IsAdmin)
+                    IsAdmin = user.Role.IsAdmin;
+            }
+        }
     }
 
     public class UserRole
     {
         public long Id { get; set; }
 
-        public string RoleName { get; set; }
+        public Roles RoleName { get; set; }
         public List<RolePermission> Permissions = new List<RolePermission>();
     }
 
@@ -43,6 +65,6 @@ namespace TPGP.Models
     {
         public long Id { get; set; }
 
-        public string PermissionDescription { get; set; }
+        public string PermissionName { get; set; }
     }
 }

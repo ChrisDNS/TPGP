@@ -1,7 +1,12 @@
 ﻿using LDAP;
+using System;
+using System.Diagnostics;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
+using TPGP.Models.DAL.Context;
 using TPGP.Models.DAL.Interfaces;
+using TPGP.Models.Enums;
 using TPGP.Models.Jobs;
 
 namespace TPGP.Controllers
@@ -9,18 +14,23 @@ namespace TPGP.Controllers
     public class HomeController : Controller
     {
         private readonly IUserRepository userRepository;
+        private readonly IRoleRepository roleRepository;
 
-        public HomeController(IUserRepository userRepository)
+        public HomeController(IUserRepository userRepository, IRoleRepository roleRepository)
         {
             this.userRepository = userRepository;
+            this.roleRepository = roleRepository;
         }
 
         // GET: Home
         public ActionResult Index()
         {
-            User user = new User("Sarra", "Sarra", "Sarra", "sarra@sarra.sarra", false, null);
-            userRepository.Insert(user);
-            userRepository.SaveChanges();
+            //juste pour créer la database
+            using (var ctx = new TPGPContext())
+            {
+                var rolesCount = ctx.Roles.Count();
+            }
+            //juste pour créer la database
 
             return View();
         }
@@ -37,8 +47,11 @@ namespace TPGP.Controllers
                     return View("Index", userModel);
                 }
 
-                bool userAlreadyExists = userRepository.GetBy(u => u.Username == userModel.Username).ToList().Count > 0;
-                if (!userAlreadyExists)
+                HttpCookie cookie = new HttpCookie("Info");
+                cookie.Expires = DateTime.Now.AddHours(1);
+
+                User user = userRepository.GetBy(u => u.Username == userModel.Username).First();
+                if (user == null)
                 {
                     User newUser = new User()
                     {
@@ -46,12 +59,28 @@ namespace TPGP.Controllers
                         Lastname = ldapUserDetails.Lastname,
                         Username = ldapUserDetails.Username,
                         Email = ldapUserDetails.Email,
-                        IsAdmin = false,
-                        Role = new Role()
+                        Role = new Role() { RoleName = Roles.COLLABORATOR, IsAdmin = false }
                     };
 
                     userRepository.Insert(newUser);
                     userRepository.SaveChanges();
+
+                    cookie.Values["username"] = user.Username;
+                    cookie.Values["role"] = user.Role.RoleName.ToString("g");
+                    Response.Cookies.Add(cookie);
+                }
+                else
+                {
+                    Role role = roleRepository.GetById(user.RoleId);
+
+                    cookie.Values["username"] = user.Username;
+                    cookie.Values["role"] = role.RoleName.ToString("g");
+                    Response.Cookies.Add(cookie);
+
+                    if (role.RoleName == Roles.ADMIN)
+                    {
+                        return View("USER AJOUazdazdazdTE");
+                    }
                 }
 
                 return View("USER AJOUTE");

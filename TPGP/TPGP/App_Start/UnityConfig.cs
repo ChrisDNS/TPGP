@@ -46,6 +46,7 @@ namespace TPGP
             // TODO: Register your type's mappings here.
             // container.RegisterType<IProductRepository, ProductRepository>();
             container.RegisterType<IUserRepository, UserRepository>();
+            container.RegisterType<IRoleRepository, RoleRepository>();
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }
     }

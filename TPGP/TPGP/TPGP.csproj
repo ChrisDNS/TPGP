@@ -246,20 +246,24 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\UnauthorisedController.cs" />
+    <Compile Include="Controllers\UnauthorizedController.cs" />
     <Compile Include="Controllers\WalletsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CustomAuthorizeAttribute.cs" />
     <Compile Include="Models\DAL\Interfaces\IPermissionRepository.cs" />
+    <Compile Include="Models\DAL\Interfaces\IRoleRepository.cs" />
     <Compile Include="Models\DAL\Repositories\ContractRepository.cs" />
     <Compile Include="Models\DAL\Interfaces\IContractRepository.cs" />
     <Compile Include="Models\DAL\Interfaces\IRepository.cs" />
     <Compile Include="Models\DAL\Interfaces\IUserRepository.cs" />
     <Compile Include="Models\DAL\Repositories\PermissionRepository.cs" />
+    <Compile Include="Models\DAL\Repositories\RoleRepository.cs" />
     <Compile Include="Models\DAL\Repositories\UserRepository.cs" />
-    <Compile Include="Models\Enums\Permission.cs" />
+    <Compile Include="Models\Enums\Permissions.cs" />
     <Compile Include="Models\Enums\Roles.cs" />
     <Compile Include="Models\Jobs\Contract.cs" />
     <Compile Include="Models\Jobs\Permission.cs" />
@@ -268,8 +272,10 @@
     <Compile Include="Models\DAL\Repositories\Repository.cs" />
     <Compile Include="Models\DAL\Context\TPGPContext.cs" />
     <Compile Include="Models\RBACUser.cs" />
+    <Compile Include="Models\TPGPDbInitializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AuthenticationService.cs" />
+    <Compile Include="Utils\Constants.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config">
@@ -283,7 +289,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="scripts\vendor\jquery\jquery-1.10.2.min.map" />
-    <Content Include="Views\Unauthorised\Index.cshtml" />
+    <Content Include="Views\Unauthorized\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -293,6 +299,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Admin\" />
     <Folder Include="Views\Wallets\" />
   </ItemGroup>
   <ItemGroup>

@@ -18,20 +18,19 @@ namespace TPGP.Models.Jobs
         public string Lastname { get; set; }
         public string Email { get; set; }
 
-        public bool IsAdmin { get; set; }
+        public long RoleId { get; set; }
         public Role Role { get; set; }
 
         public User()
         {
         }
 
-        public User(string username, string firstname, string lastname, string email, bool isAdmin, Role role)
+        public User(string username, string firstname, string lastname, string email, Role role)
         {
             Username = username;
             Firstname = firstname;
             Lastname = lastname;
             Email = email;
-            IsAdmin = isAdmin;
             Role = role;
         }
     }
