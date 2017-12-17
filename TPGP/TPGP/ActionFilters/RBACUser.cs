@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using TPGP.Models.DAL.Context;
-using TPGP.Models.DAL.Interfaces;
-using TPGP.Models.DAL.Repositories;
+using TPGP.Context;
+using TPGP.DAL.Interfaces;
+using TPGP.DAL.Repositories;
 using TPGP.Models.Enums;
 using TPGP.Models.Jobs;
 
-namespace TPGP.Models
+namespace TPGP.ActionFilters
 {
     public class RBACUser
     {

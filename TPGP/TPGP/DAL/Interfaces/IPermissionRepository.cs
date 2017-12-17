@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using TPGP.Models.Jobs;
 
-namespace TPGP.Models.DAL.Interfaces
+namespace TPGP.DAL.Interfaces
 {
-    interface IPermissionRepository
+    public interface IPermissionRepository
     {
         Role GetUserRole(string username);
         List<Permission> GetPermissions(string username);

@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Web;
 
-namespace TPGP.Models.DAL.Interfaces
+namespace TPGP.DAL.Interfaces
 {
     public interface IRepository<T> where T : class
     {

@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using TPGP.Models.DAL.Context;
-using TPGP.Models.DAL.Interfaces;
+﻿using TPGP.Context;
+using TPGP.DAL.Interfaces;
 using TPGP.Models.Jobs;
 
-namespace TPGP.Models.DAL.Repositories
+namespace TPGP.DAL.Repositories
 {
     public class UserRepository : Repository<User>, IUserRepository
     {

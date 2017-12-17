@@ -1,11 +1,10 @@
 ﻿using LDAP;
 using System;
-using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using TPGP.Models.DAL.Context;
-using TPGP.Models.DAL.Interfaces;
+using TPGP.Context;
+using TPGP.DAL.Interfaces;
 using TPGP.Models.Enums;
 using TPGP.Models.Jobs;
 

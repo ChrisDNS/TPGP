@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
-using TPGP.Models.DAL.Context;
+using TPGP.Context;
 using TPGP.Models.Enums;
 using TPGP.Models.Jobs;
 
-namespace TPGP.Models
+namespace TPGP
 {
     public class TPGPDbInitializer : DropCreateDatabaseAlways<TPGPContext>
     {

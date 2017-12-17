@@ -1,7 +1,7 @@
 ﻿using System.Data.Entity;
 using TPGP.Models.Jobs;
 
-namespace TPGP.Models.DAL.Context
+namespace TPGP.Context
 {
     public class TPGPContext : DbContext
     {

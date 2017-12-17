@@ -1,7 +1,7 @@
 using System;
 using System.Web.Mvc;
-using TPGP.Models.DAL.Interfaces;
-using TPGP.Models.DAL.Repositories;
+using TPGP.DAL.Interfaces;
+using TPGP.DAL.Repositories;
 using Unity;
 using Unity.AspNet.Mvc;
 

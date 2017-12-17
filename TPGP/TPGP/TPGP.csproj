@@ -253,28 +253,27 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\CustomAuthorizeAttribute.cs" />
-    <Compile Include="Models\DAL\Interfaces\IPermissionRepository.cs" />
-    <Compile Include="Models\DAL\Interfaces\IRoleRepository.cs" />
-    <Compile Include="Models\DAL\Repositories\ContractRepository.cs" />
-    <Compile Include="Models\DAL\Interfaces\IContractRepository.cs" />
-    <Compile Include="Models\DAL\Interfaces\IRepository.cs" />
-    <Compile Include="Models\DAL\Interfaces\IUserRepository.cs" />
-    <Compile Include="Models\DAL\Repositories\PermissionRepository.cs" />
-    <Compile Include="Models\DAL\Repositories\RoleRepository.cs" />
-    <Compile Include="Models\DAL\Repositories\UserRepository.cs" />
+    <Compile Include="ActionFilters\CustomAuthorizeAttribute.cs" />
+    <Compile Include="DAL\Interfaces\IPermissionRepository.cs" />
+    <Compile Include="DAL\Interfaces\IRoleRepository.cs" />
+    <Compile Include="DAL\Repositories\ContractRepository.cs" />
+    <Compile Include="DAL\Interfaces\IContractRepository.cs" />
+    <Compile Include="DAL\Interfaces\IRepository.cs" />
+    <Compile Include="DAL\Interfaces\IUserRepository.cs" />
+    <Compile Include="DAL\Repositories\PermissionRepository.cs" />
+    <Compile Include="DAL\Repositories\RoleRepository.cs" />
+    <Compile Include="DAL\Repositories\UserRepository.cs" />
     <Compile Include="Models\Enums\Permissions.cs" />
     <Compile Include="Models\Enums\Roles.cs" />
     <Compile Include="Models\Jobs\Contract.cs" />
     <Compile Include="Models\Jobs\Permission.cs" />
     <Compile Include="Models\Jobs\Role.cs" />
     <Compile Include="Models\Jobs\User.cs" />
-    <Compile Include="Models\DAL\Repositories\Repository.cs" />
-    <Compile Include="Models\DAL\Context\TPGPContext.cs" />
-    <Compile Include="Models\RBACUser.cs" />
-    <Compile Include="Models\TPGPDbInitializer.cs" />
+    <Compile Include="DAL\Repositories\Repository.cs" />
+    <Compile Include="DAL\TPGPContext.cs" />
+    <Compile Include="ActionFilters\RBACUser.cs" />
+    <Compile Include="TPGPDbInitializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\AuthenticationService.cs" />
     <Compile Include="Utils\Constants.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -300,6 +299,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Services\" />
     <Folder Include="Views\Wallets\" />
   </ItemGroup>
   <ItemGroup>
