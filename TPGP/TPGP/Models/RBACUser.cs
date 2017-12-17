@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using TPGP.Models.DAL.Context;
 using TPGP.Models.DAL.Interfaces;
@@ -16,14 +17,13 @@ namespace TPGP.Models
         public string Username { get; set; }
         public UserRole Role { get; set; }
 
-        private readonly IUserRepository userRepository;
+        private readonly IUserRepository userRepository = new UserRepository(new TPGPContext());
+        private readonly IRoleRepository roleRepository = new RoleRepository(new TPGPContext());
 
         public RBACUser(string username)
         {
             this.Username = username;
             this.IsAdmin = false;
-
-            userRepository = new UserRepository(new TPGPContext());
 
             GetUserRolePermissions();
         }
@@ -35,20 +35,21 @@ namespace TPGP.Models
 
         private void GetUserRolePermissions()
         {
-            User user = userRepository.GetBy(u => u.Username == Username).FirstOrDefault();
-            if (user != null)
+            User user = userRepository.GetBy(u => u.Username == Username).First();
+            Role role = roleRepository.GetById(user.RoleId);
+            if (user != null && role != null)
             {
                 Id = user.Id;
-                UserRole userRole = new UserRole { Id = user.Role.Id, RoleName = user.Role.RoleName };
-                foreach (var permission in user.Role.Permissions)
-                {
-                    userRole.Permissions.Add(new RolePermission { Id = permission.Id, PermissionName = permission.Name});
-                }
+                UserRole userRole = new UserRole { Id = role.Id, RoleName = role.RoleName };
+//                foreach (var permission in role.Permissions)
+//                {
+//                    userRole.Permissions.Add(new RolePermission { Id = permission.Id, PermissionName = permission.Name});
+//                }
 
                 Role = userRole;
 
                 if (!IsAdmin)
-                    IsAdmin = user.Role.IsAdmin;
+                    IsAdmin = role.IsAdmin;
             }
         }
     }

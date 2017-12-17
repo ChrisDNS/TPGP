@@ -24,7 +24,7 @@ namespace TPGP.Models.DAL.Context
                                                  pr.MapRightKey("role_id");
                                                  pr.ToTable("link_permissions_roles");
                                              });
-            modelBuilder.Entity<User>().HasRequired<Role>(u => u.Role).WithMany(r => r.Users).HasForeignKey<long>(u => u.RoleId);
+            modelBuilder.Entity<User>().HasRequired<Role>(u => u.Role).WithMany(r => r.Users);
         }
     }
 }

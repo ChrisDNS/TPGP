@@ -47,8 +47,10 @@ namespace TPGP.Controllers
                     return View("Index", userModel);
                 }
 
-                HttpCookie cookie = new HttpCookie("Info");
-                cookie.Expires = DateTime.Now.AddHours(1);
+                HttpCookie cookie = new HttpCookie("UserInfo")
+                {
+                    Expires = DateTime.Now.AddHours(1)
+                };
 
                 User user = userRepository.GetBy(u => u.Username == userModel.Username).First();
                 if (user == null)
@@ -71,15 +73,15 @@ namespace TPGP.Controllers
                 }
                 else
                 {
-                    Role role = roleRepository.GetById(user.RoleId);
+                    user.Role = roleRepository.GetById(user.RoleId);
 
                     cookie.Values["username"] = user.Username;
-                    cookie.Values["role"] = role.RoleName.ToString("g");
+                    cookie.Values["role"] = user.Role.RoleName.ToString("g");
                     Response.Cookies.Add(cookie);
 
-                    if (role.RoleName == Roles.ADMIN)
+                    if (user.Role.RoleName == Roles.ADMIN)
                     {
-                        return View("USER AJOUazdazdazdTE");
+                        return RedirectToAction("Index", "Admin");
                     }
                 }
 

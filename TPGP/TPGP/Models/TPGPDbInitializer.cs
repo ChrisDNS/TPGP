@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
-using System.Web;
 using TPGP.Models.DAL.Context;
 using TPGP.Models.Enums;
 using TPGP.Models.Jobs;
@@ -19,17 +16,17 @@ namespace TPGP.Models
         {
             IList<Permission> permissions = new List<Permission>
             {
-                new Permission() { Name = "admin" }
+                new Permission { Name = "admin" }
             };
             IList<Role> roles = new List<Role>
             {
-                new Role() { RoleName = Roles.ADMIN, IsAdmin = true, Permissions = permissions },
-                new Role() { RoleName = Roles.COLLABORATOR, IsAdmin = false }
+                new Role { RoleName = Roles.ADMIN, IsAdmin = true, Permissions = permissions },
+                new Role { RoleName = Roles.COLLABORATOR, IsAdmin = false }
             };
             IList<User> users = new List<User>
             {
-                new User() { Username = "Sarra", Firstname = "Sarra", Lastname = "Sarra", Email = "sarra@sarra.sarra", Role = roles[0] },
-                new User() { Username = "Pierre", Firstname = "Pierre", Lastname = "Pierre", Email = "pierre@pierre.pierre", Role = roles[1] }
+                new User { Username = "Sarra", Firstname = "Sarra", Lastname = "Sarra", Email = "sarra@sarra.sarra", Role = roles[0] },
+                new User { Username = "Pierre", Firstname = "Pierre", Lastname = "Pierre", Email = "pierre@pierre.pierre", Role = roles[1] }
             };
 
             foreach (var role in roles)
