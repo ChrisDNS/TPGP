@@ -79,15 +79,15 @@ namespace TPGP.Controllers
                     Response.Cookies.Add(cookie);
 
                     if (user.Role.RoleName == Roles.ADMIN)
-                    {
                         return RedirectToAction("Index", "Admin");
-                    }
+                    else if (user.Role.RoleName == Roles.COLLABORATOR)
+                        return RedirectToAction("Index", "Wallets");
                 }
 
-                return View("USER AJOUTE");
+                return View("Index");
             }
 
-            return View("USER DEJA LA");
+            return View("Index");
         }
     }
 }
