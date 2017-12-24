@@ -1,5 +1,4 @@
-﻿
-@model TPGP.Models.Jobs.User
+﻿@model TPGP.Models.Jobs.User
 @{
     ViewBag.Title = "Index";
     Layout = null;
@@ -8,66 +7,23 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<meta name="description" content="" />
-<meta name="author" content="" />
-<title>TPGP</title>
-<link href="~/content/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-<link href="~/content/css/Site.css" rel="stylesheet" />
-<link href="~/content/css/signin.css" rel="stylesheet" />
-<link href="~/content/css/footer.css" rel="stylesheet" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>TPGP</title>
+    <link href="~/content/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/content/css/Site.css" rel="stylesheet" />
+    <link href="~/content/css/signin.css" rel="stylesheet" />
 </head>
 
 <body>
     <div class="center">
-        <nav class="navbar navbar-expand-lg navbar-light bg-fade navbar-inverse">
-            <div class="container">
-                <div class="navbar-header">
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarResponsive">
-                        <ul class="navbar-nav ml-auto">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="#">
-                                    Home
-                                    <span class="sr-only">(current)</span>
-                                </a>
-                            </li>
-                            <li class="nav-item active">
-
-                                <a class="nav-link" href="#">
-                                    Wallets
-                                    <span class="sr-only">(current)</span>
-                                </a>
-                            </li>
-                            <li class="nav-item active">
-
-                                <a class="nav-link" href="#">
-                                    Wallets
-                                    <span class="sr-only">(current)</span>
-                                </a>
-                            </li>
-                            <li class="nav-item active">
-
-                                <a class="nav-link" href="#">
-                                    Wallets
-                                    <span class="sr-only">(current)</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <a class="navbar-brand navbar-right" href="#">
-                    <img src="~/Content/images/logo.png" alt="logo" width="32" height="32">
-                    Allianz
-                </a>
-            </div>
-        </nav>
+        @Html.Partial("_HomeNavbar")
 
         <section class="container">
             <section class="login-form">
+
                 @using (Html.BeginForm("Login", "Home", FormMethod.Post, new { role = "login" }))
                 {
                     @Html.TextBoxFor(m => m.Username, new { @class = "form-control input-lg", type = "text", placeholder = "Username" })
@@ -77,17 +33,13 @@
                     @Html.ValidationSummary(true, "", new { @class = "text-danager" })
                     <button class="btn btn-lg btn-primary btn-block" type="submit" name="submit" value="Login">Sign in</button>
                 }
+
             </section>
         </section>
     </div>
 
-    <footer class="footer">
-        <div class="container">
-            <span class="text-muted">FOOOOOOOOOOOTTTTTTEEEEEEEEEERRRRRRRRRRR.</span>
-        </div>
-    </footer>
+    @Html.Partial("_Footer")
 
-    <!-- Bootstrap core JavaScript -->
     <script src="~/scripts/vendor/jquery/jquery-3.2.1.min.js"></script>
     <script src="~/scripts/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="~/scripts/jquery.validate.min.js"></script>

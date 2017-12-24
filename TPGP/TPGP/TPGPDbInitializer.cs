@@ -19,22 +19,33 @@ namespace TPGP
             {
                 new Permission { Name = "admin" }
             };
+
             IList<Role> roles = new List<Role>
             {
                 new Role { RoleName = Roles.ADMIN, IsAdmin = true, Permissions = permissions },
                 new Role { RoleName = Roles.COLLABORATOR, IsAdmin = false }
             };
+
             IList<User> users = new List<User>
             {
                 new User { Username = "Sarra", Firstname = "Sarra", Lastname = "Sarra", Email = "sarra@sarra.sarra", Role = roles[0] },
                 new User { Username = "Pierre", Firstname = "Pierre", Lastname = "Pierre", Email = "pierre@pierre.pierre", Role = roles[1] }
             };
+
+            IList<Portfolio> portfolios = new List<Portfolio>
+            {
+                new Portfolio { Sector = "Health"},
+                new Portfolio { Sector = "Transport"},
+                new Portfolio { Sector = "Automobile"},
+                new Portfolio { Sector = "Pharmaceutical Industry"}
+            };
+
             IList<Contract> contracts = new List<Contract>
             {
-                new Contract { Name = "Contract-1", InitDate = DateTime.Now, Sector = "Health", Bonus = 125.445 },
-                new Contract { Name = "Contract-2", InitDate = DateTime.Now, Sector = "Automobile", Bonus = 1201.45 },
-                new Contract { Name = "Contract-3", InitDate = DateTime.Now, Sector = "Test1", Bonus = 201.15 },
-                new Contract { Name = "Contract-4", InitDate = DateTime.Now, Sector = "Test2", Bonus = 2221.74 },
+                new Contract { Name = "Contract-1", InitDate = DateTime.Now, Bonus = 125.445, Portfolio = portfolios[0] },
+                new Contract { Name = "Contract-2", InitDate = DateTime.Now, Bonus = 1201.45, Portfolio = portfolios[0] },
+                new Contract { Name = "Contract-3", InitDate = DateTime.Now, Bonus = 201.15, Portfolio = portfolios[1] },
+                new Contract { Name = "Contract-4", InitDate = DateTime.Now, Bonus = 2221.74, Portfolio = portfolios[2] }
             };
 
             foreach (var role in roles)
@@ -45,6 +56,12 @@ namespace TPGP
 
             foreach (var permission in permissions)
                 context.Permissions.Add(permission);
+
+            foreach (var portfolio in portfolios)
+                context.Portfolios.Add(portfolio);
+
+            foreach (var contract in contracts)
+                context.Contracts.Add(contract);
 
             base.Seed(context);
         }

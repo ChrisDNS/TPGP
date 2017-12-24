@@ -11,15 +11,5 @@ namespace TPGP.DAL.Repositories
         public PermissionRepository(TPGPContext ctx) : base(ctx)
         {
         }
-
-        public List<Permission> GetPermissions(string username)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Role GetUserRole(string username)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

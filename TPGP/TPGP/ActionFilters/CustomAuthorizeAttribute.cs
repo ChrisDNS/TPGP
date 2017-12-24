@@ -2,7 +2,6 @@
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
-using TPGP.Models;
 
 namespace TPGP.ActionFilters
 {
@@ -13,7 +12,7 @@ namespace TPGP.ActionFilters
             string requiredPermission = String.Format("{0}-{1}", filterContext.ActionDescriptor.ControllerDescriptor.ControllerName,
                                                                  filterContext.ActionDescriptor.ActionName);
 
-            RBACUser authUser = new RBACUser(HttpContext.Current.Request.Cookies["UserInfo"]["username"]);
+            RBACUser authUser = new RBACUser(HttpContext.Current.Request.Cookies["user"]["username"]);
             if (/*!authUser.HasPermission(requiredPermission) & */!authUser.IsAdmin)
             {
                 filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary

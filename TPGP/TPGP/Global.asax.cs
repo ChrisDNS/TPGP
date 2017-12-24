@@ -15,6 +15,7 @@ namespace TPGP
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             UnityConfig.RegisterTypes(new UnityContainer());
+            ViewEngines.Engines.Add(new RazorViewEngine());
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using LDAP;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -7,6 +8,7 @@ using TPGP.Context;
 using TPGP.DAL.Interfaces;
 using TPGP.Models.Enums;
 using TPGP.Models.Jobs;
+using TPGP.ViewModels;
 
 namespace TPGP.Controllers
 {
@@ -14,11 +16,14 @@ namespace TPGP.Controllers
     {
         private readonly IUserRepository userRepository;
         private readonly IRoleRepository roleRepository;
+        private readonly IContractRepository contractRepository;
 
-        public HomeController(IUserRepository userRepository, IRoleRepository roleRepository)
+        public HomeController(IUserRepository userRepository, IRoleRepository roleRepository,
+                                                              IContractRepository contractRepository)
         {
             this.userRepository = userRepository;
             this.roleRepository = roleRepository;
+            this.contractRepository = contractRepository;
         }
 
         // GET: Home
@@ -30,6 +35,9 @@ namespace TPGP.Controllers
                 var rolesCount = ctx.Roles.Count();
             }
             //juste pour créer la database
+
+            if (System.Web.HttpContext.Current.Request.Cookies["user"] != null)
+                return RedirectToAction("Index", "Contract");
 
             return View();
         }
@@ -46,7 +54,7 @@ namespace TPGP.Controllers
                     return View("Index", userModel);
                 }
 
-                HttpCookie cookie = new HttpCookie("UserInfo")
+                HttpCookie cookie = new HttpCookie("user")
                 {
                     Expires = DateTime.Now.AddHours(1)
                 };
@@ -81,7 +89,7 @@ namespace TPGP.Controllers
                     if (user.Role.RoleName == Roles.ADMIN)
                         return RedirectToAction("Index", "Admin");
                     else if (user.Role.RoleName == Roles.COLLABORATOR)
-                        return RedirectToAction("Index", "Wallets");
+                        return RedirectToAction("Index", "Contract");
                 }
 
                 return View("Index");

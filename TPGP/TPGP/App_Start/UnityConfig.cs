@@ -2,6 +2,7 @@ using System;
 using System.Web.Mvc;
 using TPGP.DAL.Interfaces;
 using TPGP.DAL.Repositories;
+using TPGP.Models.DAL.Repositories;
 using Unity;
 using Unity.AspNet.Mvc;
 
@@ -47,6 +48,8 @@ namespace TPGP
             // container.RegisterType<IProductRepository, ProductRepository>();
             container.RegisterType<IUserRepository, UserRepository>();
             container.RegisterType<IRoleRepository, RoleRepository>();
+            container.RegisterType<IPortfolioRepository, PortfolioRepository>();
+            container.RegisterType<IContractRepository, ContractRepository>();
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }
     }

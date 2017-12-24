@@ -13,10 +13,13 @@ namespace TPGP.Context
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<Permission> Permissions { get; set; }
+        public DbSet<Portfolio> Portfolios { get; set; }
         public DbSet<Contract> Contracts { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<User>().HasRequired<Role>(u => u.Role).WithMany(r => r.Users);
+            modelBuilder.Entity<Contract>().HasRequired<Portfolio>(c => c.Portfolio).WithMany(p => p.Contracts);
             modelBuilder.Entity<Permission>().HasMany(p => p.Roles).WithMany(p => p.Permissions)
                                              .Map(pr =>
                                              {
@@ -24,7 +27,6 @@ namespace TPGP.Context
                                                  pr.MapRightKey("role_id");
                                                  pr.ToTable("link_permissions_roles");
                                              });
-            modelBuilder.Entity<User>().HasRequired<Role>(u => u.Role).WithMany(r => r.Users);
         }
     }
 }

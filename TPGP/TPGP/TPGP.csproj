@@ -192,9 +192,8 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\css\footer.css" />
     <Content Include="Content\css\signin.css" />
-    <Content Include="Content\css\wallets.css" />
+    <Content Include="Content\css\contracts.css" />
     <Content Include="Content\images\logo.png" />
     <Content Include="Content\vendor\bootstrap\css\bootstrap-grid.css" />
     <Content Include="Content\vendor\bootstrap\css\bootstrap-grid.min.css" />
@@ -250,7 +249,9 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UnauthorizedController.cs" />
-    <Compile Include="Controllers\WalletsController.cs" />
+    <Compile Include="Controllers\ContractController.cs" />
+    <Compile Include="DAL\Interfaces\IPortfolioRepository.cs" />
+    <Compile Include="DAL\Repositories\PortfolioRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -268,6 +269,7 @@
     <Compile Include="Models\Enums\Roles.cs" />
     <Compile Include="Models\Jobs\Contract.cs" />
     <Compile Include="Models\Jobs\Permission.cs" />
+    <Compile Include="Models\Jobs\Portfolio.cs" />
     <Compile Include="Models\Jobs\Role.cs" />
     <Compile Include="Models\Jobs\User.cs" />
     <Compile Include="DAL\Repositories\Repository.cs" />
@@ -276,6 +278,8 @@
     <Compile Include="TPGPDbInitializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\Constants.cs" />
+    <Compile Include="ViewModels\ContractViewModel.cs" />
+    <Compile Include="ViewModels\PortfoliosViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config">
@@ -290,9 +294,12 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="scripts\vendor\jquery\jquery-1.10.2.min.map" />
     <Content Include="Views\Unauthorized\Index.cshtml" />
-    <Content Include="Views\Wallets\Index.cshtml" />
+    <Content Include="Views\Contract\Index.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
-    <Content Include="Views\Wallets\View.cshtml" />
+    <Content Include="Views\Shared\_HomeNavbar.cshtml" />
+    <Content Include="Views\Shared\_AdminNavbar.cshtml" />
+    <Content Include="Views\Shared\_Footer.cshtml" />
+    <Content Include="Views\Contract\View.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -14,5 +14,17 @@
 }
 
 .navbar {
-    background-color: #4286f4;
+    background-color: lightskyblue;
+}
+
+.footer {
+    background-color: lightskyblue;
+    height: 60px;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 90%;
+    margin-left: 5%;
+    text-align: center;
+    line-height: 60px;
 }
