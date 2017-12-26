@@ -11,5 +11,7 @@ namespace TPGP.DAL.Repositories
         public PermissionRepository(TPGPContext ctx) : base(ctx)
         {
         }
+
+        public override IEnumerable<Permission> Pagination(int page, int itemsPerPage, out int totalCount) => throw new NotImplementedException();
     }
 }

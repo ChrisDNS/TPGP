@@ -19,5 +19,7 @@ namespace TPGP.DAL.Interfaces
         void Delete(long id);
 
         void SaveChanges();
+
+        IEnumerable<T> Pagination(int page, int itemsPerPage, out int totalCount);
     }
 }

@@ -1,9 +1,10 @@
-﻿using TPGP.Models.Jobs;
+﻿using System.Collections.Generic;
+using TPGP.Models.Jobs;
 
 namespace TPGP.DAL.Interfaces
 {
     public interface IContractRepository : IRepository<Contract>
     {
-        //fonctions spécifiques aux contracts
+        IEnumerable<Contract> GetAllFromPortfolio(long id);
     }
 }

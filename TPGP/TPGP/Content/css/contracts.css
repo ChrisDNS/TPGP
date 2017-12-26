@@ -1,3 +1,6 @@
 ﻿.portfolios {
-    margin-top : 150px;
+    margin-top: 120px;
+    border: 2px solid;
+    border-radius: 25px;
+    background-color : lightgrey;
 }

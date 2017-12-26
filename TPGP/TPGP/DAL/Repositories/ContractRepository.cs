@@ -1,4 +1,5 @@
-﻿using TPGP.Context;
+﻿using System.Collections.Generic;
+using TPGP.Context;
 using TPGP.DAL.Interfaces;
 using TPGP.DAL.Repositories;
 using TPGP.Models.Jobs;
@@ -10,5 +11,12 @@ namespace TPGP.Models.DAL.Repositories
         public ContractRepository(TPGPContext ctx) : base(ctx)
         {
         }
+
+        public IEnumerable<Contract> GetAllFromPortfolio(long id)
+        {
+            return GetBy(c => c.PortfolioId == id);
+        }
+
+        public override IEnumerable<Contract> Pagination(int page, int itemsPerPage, out int totalCount) => throw new System.NotImplementedException();
     }
 }

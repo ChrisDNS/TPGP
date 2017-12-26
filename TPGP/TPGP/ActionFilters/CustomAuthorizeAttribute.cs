@@ -12,7 +12,7 @@ namespace TPGP.ActionFilters
             string requiredPermission = String.Format("{0}-{1}", filterContext.ActionDescriptor.ControllerDescriptor.ControllerName,
                                                                  filterContext.ActionDescriptor.ActionName);
 
-            RBACUser authUser = new RBACUser(HttpContext.Current.Request.Cookies["user"]["username"]);
+            RBACUser authUser = new RBACUser(HttpContext.Current.Session["username"].ToString());
             if (/*!authUser.HasPermission(requiredPermission) & */!authUser.IsAdmin)
             {
                 filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary

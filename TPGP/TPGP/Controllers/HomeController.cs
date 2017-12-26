@@ -1,14 +1,10 @@
 ﻿using LDAP;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using TPGP.Context;
 using TPGP.DAL.Interfaces;
 using TPGP.Models.Enums;
 using TPGP.Models.Jobs;
-using TPGP.ViewModels;
 
 namespace TPGP.Controllers
 {
@@ -16,17 +12,13 @@ namespace TPGP.Controllers
     {
         private readonly IUserRepository userRepository;
         private readonly IRoleRepository roleRepository;
-        private readonly IContractRepository contractRepository;
 
-        public HomeController(IUserRepository userRepository, IRoleRepository roleRepository,
-                                                              IContractRepository contractRepository)
+        public HomeController(IUserRepository userRepository, IRoleRepository roleRepository)
         {
             this.userRepository = userRepository;
             this.roleRepository = roleRepository;
-            this.contractRepository = contractRepository;
         }
 
-        // GET: Home
         public ActionResult Index()
         {
             //juste pour créer la database
@@ -36,8 +28,8 @@ namespace TPGP.Controllers
             }
             //juste pour créer la database
 
-            if (System.Web.HttpContext.Current.Request.Cookies["user"] != null)
-                return RedirectToAction("Index", "Contract");
+            if (Session["user"] != null)
+                return RedirectToAction("Index", "Portfolio");
 
             return View();
         }
@@ -54,11 +46,6 @@ namespace TPGP.Controllers
                     return View("Index", userModel);
                 }
 
-                HttpCookie cookie = new HttpCookie("user")
-                {
-                    Expires = DateTime.Now.AddHours(1)
-                };
-
                 User user = userRepository.GetBy(u => u.Username == userModel.Username).First();
                 if (user == null)
                 {
@@ -74,28 +61,34 @@ namespace TPGP.Controllers
                     userRepository.Insert(newUser);
                     userRepository.SaveChanges();
 
-                    cookie.Values["username"] = user.Username;
-                    cookie.Values["role"] = user.Role.RoleName.ToString("g");
-                    Response.Cookies.Add(cookie);
+                    Session["username"] = user.Username;
+                    Session["role"] = user.Role.RoleName.ToString("g");
                 }
                 else
                 {
                     user.Role = roleRepository.GetById(user.RoleId);
 
-                    cookie.Values["username"] = user.Username;
-                    cookie.Values["role"] = user.Role.RoleName.ToString("g");
-                    Response.Cookies.Add(cookie);
+                    Session["username"] = user.Username;
+                    Session["role"] = user.Role.RoleName.ToString("g");
 
                     if (user.Role.RoleName == Roles.ADMIN)
                         return RedirectToAction("Index", "Admin");
                     else if (user.Role.RoleName == Roles.COLLABORATOR)
-                        return RedirectToAction("Index", "Contract");
+                        return RedirectToAction("Index", "Portfolio");
                 }
 
                 return View("Index");
             }
 
             return View("Index");
+        }
+
+        public ActionResult Logout()
+        {
+            Session["username"] = null;
+            Session["role"] = null;
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }
