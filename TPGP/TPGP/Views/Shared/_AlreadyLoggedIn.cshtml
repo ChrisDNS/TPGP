@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "_AlreadyLoggedIn";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>TPGP</title>
+    <link href="~/content/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/content/css/Site.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="center">
+        @Html.Partial("_HomeNavbar")
+        <h1 style="margin-top: 120px;">You are already logged in.</h1>
+    </div>
+
+    @Html.Partial("_Footer");
+
+    <script src="~/scripts/vendor/jquery/jquery-3.2.1.min.js"></script>
+    <script src="~/scripts/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

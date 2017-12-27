@@ -10,7 +10,5 @@ namespace TPGP.DAL.Repositories
         public UserRepository(TPGPContext ctx) : base(ctx)
         {
         }
-
-        public override IEnumerable<User> Pagination(int page, int itemsPerPage, out int totalCount) => throw new System.NotImplementedException();
     }
 }

@@ -16,7 +16,5 @@ namespace TPGP.Models.DAL.Repositories
         {
             return GetBy(c => c.PortfolioId == id);
         }
-
-        public override IEnumerable<Contract> Pagination(int page, int itemsPerPage, out int totalCount) => throw new System.NotImplementedException();
     }
 }

@@ -5,6 +5,11 @@ namespace TPGP.ViewModels
 {
     public class ContractViewModel
     {
-        public List<Contract> Contracts { get; set; }
+        public Contract Contract { get; set; }
+
+        public ContractViewModel(Contract c)
+        {
+            this.Contract = c;
+        }
     }
 }

@@ -36,7 +36,5 @@ namespace TPGP.DAL.Repositories
         public void Delete(long id) => dbSet.Remove(GetById(id));
 
         public void SaveChanges() => dbContext.SaveChanges();
-
-        public abstract IEnumerable<T> Pagination(int page, int itemsPerPage, out int totalCount);
     }
 }

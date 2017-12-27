@@ -28,8 +28,8 @@ namespace TPGP.Controllers
             }
             //juste pour créer la database
 
-            if (Session["user"] != null)
-                return RedirectToAction("Index", "Portfolio");
+            if (Session["username"] != null)
+                return View("_AlreadyLoggedIn");
 
             return View();
         }
@@ -81,6 +81,11 @@ namespace TPGP.Controllers
             }
 
             return View("Index");
+        }
+
+        public ActionResult About()
+        {
+            return View();
         }
 
         public ActionResult Logout()

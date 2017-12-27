@@ -1,9 +1,9 @@
 ﻿@using PagedList;
 @using PagedList.Mvc
 
-@model IPagedList<TPGP.ViewModels.PortfolioViewModel>
+@model IPagedList<TPGP.ViewModels.ContractViewModel>
 @{
-    ViewBag.Title = "Portfolios";
+    ViewBag.Title = "Contracts";
     Layout = null;
 }
 
@@ -27,27 +27,40 @@
     </div>
 
     <div class="container portfolios">
-        <h1>Portfolios of contracts</h1>
+        <h1>Contracts</h1>
         <table class="table">
             <tr>
-                <th>Sector</th>
-                <th>Options</th>
+                <th>
+
+                </th>
+                <th>
+
+                </th>
+                <th>
+
+                </th>
+                <th></th>
             </tr>
 
             @foreach (var item in Model)
             {
                 <tr>
                     <td>
-                        @Html.ActionLink(@item.Portfolio.Sector, "Contracts", "Portfolio", new { id = item.Portfolio.Id }, null)
+                        @Html.DisplayFor(modelItem => item.Contract.Name)
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.Portfolio.Id }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.Portfolio.Id }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.Portfolio.Id })
+                        @Html.DisplayFor(modelItem => item.Contract.InitDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Contract.Bonus)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Contract.Id }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.Contract.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Contract.Id })
                     </td>
                 </tr>
             }
-
         </table>
 
         <div class="container">

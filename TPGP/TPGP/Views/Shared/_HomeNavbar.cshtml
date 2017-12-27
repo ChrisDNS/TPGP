@@ -2,7 +2,7 @@
 {
     <div class="dropdown">
         <a class="btn btn-outline-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            @Session["username"]
+            @Session["username"], @Session["role"]
         </a>
         <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
             <li><a class="dropdown-item" href="#">Account</a></li>
@@ -19,7 +19,7 @@
     <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/Portfolio">Portfolios<span class="sr-only">(current)</span></a>
             </li>
         </ul>
         <a class="navbar-brand navbar-right" href="#">
