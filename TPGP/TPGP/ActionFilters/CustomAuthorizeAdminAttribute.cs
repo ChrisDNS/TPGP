@@ -5,7 +5,7 @@ using System.Web.Routing;
 
 namespace TPGP.ActionFilters
 {
-    public class CustomAuthorizeAttribute : AuthorizeAttribute
+    public class CustomAuthorizeAdminAttribute : AuthorizeAttribute
     {
         public override void OnAuthorization(AuthorizationContext filterContext)
         {

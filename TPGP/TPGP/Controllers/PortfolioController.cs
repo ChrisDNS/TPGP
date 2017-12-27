@@ -9,7 +9,7 @@ using TPGP.ViewModels;
 
 namespace TPGP.Controllers
 {
-    [CustomAuthorize]
+    [CustomAuthorizeOthers]
     public class PortfolioController : Controller
     {
         private readonly IContractRepository contractRepository;

@@ -250,6 +250,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionFilters\CustomAuthorizeOthersAttribute.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
@@ -263,7 +264,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="ActionFilters\CustomAuthorizeAttribute.cs" />
+    <Compile Include="ActionFilters\CustomAuthorizeAdminAttribute.cs" />
     <Compile Include="DAL\Interfaces\IPermissionRepository.cs" />
     <Compile Include="DAL\Interfaces\IRoleRepository.cs" />
     <Compile Include="DAL\Repositories\ContractRepository.cs" />

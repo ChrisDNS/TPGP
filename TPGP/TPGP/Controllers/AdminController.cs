@@ -3,7 +3,7 @@ using TPGP.ActionFilters;
 
 namespace TPGP.Controllers
 {
-    [CustomAuthorize]
+    [CustomAuthorizeAdmin]
     public class AdminController : Controller
     {
         // GET: Admin
