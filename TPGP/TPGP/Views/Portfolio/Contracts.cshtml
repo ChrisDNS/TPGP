@@ -41,9 +41,9 @@
                     @Html.DisplayFor(modelItem => item.Contract.Bonus)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Contract.Id }) |
-                    @Html.ActionLink("Details", "Details", "Contract", new { id = item.Contract.Id }, null) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Contract.Id })
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Contract.Id }, new { @class = "btn btn-info" })
+                    @Html.ActionLink("Details", "Details", "Contract", new { id = item.Contract.Id }, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Contract.Id }, new { @class = "btn btn-danger" })
                 </td>
             </tr>
         }

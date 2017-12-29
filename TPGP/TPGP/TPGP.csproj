@@ -255,6 +255,7 @@
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ContractController.cs" />
+    <Compile Include="Controllers\ErrorHandlerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UnauthorizedController.cs" />
     <Compile Include="Controllers\PortfolioController.cs" />
@@ -319,6 +320,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Services\" />
+    <Folder Include="Views\ErrorHandler\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LDAP\LDAP.csproj">

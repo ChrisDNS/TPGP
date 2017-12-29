@@ -1,15 +1,12 @@
 ﻿.login-form {
-    margin: 100px auto;
+    margin: 190px auto;
     max-width: 400px;
 }
 
 form[role=login] {
-    color: #5d5d5d;
-    background: #f2f2f2;
-    padding: 26px;
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
+    color: black;
+    background-color: lightgrey;
+    padding: 60px;
 }
 
     form[role=login] img {
@@ -21,7 +18,7 @@ form[role=login] {
     form[role=login] input,
     form[role=login] button {
         font-size: 18px;
-        margin: 16px 0;
+        margin: 20px 0;
     }
 
     form[role=login] > div {
@@ -36,4 +33,18 @@ form[role=login] {
 
     .form-links a {
         color: #fff;
+    }
+
+.content {
+    width: 140px;
+}
+
+    .content img {
+        margin-right: 15px;
+        float: left;
+    }
+
+    .content h3 {
+        font-family: Caladea;
+        color: royalblue;
     }
