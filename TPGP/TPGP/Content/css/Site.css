@@ -9,8 +9,13 @@
 }
 
 .body-content {
+    margin-top: 120px;
     padding-left: 15px;
     padding-right: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: lightgrey;
+    box-shadow: 0 0 15px black;
 }
 
 .navbar {

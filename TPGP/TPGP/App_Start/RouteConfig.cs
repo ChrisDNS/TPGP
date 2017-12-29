@@ -10,9 +10,15 @@ namespace TPGP
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "Contract",
+                url: "Contract/{id}",
+                defaults: new { controller = "Contract", action = "Details" }
+            );
+
+            routes.MapRoute(
                 name: "Portfolios",
                 url: "Portfolio/{id}",
-                defaults: new { controller = "Portfolio", action = "Contracts"}
+                defaults: new { controller = "Portfolio", action = "Contracts" }
             );
 
             routes.MapRoute(

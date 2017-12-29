@@ -199,7 +199,6 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\signin.css" />
-    <Content Include="Content\css\contracts.css" />
     <Content Include="Content\images\logo.png" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\vendor\bootstrap\css\bootstrap-grid.css" />
@@ -308,8 +307,8 @@
     <Content Include="Views\Shared\_AdminNavbar.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Portfolio\Contracts.cshtml" />
-    <Content Include="Views\Portfolio\View.cshtml" />
     <Content Include="Views\Shared\_AlreadyLoggedIn.cshtml" />
+    <Content Include="Views\Contract\Details.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -320,7 +319,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Services\" />
-    <Folder Include="Views\Contract\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LDAP\LDAP.csproj">

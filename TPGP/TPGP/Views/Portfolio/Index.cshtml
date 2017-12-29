@@ -2,74 +2,51 @@
 @using PagedList.Mvc
 
 @model IPagedList<TPGP.ViewModels.PortfolioViewModel>
+
 @{
     ViewBag.Title = "Portfolios";
-    Layout = null;
 }
 
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <title>TPGP</title>
-    <link href="~/content/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/content/css/Site.css" rel="stylesheet" />
-    <link href="~/content/css/contracts.css" rel="stylesheet" />
-    <link href="~/content/PagedList.css" rel="stylesheet" />
-</head>
+@section css {
+    <link href="@Url.Content("~/Content/PagedList.css")" rel="stylesheet" />
+}
 
-<body>
-    <div class="center">
-        @Html.Partial("_HomeNavbar")
-    </div>
+<h2>Portfolios of contracts</h2>
 
-    <div class="container portfolios">
-        <h1>Portfolios of contracts</h1>
-        <table class="table">
+<div>
+    <hr />
+    <table class="table">
+        <tr>
+            <th>Sector</th>
+            <th>Options</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
             <tr>
-                <th>Sector</th>
-                <th>Options</th>
+                <td>
+                    @Html.ActionLink(@item.Portfolio.Sector, "Contracts", "Portfolio", new { id = item.Portfolio.Id }, null)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Portfolio.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Portfolio.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Portfolio.Id })
+                </td>
             </tr>
+        }
 
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.ActionLink(@item.Portfolio.Sector, "Contracts", "Portfolio", new { id = item.Portfolio.Id }, null)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.Portfolio.Id }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.Portfolio.Id }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.Portfolio.Id })
-                    </td>
-                </tr>
-            }
+    </table>
 
-        </table>
-
-        <div class="container">
-            <ul class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Photos</a></li>
-                <li class="breadcrumb-item"><a href="#">Summer 2017</a></li>
-                <li class="breadcrumb-item"><a href="#">Italy</a></li>
-                <li class="breadcrumb-item active">Rome</li>
-            </ul>
-        </div>
-
-        <div class="container pagination pager">
-            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
-        </div>
-
+    <div class="container">
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Photos</a></li>
+            <li class="breadcrumb-item"><a href="#">Summer 2017</a></li>
+            <li class="breadcrumb-item"><a href="#">Italy</a></li>
+            <li class="breadcrumb-item active">Rome</li>
+        </ul>
     </div>
 
-    @Html.Partial("_Footer");
-
-    <script src="~/scripts/vendor/jquery/jquery-3.2.1.min.js"></script>
-    <script src="~/scripts/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="~/scripts/jquery.validate.min.js"></script>
-    <script src="~/scripts/jquery.validate.unobtrusive.min.js"></script>
-</body>
-</html>
+    <div class="container pagination pager">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+    </div>
+</div>

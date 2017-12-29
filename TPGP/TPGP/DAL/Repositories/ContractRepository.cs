@@ -12,7 +12,7 @@ namespace TPGP.Models.DAL.Repositories
         {
         }
 
-        public IEnumerable<Contract> GetAllFromPortfolio(long id)
+        public IEnumerable<Contract> GetAllFromPortfolio(long? id)
         {
             return GetBy(c => c.PortfolioId == id);
         }

@@ -41,7 +41,7 @@ namespace TPGP.Controllers
             return View(portfoliosViews.ToPagedList(noPage, itemsPerPage));
         }
 
-        public ActionResult Contracts(int? page, int id, string sortOrder)
+        public ActionResult Contracts(int? page, long? id, string sortOrder)
         {
             const int itemsPerPage = 3;
             int noPage = (page ?? 1);
