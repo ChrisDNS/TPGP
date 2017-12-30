@@ -37,7 +37,14 @@ namespace TPGP
                 new Portfolio { Sector = "Health"},
                 new Portfolio { Sector = "Transport"},
                 new Portfolio { Sector = "Automobile"},
-                new Portfolio { Sector = "Pharmaceutical Industry"}
+                new Portfolio { Sector = "Pharmaceutical Industry"},
+                new Portfolio { Sector = "Textile/Dressing/Shoe"},
+                new Portfolio { Sector = "Communication and Multimedia"},
+                new Portfolio { Sector = "Studies and advices"},
+                new Portfolio { Sector = "Metalworking Industry"},
+                new Portfolio { Sector = "Chemistry and Parachemistry"},
+                new Portfolio { Sector = "Bank/Insurance"},
+                new Portfolio { Sector = "Food-processing Industry"}
             };
 
             IList<Contract> contracts = new List<Contract>

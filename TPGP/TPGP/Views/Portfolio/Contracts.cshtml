@@ -11,54 +11,81 @@
     <link href="@Url.Content("~/Content/PagedList.css")" rel="stylesheet" />
 }
 
-<h1>Contracts</h1>
-<div>
-    <hr />
-    <table class="table">
-        <tr>
-            <th>
+<h1 style="text-align:center;">Contracts</h1>
+<hr />
+@if (!ViewBag.IsListEmpty)
+{
+    <div class="container util">
+        <div class="row">
+            <div class="col-lg-8">
+                <button type="button" class="btn btn-primary">Primary</button>
+            </div>
+            <div class="col-lg-4">
 
-            </th>
-            <th>
+                @using (Html.BeginForm("Contracts", "Portfolio", FormMethod.Get))
+                {
+                    <div class="input-group">
+                        @Html.TextBox("SearchString", "Search...", new { @class = "form-control" })
+                        <span class="input-group-btn">
+                            <button class="btn btn-secondary" type="submit" value="Search">Go!</button>
+                        </span>
+                    </div>
+                }
 
-            </th>
-            <th>
-
-            </th>
-            <th></th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Contract.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Contract.InitDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Contract.Bonus)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Contract.Id }, new { @class = "btn btn-info" })
-                    @Html.ActionLink("Details", "Details", "Contract", new { id = item.Contract.Id }, new { @class = "btn btn-success" })
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Contract.Id }, new { @class = "btn btn-danger" })
-                </td>
-            </tr>
-        }
-    </table>
-
+            </div>
+        </div>
+    </div>
+}
+else
+{
     <div class="container">
-        <ul class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Photos</a></li>
-            <li class="breadcrumb-item"><a href="#">Summer 2017</a></li>
-            <li class="breadcrumb-item"><a href="#">Italy</a></li>
-            <li class="breadcrumb-item active">Rome</li>
-        </ul>
+        <div class="alert alert-info">
+            <strong>Info!</strong> There is no contract yet in this portfolio.
+        </div>
     </div>
+}
 
-    <div class="container pagination pager">
-        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+@if (!ViewBag.IsListEmpty)
+{
+    <div>
+        <table class="table">
+            <tr>
+                <th>
+
+                </th>
+                <th>
+
+                </th>
+                <th>
+
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Contract.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Contract.InitDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Contract.Bonus)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Contract.Id }, new { @class = "btn btn-info" })
+                        @Html.ActionLink("Details", "Details", "Contract", new { id = item.Contract.Id }, new { @class = "btn btn-success" })
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Contract.Id }, new { @class = "btn btn-danger" })
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+        <div class="container pagination pager">
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+        </div>
     </div>
-</div>
+}

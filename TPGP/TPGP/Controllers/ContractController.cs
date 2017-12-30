@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
+using System.Linq;
 using TPGP.ActionFilters;
 using TPGP.DAL.Interfaces;
 using TPGP.Models.Jobs;
@@ -16,7 +17,7 @@ namespace TPGP.Controllers
             this.contractRepository = contractRepository;
         }
 
-        public ActionResult Index()
+        public ActionResult Index(string currentFilter, string searchString)
         {
             return View();
         }

@@ -8,14 +8,25 @@
     margin-left: 5%;
 }
 
-.body-content {
-    margin-top: 120px;
+.util {
     padding-left: 15px;
     padding-right: 15px;
-    padding-top: 5px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background-color: #ffedff;
+}
+
+.body-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 10px;
     padding-bottom: 5px;
-    background-color: lightgrey;
-    box-shadow: 0 0 15px black;
+    background-color: #bfd3f2;
+    box-shadow: 0 0 10px black;
 }
 
 .navbar {

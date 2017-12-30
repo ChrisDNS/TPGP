@@ -5,6 +5,6 @@ namespace TPGP.DAL.Interfaces
 {
     public interface IContractRepository : IRepository<Contract>
     {
-        IEnumerable<Contract> GetAllFromPortfolio(long? id);
+        IEnumerable<Contract> GetAllFromPortfolio(long id);
     }
 }
