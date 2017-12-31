@@ -11,10 +11,9 @@
     <link href="@Url.Content("~/Content/PagedList.css")" rel="stylesheet" />
 }
 
-<h2>Portfolios of contracts</h2>
-
+<h1>Portfolios of contracts</h1>
+<hr />
 <div>
-    <hr />
     <table class="table">
         <tr>
             <th>Sector</th>
@@ -30,15 +29,6 @@
         }
 
     </table>
-
-    <div class="container">
-        <ul class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Photos</a></li>
-            <li class="breadcrumb-item"><a href="#">Summer 2017</a></li>
-            <li class="breadcrumb-item"><a href="#">Italy</a></li>
-            <li class="breadcrumb-item active">Rome</li>
-        </ul>
-    </div>
 
     <div class="container pagination pager">
         @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))

@@ -11,7 +11,7 @@
     <link href="@Url.Content("~/Content/PagedList.css")" rel="stylesheet" />
 }
 
-<h1 style="text-align:center;">Contracts</h1>
+<h1>Contracts</h1>
 <hr />
 @if (!ViewBag.IsListEmpty)
 {
@@ -25,7 +25,7 @@
                 @using (Html.BeginForm("Contracts", "Portfolio", FormMethod.Get))
                 {
                     <div class="input-group">
-                        @Html.TextBox("SearchString", "Search...", new { @class = "form-control" })
+                        @Html.TextBox("SearchString", null, new { @class = "form-control", @placeholder = "Search..." })
                         <span class="input-group-btn">
                             <button class="btn btn-secondary" type="submit" value="Search">Go!</button>
                         </span>

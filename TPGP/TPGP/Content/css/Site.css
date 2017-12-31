@@ -16,6 +16,10 @@
     background-color: #ffedff;
 }
 
+h1 {
+    text-align: center;
+}
+
 .body-content {
     position: absolute;
     top: 50%;
