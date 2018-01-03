@@ -75,6 +75,7 @@ namespace TPGP.Controllers
                         return RedirectToAction("Index", "Admin");
                     else if (user.Role.RoleName == Roles.COLLABORATOR)
                         return RedirectToAction("Index", "Portfolio");
+                    
                 }
 
                 return View("Index");

@@ -310,6 +310,11 @@
     <Content Include="Views\Portfolio\Contracts.cshtml" />
     <Content Include="Views\Shared\_AlreadyLoggedIn.cshtml" />
     <Content Include="Views\Contract\Details.cshtml" />
+    <Content Include="Views\Admin\admin.cshtml" />
+    <Content Include="Views\Admin\AdminView.cshtml" />
+    <Content Include="Views\Admin\edit.cshtml" />
+    <Content Include="Views\Shared\_Layout1.cshtml" />
+    <Content Include="Views\Admin\Indexconnec.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -11,19 +11,21 @@
     @RenderSection("css", false)
 </head>
 <body>
+    <div class="container col-lg-11"> 
+         <div class="center">
+             @Html.Partial("_HomeNavbar")
+         </div>
 
-    <div class="center">
-        @Html.Partial("_HomeNavbar")
-    </div>
+         <div class="body-content">
+               @RenderBody()
+              @RenderSection("Body", false)
+         </div>
 
-    <div class="container body-content">
-        @RenderBody()
-    </div>
+          @Html.Partial("_Footer")
 
-    @Html.Partial("_Footer")
-
-    <script src="~/scripts/vendor/jquery/jquery-3.2.1.min.js"></script>
-    <script src="~/scripts/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    @RenderSection("js", false)
+         <script src="~/scripts/vendor/jquery/jquery-3.2.1.min.js"></script>
+         <script src="~/scripts/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+             @RenderSection("js", false)
+    </div> 
 </body>
 </html>

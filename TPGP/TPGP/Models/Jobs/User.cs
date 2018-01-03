@@ -7,19 +7,20 @@ namespace TPGP.Models.Jobs
     public class User
     {
         public long Id { get; set; }
-
+        [Display(Name ="User name")]
         [Required(ErrorMessage = "Username field is required.")]
         public string Username { get; set; }
         [DataType(DataType.Password)]
         [NotMapped]
         public string Password { get; set; }
-
+        [Display(Name ="Frist name")]
         public string Firstname { get; set; }
+        [Display(Name ="Last name")]
         public string Lastname { get; set; }
         public string Email { get; set; }
 
         public long RoleId { get; set; }
-        public Role Role { get; set; }
+        public virtual Role Role { get; set; }
 
         public User()
         {
@@ -32,6 +33,16 @@ namespace TPGP.Models.Jobs
             Lastname = lastname;
             Email = email;
             Role = role;
+        }
+
+        public void Edit(User user)
+        {
+            this.Username = user.Username;
+            this.Firstname = user.Firstname;
+            this.Lastname = user.Lastname;
+            this.Email = user.Email;
+            this.RoleId = user.RoleId;
+
         }
     }
 }
