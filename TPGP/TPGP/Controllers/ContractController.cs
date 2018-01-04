@@ -1,9 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Web.Mvc;
-using System.Linq;
+﻿using System.Web.Mvc;
 using TPGP.ActionFilters;
 using TPGP.DAL.Interfaces;
-using TPGP.Models.Jobs;
 
 namespace TPGP.Controllers
 {
@@ -24,9 +21,12 @@ namespace TPGP.Controllers
 
         public ActionResult Details(long id)
         {
-            Contract contract = contractRepository.GetById(id);
+            return View(contractRepository.GetById(id));
+        }
 
-            return View(contract);
+        public ActionResult Create()
+        {
+            return View();
         }
     }
 }

@@ -1,60 +1,46 @@
 ﻿using System.Web.Mvc;
 using TPGP.ActionFilters;
 using TPGP.Models.Jobs;
-using TPGP.Context;
-using System.Collections.Generic;
 using System.Linq;
-using TPGP.DAL.Repositories;
 using TPGP.DAL.Interfaces;
 
 namespace TPGP.Controllers
 {
-   // [CustomAuthorizeAdmin]
+    [CustomAuthorizeAdmin]
     public class AdminController : Controller
     {
-        TPGPContext context;
-        IUserRepository userrepository;
-        public AdminController(IUserRepository usr)
-        { // context.users.Skip(4).take(5).tolist() // saut de users
-            // ff.Include(p=>p.cate) inclure les lazy
-            context = new TPGPContext();
-            userrepository = usr;
+        private readonly IUserRepository userRepository;
+
+        public AdminController(IUserRepository userRepository)
+        {
+            this.userRepository = userRepository;
         }
+
         // GET: Admin
         public ActionResult Index()
         {
-            
-            IEnumerable<User> us = userrepository.GetAll();
-            return View("AdminView", us);
+            return View(userRepository.GetAll());
         }
 
         public ActionResult Edit(long id)
         {
-            var us = userrepository.GetById(id);
-           /* User us = context.Users
-                .Where(p => p.Id.Equals(id))
-                .FirstOrDefault<User>();*/
-
-            return View("edit",us);
+            return View(userRepository.GetById(id));
         }
 
         public ActionResult Save(User user)
         {
+            var usr = userRepository.GetBy(u => u.Id == user.Id).FirstOrDefault();
 
-            var us = userrepository.GetAll().Where(p => p.Username.Equals(user.Username))
-                .FirstOrDefault<User>();
-           /* User us = context.Users
-                .Where(p => p.Username.Equals(user.Username))
-                .FirstOrDefault<User>();*/
-            if (us != null)
+            if (usr != null)
             {
-                us.Username = user.Username;
-                us.Role.RoleName = user.Role.RoleName;
+                usr.Username = user.Username;
+                usr.Role.RoleName = user.Role.RoleName;
             }
-            userrepository.SaveChanges();
-            IEnumerable<User> users = context.Users.ToList();
-            
-            return View("AdminView", users);
+
+            userRepository.Update(usr);
+            userRepository.SaveChanges();
+
+            return View("Index", userRepository.GetAll());
         }
     }
 }

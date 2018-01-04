@@ -7,13 +7,13 @@ namespace TPGP.Models.Jobs
     public class User
     {
         public long Id { get; set; }
-        [Display(Name ="User name")]
+        [Display(Name ="Username")]
         [Required(ErrorMessage = "Username field is required.")]
         public string Username { get; set; }
         [DataType(DataType.Password)]
         [NotMapped]
         public string Password { get; set; }
-        [Display(Name ="Frist name")]
+        [Display(Name ="First name")]
         public string Firstname { get; set; }
         [Display(Name ="Last name")]
         public string Lastname { get; set; }
@@ -42,7 +42,6 @@ namespace TPGP.Models.Jobs
             this.Lastname = user.Lastname;
             this.Email = user.Email;
             this.RoleId = user.RoleId;
-
         }
     }
 }

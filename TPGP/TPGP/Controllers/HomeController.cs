@@ -49,7 +49,7 @@ namespace TPGP.Controllers
                 User user = userRepository.GetBy(u => u.Username == userModel.Username).First();
                 if (user == null)
                 {
-                    User newUser = new User()
+                    User newUser = new User
                     {
                         Firstname = ldapUserDetails.Firstname,
                         Lastname = ldapUserDetails.Lastname,
@@ -73,9 +73,8 @@ namespace TPGP.Controllers
 
                     if (user.Role.RoleName == Roles.ADMIN)
                         return RedirectToAction("Index", "Admin");
-                    else if (user.Role.RoleName == Roles.COLLABORATOR)
+                    else
                         return RedirectToAction("Index", "Portfolio");
-                    
                 }
 
                 return View("Index");

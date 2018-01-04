@@ -18,15 +18,15 @@
 </head>
 
 <body>
-    <div class="center">
+    <div class="container col-lg-11">
         @Html.Partial("_HomeNavbar")
-    </div>
 
-    <section class="container">
-        <section class="login-form">
+        <div class="login-form">
 
             @using (Html.BeginForm("Login", "Home", FormMethod.Post, new { role = "login" }))
             {
+                @Html.AntiForgeryToken()
+
                 <div class="content">
                     <img src="~/Content/images/logo.png" class="img-responsive" alt="" width="40" height="40" />
                     <h3>Alienze</h3>
@@ -40,10 +40,10 @@
                 <button class="btn btn-lg btn-primary btn-block" type="submit" name="submit" value="Login">LOGIN</button>
             }
 
-        </section>
-    </section>
+        </div>
 
-    @Html.Partial("_Footer")
+        @Html.Partial("_Footer")
+    </div>
 
     <script src="~/scripts/vendor/jquery/jquery-3.2.1.min.js"></script>
     <script src="~/scripts/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

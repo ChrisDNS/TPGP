@@ -27,11 +27,7 @@ namespace TPGP.DAL.Repositories
 
         public void Insert(T obj) => dbSet.Add(obj);
 
-        public void Update(T entityToUpdate)
-        {
-            dbSet.Attach(entityToUpdate);
-            dbContext.Entry(entityToUpdate).State = EntityState.Modified;
-        }
+        public void Update(T entityToUpdate) => dbContext.Entry(entityToUpdate).State = EntityState.Modified;
 
         public void Delete(long id) => dbSet.Remove(GetById(id));
 
