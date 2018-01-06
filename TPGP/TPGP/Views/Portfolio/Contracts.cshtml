@@ -1,7 +1,7 @@
 ﻿@using PagedList;
 @using PagedList.Mvc
 
-@model IPagedList<TPGP.ViewModels.ContractViewModel>
+@model TPGP.ViewModels.ContractsViewModel
 
 @{
     ViewBag.Title = "Contracts";
@@ -13,7 +13,7 @@
 
 <h1>Contracts</h1>
 <hr />
-@if (!ViewBag.IsListEmpty)
+@if (!Model.IsListEmpty)
 {
     <div class="container util">
         <div class="row">
@@ -45,7 +45,7 @@ else
     </div>
 }
 
-@if (!ViewBag.IsListEmpty)
+@if (!Model.IsListEmpty)
 {
     <div>
         <table class="table">
@@ -62,22 +62,22 @@ else
                 <th></th>
             </tr>
 
-            @foreach (var item in Model)
+            @foreach (var item in Model.Contracts)
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Contract.Name)
+                        @Html.DisplayFor(modelItem => item.Name)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Contract.InitDate)
+                        @Html.DisplayFor(modelItem => item.InitDate)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Contract.Bonus)
+                        @Html.DisplayFor(modelItem => item.Bonus)
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.Contract.Id }, new { @class = "btn btn-info" })
-                        @Html.ActionLink("Details", "Details", "Contract", new { id = item.Contract.Id }, new { @class = "btn btn-success" })
-                        @Html.ActionLink("Delete", "Delete", new { id = item.Contract.Id }, new { @class = "btn btn-danger" })
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-info" })
+                        @Html.ActionLink("Details", "Details", "Contract", new { id = item.Id }, new { @class = "btn btn-success" })
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
                     </td>
                 </tr>
             }
@@ -85,7 +85,7 @@ else
         </table>
 
         <div class="container pagination pager">
-            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+            @Html.PagedListPager(Model.Contracts, page => Url.Action("Index", new { page }))
         </div>
     </div>
 }

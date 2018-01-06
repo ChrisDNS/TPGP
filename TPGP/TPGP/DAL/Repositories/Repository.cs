@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
@@ -19,9 +18,9 @@ namespace TPGP.DAL.Repositories
             dbSet = dbContext.Set<T>();
         }
 
-        public IEnumerable<T> GetAll() => dbSet.ToList();
+        public IQueryable<T> GetAll() => dbSet.AsQueryable();
 
-        public IEnumerable<T> GetBy(Expression<Func<T, bool>> filter) => dbSet.Where(filter);
+        public IQueryable<T> GetBy(Expression<Func<T, bool>> filter) => dbSet.Where(filter);
 
         public T GetById(long id) => dbSet.Find(id);
 

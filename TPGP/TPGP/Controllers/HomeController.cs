@@ -5,6 +5,7 @@ using TPGP.Context;
 using TPGP.DAL.Interfaces;
 using TPGP.Models.Enums;
 using TPGP.Models.Jobs;
+using TPGP.ViewModels;
 
 namespace TPGP.Controllers
 {
@@ -35,18 +36,18 @@ namespace TPGP.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(User userModel)
+        public ActionResult Login(UserViewModel uvm)
         {
             if (ModelState.IsValid)
             {
-                LDAPUser ldapUserDetails = LDAPService.Instance.AuthenticationAndIdentification(userModel.Username, userModel.Password);
+                LDAPUser ldapUserDetails = LDAPService.Instance.AuthenticationAndIdentification(uvm.User.Username, uvm.User.Password);
                 if (ldapUserDetails == null)
                 {
                     ModelState.AddModelError(string.Empty, "Wrong username or password.");
-                    return View("Index", userModel);
+                    return View("Index", uvm.User);
                 }
 
-                User user = userRepository.GetBy(u => u.Username == userModel.Username).First();
+                User user = userRepository.GetBy(u => u.Username == uvm.User.Username).First();
                 if (user == null)
                 {
                     User newUser = new User
@@ -83,17 +84,17 @@ namespace TPGP.Controllers
             return View("Index");
         }
 
-        public ActionResult About()
-        {
-            return View();
-        }
-
         public ActionResult Logout()
         {
             Session["username"] = null;
             Session["role"] = null;
 
             return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult About()
+        {
+            return View();
         }
     }
 }

@@ -3,6 +3,7 @@ using TPGP.ActionFilters;
 using TPGP.Models.Jobs;
 using System.Linq;
 using TPGP.DAL.Interfaces;
+using TPGP.ViewModels;
 
 namespace TPGP.Controllers
 {
@@ -24,17 +25,17 @@ namespace TPGP.Controllers
 
         public ActionResult Edit(long id)
         {
-            return View(userRepository.GetById(id));
+            return View(new UserViewModel(userRepository.GetById(id)));
         }
 
-        public ActionResult Save(User user)
+        public ActionResult Save(UserViewModel uvm)
         {
-            var usr = userRepository.GetBy(u => u.Id == user.Id).FirstOrDefault();
+            var usr = userRepository.GetBy(u => u.Id == uvm.User.Id).FirstOrDefault();
 
             if (usr != null)
             {
-                usr.Username = user.Username;
-                usr.Role.RoleName = user.Role.RoleName;
+                usr.Username = uvm.User.Username;
+                usr.Role.RoleName = uvm.User.Role.RoleName;
             }
 
             userRepository.Update(usr);

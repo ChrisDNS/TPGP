@@ -1,10 +1,10 @@
-﻿using PagedList;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using TPGP.ActionFilters;
 using TPGP.DAL.Interfaces;
 using TPGP.Models.Jobs;
+using TPGP.Utils;
 using TPGP.ViewModels;
 
 namespace TPGP.Controllers
@@ -23,60 +23,48 @@ namespace TPGP.Controllers
 
         public ActionResult Index(int? page, string sortOrder)
         {
-            const int itemsPerPage = 5;
             int noPage = (page ?? 1);
-
-            IEnumerable<Portfolio> portfolios = portfolioRepository.GetAll();
-            switch (sortOrder)
+            var portfoliosViewModels = new PortfoliosViewModel
             {
-                default:
-                    portfolios = portfolios.OrderBy(p => p.Sector);
-                    break;
-            }
+                Portfolios = Util.Pagination<Portfolio, string>(portfolioRepository.GetAll(),
+                                                                p => p.Sector,
+                                                                noPage,
+                                                                Constants.ITEMS_PER_PAGE)
+            };
 
-            List<PortfolioViewModel> portfoliosViews = new List<PortfolioViewModel>();
-            foreach (Portfolio p in portfolios)
-                portfoliosViews.Add(new PortfolioViewModel(p));
-
-            return View(portfoliosViews.ToPagedList(noPage, itemsPerPage));
+            return View(portfoliosViewModels);
         }
 
         public ActionResult Contracts(long id, int? page, string sortOrder, string currentFilter, string searchString)
         {
-            ViewBag.IsListEmpty = false;
-            ViewBag.CurrentSort = sortOrder;
-            const int itemsPerPage = 3;
             int noPage = (page ?? 1);
+            var contractsViewModels = new ContractsViewModel
+            {
+                CurrentSort = sortOrder
+            };
 
             if (searchString != null)
                 page = 1;
             else
                 searchString = currentFilter;
 
-            ViewBag.CurrentFilter = searchString;
+            contractsViewModels.CurrentFilter = searchString;
 
-            List<ContractViewModel> contractsViews = new List<ContractViewModel>();
-            IEnumerable<Contract> contracts = contractRepository.GetAllFromPortfolio(id);
-            if(contracts.Count() == 0)
+            var contracts = contractRepository.GetAllFromPortfolio(id);
+            if (contracts.Count() == 0)
             {
-                ViewBag.IsListEmpty = true;
-                return View(contractsViews.ToPagedList(noPage, itemsPerPage));
+                contractsViewModels.IsListEmpty = true;
+                return View(contractsViewModels);
             }
 
             if (!string.IsNullOrEmpty(searchString))
                 contracts = contracts.Where(c => c.Name.Contains(searchString));
 
-            switch (sortOrder)
-            {
-                default:
-                    contracts = contracts.OrderBy(p => p.Name);
-                    break;
-            }
+            contractsViewModels.Contracts = Util.Pagination<Contract, string>(contracts, p => p.Name,
+                                                                             noPage,
+                                                                             Constants.ITEMS_PER_PAGE);
 
-            foreach (Contract c in contracts)
-                contractsViews.Add(new ContractViewModel(c));
-
-            return View(contractsViews.ToPagedList(noPage, itemsPerPage));
+            return View(contractsViewModels);
         }
     }
 }

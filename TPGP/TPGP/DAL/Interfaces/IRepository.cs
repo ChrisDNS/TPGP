@@ -1,14 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using PagedList;
+using System;
+using System.Linq;
 using System.Linq.Expressions;
 
 namespace TPGP.DAL.Interfaces
 {
     public interface IRepository<T> where T : class
     {
-        IEnumerable<T> GetAll();
+        IQueryable<T> GetAll();
 
-        IEnumerable<T> GetBy(Expression<Func<T, bool>> filter);
+        IQueryable<T> GetBy(Expression<Func<T, bool>> filter);
 
         T GetById(long id);
 

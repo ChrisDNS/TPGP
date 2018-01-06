@@ -1,7 +1,6 @@
-﻿@using PagedList;
-@using PagedList.Mvc
+﻿@using PagedList.Mvc
 
-@model IPagedList<TPGP.ViewModels.PortfolioViewModel>
+@model TPGP.ViewModels.PortfoliosViewModel
 
 @{
     ViewBag.Title = "Portfolios";
@@ -19,11 +18,11 @@
             <th>Sector</th>
         </tr>
 
-        @foreach (var item in Model)
+        @foreach (var item in Model.Portfolios)
         {
             <tr>
                 <td>
-                    @Html.ActionLink(@item.Portfolio.Sector, "Contracts", "Portfolio", new { id = item.Portfolio.Id }, null)
+                    @Html.ActionLink(@item.Sector, "Contracts", "Portfolio", new { id = item.Id }, null)
                 </td>
             </tr>
         }
@@ -31,6 +30,6 @@
     </table>
 
     <div class="container pagination pager">
-        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+        @Html.PagedListPager(Model.Portfolios, page => Url.Action("Index", new { page }))
     </div>
 </div>
