@@ -8,6 +8,7 @@
     <title>TPGP</title>
     <link href="~/content/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/content/css/Site.css" rel="stylesheet" />
+    @Styles.Render("~/Content/cssjqryUi")
     @RenderSection("css", false)
 </head>
 <body>
@@ -23,6 +24,7 @@
 
     <script src="~/scripts/vendor/jquery/jquery-3.2.1.min.js"></script>
     <script src="~/scripts/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    @Scripts.Render("~/bundles/jqueryui")
     @RenderSection("js", false)
 </body>
 </html>

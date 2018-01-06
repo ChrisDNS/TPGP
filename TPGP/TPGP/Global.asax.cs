@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using System.Web.Optimization;
 using System.Web.Routing;
+using TPGP.App_Start;
 using Unity;
 
 namespace TPGP
@@ -16,6 +14,7 @@ namespace TPGP
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             UnityConfig.RegisterTypes(new UnityContainer());
             ViewEngines.Engines.Add(new RazorViewEngine());
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
     }
 }

@@ -7,7 +7,7 @@
 <h3 class="panel-heading">Editing</h3>
 <div class="panel-body  col-lg-8 col-lg-offset-1">
 
-    @using (Html.BeginForm("Save", "Admin"))
+    @using (Html.BeginForm("Save", "Admin", FormMethod.Post))
     {
         @Html.AntiForgeryToken()
 
@@ -51,11 +51,11 @@
                 @Html.LabelFor(model => model.Role.RoleName, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.DropDownListFor(model => model.Role.RoleName,
-                                      new SelectList(new[]{ TPGP.Models.Enums.Roles.ACTUARY.ToString(),
-                                            TPGP.Models.Enums.Roles.ADMIN.ToString(),
-                                            TPGP.Models.Enums.Roles.COLLABORATOR.ToString(),
-                                            TPGP.Models.Enums.Roles.MANAGER.ToString(),
-                                            TPGP.Models.Enums.Roles.SUBSCRIBER.ToString() }))
+                                                          new SelectList(new[]{ TPGP.Models.Enums.Roles.ACTUARY.ToString(),
+                                                            TPGP.Models.Enums.Roles.ADMIN.ToString(),
+                                                            TPGP.Models.Enums.Roles.COLLABORATOR.ToString(),
+                                                            TPGP.Models.Enums.Roles.MANAGER.ToString(),
+                                                            TPGP.Models.Enums.Roles.SUBSCRIBER.ToString() }))
                     @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -65,12 +65,10 @@
                     <input type="submit" value="Save" class="btn btn-default" />
                 </div>
             </div>
-
-        </div>
-
-        <div>
-            @Html.ActionLink("Back to List", "Index")
         </div>
     }
 
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
 </div>
