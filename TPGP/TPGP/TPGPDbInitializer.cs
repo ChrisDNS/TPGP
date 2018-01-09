@@ -55,6 +55,30 @@ namespace TPGP
                 new Contract { Name = "Contract-4", InitDate = DateTime.Now, Bonus = 2221.74, Portfolio = portfolios[2] }
             };
 
+            GeographicalZone world = new GeographicalZone
+            {
+                Label = "World",
+                Parent = null
+            };
+
+            IList<GeographicalZone> continents = new List<GeographicalZone>
+            {
+                new GeographicalZone { Label = "Europe", Parent = world },
+                new GeographicalZone { Label = "Asie", Parent = world },
+                new GeographicalZone { Label = "Océanie", Parent = world },
+                new GeographicalZone { Label = "Afrique", Parent = world },
+                new GeographicalZone { Label = "Amérique", Parent = world },
+                new GeographicalZone { Label = "Antarctique", Parent = world }
+            };
+
+            IList<GeographicalZone> countries = new List<GeographicalZone>
+            {
+                new GeographicalZone { Label = "France", Parent = continents[0] },
+                new GeographicalZone { Label = "Chine", Parent = continents[1] },
+                new GeographicalZone { Label = "Algérie", Parent = continents[3] },
+                new GeographicalZone { Label = "Canada", Parent = continents[4] },
+            };
+
             foreach (var role in roles)
                 context.Roles.Add(role);
 
@@ -69,6 +93,15 @@ namespace TPGP
 
             foreach (var contract in contracts)
                 context.Contracts.Add(contract);
+
+            /**geographical zones**/
+            context.Zones.Add(world);
+
+            foreach (var continent in continents)
+                context.Zones.Add(continent);
+
+            //foreach (var country in countries)
+              //  context.Zones.Add(country);
 
             base.Seed(context);
         }

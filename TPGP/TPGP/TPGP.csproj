@@ -333,6 +333,7 @@
     <Compile Include="Models\Enums\Permissions.cs" />
     <Compile Include="Models\Enums\Roles.cs" />
     <Compile Include="Models\Jobs\Contract.cs" />
+    <Compile Include="Models\Jobs\GeographicalZone.cs" />
     <Compile Include="Models\Jobs\Permission.cs" />
     <Compile Include="Models\Jobs\Portfolio.cs" />
     <Compile Include="Models\Jobs\Role.cs" />

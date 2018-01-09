@@ -15,11 +15,13 @@ namespace TPGP.Context
         public DbSet<Permission> Permissions { get; set; }
         public DbSet<Portfolio> Portfolios { get; set; }
         public DbSet<Contract> Contracts { get; set; }
+        public DbSet<GeographicalZone> Zones { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().HasRequired<Role>(u => u.Role).WithMany(r => r.Users);
             modelBuilder.Entity<Contract>().HasRequired<Portfolio>(c => c.Portfolio).WithMany(p => p.Contracts);
+            modelBuilder.Entity<GeographicalZone>().HasRequired(g => g.Parent).WithMany().HasForeignKey(g => g.ParentId);
             modelBuilder.Entity<Permission>().HasMany(p => p.Roles).WithMany(p => p.Permissions)
                                              .Map(pr =>
                                              {
