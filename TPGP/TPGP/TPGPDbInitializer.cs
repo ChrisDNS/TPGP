@@ -100,8 +100,8 @@ namespace TPGP
             foreach (var continent in continents)
                 context.Zones.Add(continent);
 
-            //foreach (var country in countries)
-              //  context.Zones.Add(country);
+            foreach (var country in countries)
+                context.Zones.Add(country);
 
             base.Seed(context);
         }

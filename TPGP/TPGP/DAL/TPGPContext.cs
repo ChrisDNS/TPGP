@@ -21,7 +21,7 @@ namespace TPGP.Context
         {
             modelBuilder.Entity<User>().HasRequired<Role>(u => u.Role).WithMany(r => r.Users);
             modelBuilder.Entity<Contract>().HasRequired<Portfolio>(c => c.Portfolio).WithMany(p => p.Contracts);
-            modelBuilder.Entity<GeographicalZone>().HasRequired(g => g.Parent).WithMany().HasForeignKey(g => g.ParentId);
+            modelBuilder.Entity<GeographicalZone>().HasOptional(g => g.Parent).WithMany().HasForeignKey<long?>(g => g.ParentId);
             modelBuilder.Entity<Permission>().HasMany(p => p.Roles).WithMany(p => p.Permissions)
                                              .Map(pr =>
                                              {
