@@ -20,6 +20,9 @@ namespace TPGP.Models.Jobs
         [Required(ErrorMessage = "The Bonus field is required.")]
         public double Bonus { get; set; }
 
+        [Display(Name = "Company")]
+        public string Company { get; set; }
+
         [Required(ErrorMessage = "The Sector field is required.")]
         public long PortfolioId { get; set; }
         public Portfolio Portfolio { get; set; }
@@ -28,12 +31,13 @@ namespace TPGP.Models.Jobs
         {
         }
 
-        public Contract(long id, string name, DateTime initDate, double bonus)
+        public Contract(long id, string name, DateTime initDate, double bonus, string company)
         {
             Id = id;
             Name = name;
             InitDate = initDate;
             Bonus = bonus;
+            Company = company;
         }
     }
 }

@@ -9,27 +9,39 @@ namespace TPGP
 {
     public class TPGPDbInitializer : DropCreateDatabaseAlways<TPGPContext>
     {
-        public TPGPDbInitializer()
+        public TPGPDbInitializer() : base()
         {
         }
 
         protected override void Seed(TPGPContext context)
         {
-            IList<Permission> permissions = new List<Permission>
+            IList<Permission> adminPermissions = new List<Permission>
             {
-                new Permission { Name = "admin" }
+                new Permission { Name = "Admin-Index" },
+                new Permission { Name = "Admin-Edit" },
+                new Permission { Name = "Admin-Save" }
+            };
+
+            IList<Permission> collaboratorPermissions = new List<Permission>
+            {
+                new Permission { Name = "Portfolio-Index" }
+            };
+
+            IList<Permission> subscriberPermissions = new List<Permission>
+            {
+                new Permission { Name = "Portfolio-Index" },
+                new Permission { Name = "Portfolio-Contracts" },
+                new Permission { Name = "Contract-Index" },
+                new Permission { Name = "Contract-Details" },
+                new Permission { Name = "Contract-Create" },
+                new Permission { Name = "Contract-Save" }
             };
 
             IList<Role> roles = new List<Role>
             {
-                new Role { RoleName = Roles.ADMIN, IsAdmin = true, Permissions = permissions },
-                new Role { RoleName = Roles.COLLABORATOR, IsAdmin = false }
-            };
-
-            IList<User> users = new List<User>
-            {
-                new User { Username = "Sarra", Firstname = "Sarra", Lastname = "Sarra", Email = "sarra@sarra.sarra", Role = roles[0] },
-                new User { Username = "Pierre", Firstname = "Pierre", Lastname = "Pierre", Email = "pierre@pierre.pierre", Role = roles[1] }
+                new Role { RoleName = Roles.ADMIN, IsAdmin = true, Permissions = adminPermissions },
+                new Role { RoleName = Roles.COLLABORATOR, IsAdmin = false, Permissions = collaboratorPermissions },
+                new Role { RoleName = Roles.SUBSCRIBER, IsAdmin = false, Permissions = subscriberPermissions }
             };
 
             IList<Portfolio> portfolios = new List<Portfolio>
@@ -79,14 +91,15 @@ namespace TPGP
                 new GeographicalZone { Label = "Canada", Parent = continents[4] },
             };
 
-            foreach (var role in roles)
-                context.Roles.Add(role);
+            IList<User> users = new List<User>
+            {
+                new User { Username = "Sarra", Firstname = "Sarra", Lastname = "Sarra", Email = "sarra@sarra.sarra", Zone = countries[0], Role = roles[0] },
+                new User { Username = "Pierre", Firstname = "Pierre", Lastname = "Pierre", Email = "pierre@pierre.pierre", Zone = countries[0], Role = roles[1] },
+                new User { Username = "Sidi", Firstname = "Sidi", Lastname = "Sidi", Email = "sidi@sid.sidi", Zone = countries[3], Role = roles[2] }
+            };
 
             foreach (var user in users)
                 context.Users.Add(user);
-
-            foreach (var permission in permissions)
-                context.Permissions.Add(permission);
 
             foreach (var portfolio in portfolios)
                 context.Portfolios.Add(portfolio);

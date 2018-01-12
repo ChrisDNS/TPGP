@@ -1,0 +1,40 @@
+﻿@{
+    if (Session["username"] != null)
+    {
+        <div class="dropdown text-right">
+            <a class="btn btn-outline-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                @Session["username"], @Session["role"]
+            </a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+                <li><a tabindex="-1" class="dropdown-item" href="/account">Account</a></li>
+                <li class="dropdown-divider"></li>
+                <li><a tabindex="-1" class="dropdown-item" href="/home/logout">Log out</a></li>
+            </ul>
+        </div>
+    }
+}
+
+<nav class="navbar navbar-expand-lg navbar-toggleable-md navbar-light bg-faded">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                @{
+                    if ((string)Session["role"] != "ADMIN")
+                    {
+                        <a class="nav-link" href="/Portfolio">Portfolios<span class="sr-only">(current)</span></a>
+                    }
+                    else
+                    {
+                        <a class="nav-link" href="/Admin">Users<span class="sr-only">(current)</span></a>
+                    }
+                }
+            </li>
+        </ul>
+        <a class="navbar-brand navbar-right" href="#">
+            <img src="~/Content/images/logo.png" alt="logo" width="33" height="33">
+        </a>
+    </div>
+</nav>

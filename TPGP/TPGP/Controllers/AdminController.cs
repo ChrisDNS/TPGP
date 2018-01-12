@@ -7,7 +7,7 @@ using TPGP.ViewModels;
 
 namespace TPGP.Controllers
 {
-    [CustomAuthorizeAdmin]
+    [CustomAuthorize]
     public class AdminController : Controller
     {
         private readonly IUserRepository userRepository;

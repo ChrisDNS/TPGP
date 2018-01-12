@@ -303,7 +303,8 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ActionFilters\CustomAuthorizeOthersAttribute.cs" />
+    <Compile Include="ActionFilters\CustomAuthorizeAttribute.cs" />
+    <Compile Include="ActionFilters\RBACExtended.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
@@ -320,7 +321,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="ActionFilters\CustomAuthorizeAdminAttribute.cs" />
     <Compile Include="DAL\Interfaces\IPermissionRepository.cs" />
     <Compile Include="DAL\Interfaces\IRoleRepository.cs" />
     <Compile Include="DAL\Repositories\ContractRepository.cs" />
@@ -330,7 +330,6 @@
     <Compile Include="DAL\Repositories\PermissionRepository.cs" />
     <Compile Include="DAL\Repositories\RoleRepository.cs" />
     <Compile Include="DAL\Repositories\UserRepository.cs" />
-    <Compile Include="Models\Enums\Permissions.cs" />
     <Compile Include="Models\Enums\Roles.cs" />
     <Compile Include="Models\Jobs\Contract.cs" />
     <Compile Include="Models\Jobs\GeographicalZone.cs" />
@@ -366,8 +365,7 @@
     <Content Include="Views\Unauthorized\Index.cshtml" />
     <Content Include="Views\Portfolio\Index.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
-    <Content Include="Views\Shared\_HomeNavbar.cshtml" />
-    <Content Include="Views\Shared\_AdminNavbar.cshtml" />
+    <Content Include="Views\Shared\_Navbar.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Portfolio\Contracts.cshtml" />
     <Content Include="Views\Shared\_AlreadyLoggedIn.cshtml" />

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TPGP.Models.Jobs
@@ -7,17 +6,20 @@ namespace TPGP.Models.Jobs
     public class User
     {
         public long Id { get; set; }
-        [Display(Name ="Username")]
+        [Display(Name = "Username")]
         [Required(ErrorMessage = "Username field is required.")]
         public string Username { get; set; }
         [DataType(DataType.Password)]
         [NotMapped]
         public string Password { get; set; }
-        [Display(Name ="First name")]
+        [Display(Name = "First name")]
         public string Firstname { get; set; }
-        [Display(Name ="Last name")]
+        [Display(Name = "Last name")]
         public string Lastname { get; set; }
+        [Display(Name = "Email")]
         public string Email { get; set; }
+        [Display(Name = "Zone")]
+        public GeographicalZone Zone { get; set; }
 
         public long RoleId { get; set; }
         public virtual Role Role { get; set; }
@@ -26,22 +28,23 @@ namespace TPGP.Models.Jobs
         {
         }
 
-        public User(string username, string firstname, string lastname, string email, Role role)
+        public User(string username, string firstname, string lastname, string email, GeographicalZone zone, Role role)
         {
             Username = username;
             Firstname = firstname;
             Lastname = lastname;
             Email = email;
+            Zone = zone;
             Role = role;
         }
 
         public void Edit(User user)
         {
-            this.Username = user.Username;
-            this.Firstname = user.Firstname;
-            this.Lastname = user.Lastname;
-            this.Email = user.Email;
-            this.RoleId = user.RoleId;
+            Username = user.Username;
+            Firstname = user.Firstname;
+            Lastname = user.Lastname;
+            Email = user.Email;
+            Role = user.Role;
         }
     }
 }

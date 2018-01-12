@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.Mvc;
 using TPGP.ActionFilters;
 using TPGP.DAL.Interfaces;
@@ -9,7 +8,7 @@ using TPGP.ViewModels;
 
 namespace TPGP.Controllers
 {
-    [CustomAuthorizeOthers]
+    [CustomAuthorize]
     public class PortfolioController : Controller
     {
         private readonly IContractRepository contractRepository;
