@@ -61,10 +61,32 @@ namespace TPGP
 
             IList<Contract> contracts = new List<Contract>
             {
-                new Contract { Name = "Contract-1", InitDate = DateTime.Now, Bonus = 125.445, Portfolio = portfolios[0] },
-                new Contract { Name = "Contract-2", InitDate = DateTime.Now, Bonus = 1201.45, Portfolio = portfolios[0] },
-                new Contract { Name = "Contract-3", InitDate = DateTime.Now, Bonus = 201.15, Portfolio = portfolios[1] },
-                new Contract { Name = "Contract-4", InitDate = DateTime.Now, Bonus = 2221.74, Portfolio = portfolios[2] }
+                new Contract { Name = "Contract-1", InitDate = DateTime.Now, EndDate = DateTime.Now.AddDays(214), Bonus = 125.445, Portfolio = portfolios[0] },
+                new Contract { Name = "Contract-2", InitDate = DateTime.Now, EndDate = DateTime.Now.AddDays(546), Bonus = 1201.45, Portfolio = portfolios[0] },
+                new Contract { Name = "Contract-3", InitDate = DateTime.Now, EndDate = DateTime.Now.AddDays(111), Bonus = 201.15, Portfolio = portfolios[1] },
+                new Contract { Name = "Contract-4", InitDate = DateTime.Now, EndDate = DateTime.Now.AddDays(799), Bonus = 2221.74, Portfolio = portfolios[2] },
+                new Contract { Name = "Contract-5", InitDate = DateTime.Now, EndDate = DateTime.Now.AddDays(799), Bonus = 2221.74, Portfolio = portfolios[3] },
+                new Contract { Name = "Contract-6", InitDate = DateTime.Now, EndDate = DateTime.Now.AddDays(799), Bonus = 2221.74, Portfolio = portfolios[4] },
+                new Contract { Name = "Contract-7", InitDate = DateTime.Now, EndDate = DateTime.Now.AddDays(799), Bonus = 2121.74, Portfolio = portfolios[4] },
+                new Contract { Name = "Contract-8", InitDate = DateTime.Now, EndDate = DateTime.Now.AddDays(799), Bonus = 2221.74, Portfolio = portfolios[4] },
+                new Contract { Name = "Contract-123", InitDate = DateTime.Now, EndDate = DateTime.Now.AddDays(799), Bonus = 231.74, Portfolio = portfolios[4] },
+                new Contract { Name = "Contract-10", InitDate = DateTime.Now, EndDate = DateTime.Now.AddDays(799), Bonus = 2781.74, Portfolio = portfolios[4] },
+                new Contract { Name = "Contract-11", InitDate = DateTime.Now, EndDate = DateTime.Now.AddDays(141), Bonus = 27961.74, Portfolio = portfolios[4] },
+                new Contract { Name = "Contract-12", InitDate = DateTime.Now, EndDate = DateTime.Now.AddDays(167), Bonus = 24541.74, Portfolio = portfolios[5] },
+                new Contract { Name = "Contract-13", InitDate = DateTime.Now, EndDate = DateTime.Now.AddDays(896), Bonus = 24521.74, Portfolio = portfolios[6] },
+                new Contract { Name = "Contract-14", InitDate = DateTime.Now, EndDate = DateTime.Now.AddDays(855), Bonus = 78921.74, Portfolio = portfolios[1] },
+                new Contract { Name = "Contract-15", InitDate = DateTime.Now, EndDate = DateTime.Now.AddDays(201), Bonus = 67.74, Portfolio = portfolios[2] },
+                new Contract { Name = "Contract-16", InitDate = DateTime.Now, EndDate = DateTime.Now.AddDays(104), Bonus = 45221.74, Portfolio = portfolios[3] },
+                new Contract { Name = "Contract-17", InitDate = DateTime.Now, EndDate = DateTime.Now.AddDays(758), Bonus = 7921.78, Portfolio = portfolios[1] },
+                new Contract { Name = "Contract-18", InitDate = DateTime.Now, EndDate = DateTime.Now.AddDays(459), Bonus = 2221.74, Portfolio = portfolios[2] },
+                new Contract { Name = "Contract-19", InitDate = DateTime.Now, EndDate = DateTime.Now.AddDays(566), Bonus = 251.74, Portfolio = portfolios[6] },
+                new Contract { Name = "Contract-20", InitDate = DateTime.Now, EndDate = DateTime.Now.AddDays(764), Bonus = 2421.74, Portfolio = portfolios[10] },
+                new Contract { Name = "Contract-21", InitDate = DateTime.Now, EndDate = DateTime.Now.AddDays(76), Bonus = 621.71, Portfolio = portfolios[7] },
+                new Contract { Name = "Contract-22", InitDate = DateTime.Now, EndDate = DateTime.Now.AddDays(766), Bonus = 621.74, Portfolio = portfolios[6] },
+                new Contract { Name = "Contract-23", InitDate = DateTime.Now, EndDate = DateTime.Now.AddDays(777), Bonus = 91.94, Portfolio = portfolios[9] },
+                new Contract { Name = "Contract-24", InitDate = DateTime.Now, EndDate = DateTime.Now.AddDays(7897), Bonus = 281.74, Portfolio = portfolios[9] },
+                new Contract { Name = "Contract-25", InitDate = DateTime.Now, EndDate = DateTime.Now.AddDays(765), Bonus = 278.74, Portfolio = portfolios[8] },
+                new Contract { Name = "Contract-26", InitDate = DateTime.Now, EndDate = DateTime.Now.AddDays(1174), Bonus = 291.74, Portfolio = portfolios[9] }
             };
 
             GeographicalZone world = new GeographicalZone

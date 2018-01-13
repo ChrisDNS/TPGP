@@ -31,17 +31,17 @@ namespace TPGP.Controllers
                 Contract = contractRepository.GetById(id)
             };
 
-            return View(cvm.Contract);
+            return View(cvm);
         }
 
         public ActionResult Create()
         {
-            var contractViewModel = new ContractViewModel
+            var cvm = new ContractViewModel
             {
                 Portfolios = new SelectList(portfolioRepository.GetAll(), dataValueField: "Id", dataTextField: "Sector")
             };
 
-            return View(contractViewModel);
+            return View(cvm);
         }
 
         [HttpPost]

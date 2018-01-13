@@ -6,18 +6,24 @@ namespace TPGP.Models.Jobs
     public class User
     {
         public long Id { get; set; }
+
         [Display(Name = "Username")]
         [Required(ErrorMessage = "Username field is required.")]
         public string Username { get; set; }
+
         [DataType(DataType.Password)]
         [NotMapped]
         public string Password { get; set; }
+
         [Display(Name = "First name")]
         public string Firstname { get; set; }
+
         [Display(Name = "Last name")]
         public string Lastname { get; set; }
+
         [Display(Name = "Email")]
         public string Email { get; set; }
+
         [Display(Name = "Zone")]
         public GeographicalZone Zone { get; set; }
 

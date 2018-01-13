@@ -14,7 +14,7 @@ namespace TPGP.Models.DAL.Repositories
 
         public IEnumerable<Contract> GetAllFromPortfolio(long id)
         {
-            return GetBy(c => c.PortfolioId == id);
+            return GetByFilter(c => c.PortfolioId == id);
         }
     }
 }

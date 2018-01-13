@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using TPGP.Context;
@@ -18,9 +20,9 @@ namespace TPGP.DAL.Repositories
             dbSet = dbContext.Set<T>();
         }
 
-        public IQueryable<T> GetAll() => dbSet.AsQueryable();
+        public IEnumerable<T> GetAll() => dbSet.AsQueryable();
 
-        public IQueryable<T> GetBy(Expression<Func<T, bool>> filter) => dbSet.Where(filter);
+        public IEnumerable<T> GetByFilter(Expression<Func<T, bool>> filter) => dbSet.Where(filter);
 
         public T GetById(long id) => dbSet.Find(id);
 
@@ -31,5 +33,20 @@ namespace TPGP.DAL.Repositories
         public void Delete(long id) => dbSet.Remove(GetById(id));
 
         public void SaveChanges() => dbContext.SaveChanges();
+
+        public IEnumerable<T> Pagination<TKey>(Expression<Func<T, TKey>> sort, int noPage, int itemsPerPage, out int total)
+        {
+            total = dbContext.Set<T>().Count();
+
+            return dbContext.Set<T>().OrderBy(sort).Skip(itemsPerPage * noPage).Take(itemsPerPage);
+        }
+
+        public IEnumerable<T> Pagination<TKey>(Expression<Func<T, bool>> filter, Expression<Func<T, TKey>> sort, int noPage, int itemsPerPage, out int total)
+        {
+            var pagedList = dbContext.Set<T>().Where(filter).OrderBy(sort).Skip(itemsPerPage * noPage).Take(itemsPerPage);
+            total = pagedList.Count();
+
+            return pagedList;
+        }
     }
 }

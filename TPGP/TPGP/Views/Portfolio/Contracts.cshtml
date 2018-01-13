@@ -1,5 +1,4 @@
-﻿@using PagedList;
-@using PagedList.Mvc
+﻿@using PagedList.Mvc
 
 @model TPGP.ViewModels.ContractsViewModel
 
@@ -85,7 +84,7 @@ else
         </table>
 
         <div class="container pagination pager">
-            @Html.PagedListPager(Model.Contracts, page => Url.Action("Index", new { page }))
+            @Html.PagedListPager(Model.Contracts, page => Url.Action("Contracts", new { page }))
         </div>
     </div>
 }

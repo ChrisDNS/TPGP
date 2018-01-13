@@ -26,6 +26,7 @@ namespace LDAP
             users.Add(new LDAPUser("Pierre", "Pierre", "Pierre", "Pierre", "pierre@pierre.pierre", "Pierriste", "17 rue Pierre", "France"));
             users.Add(new LDAPUser("Sidi", "Sidi", "Sidi", "Sidi", "sidi@sidi.sidi", "Sidouche", "17 rue Sidi", "Algérie"));
             users.Add(new LDAPUser("Sarra", "Sarra", "Sarra", "Sarra", "sarra@sarra.sarra", "sarreuse", "17 rue Sarra", "France"));
+            users.Add(new LDAPUser("Random", "Random", "Random", "Random", "random@random.random", "randouse", "17 rue Random", "Allemagne"));
         }
 
         public LDAPUser AuthenticationAndIdentification(string login, string password)

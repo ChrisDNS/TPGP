@@ -1,10 +1,12 @@
 using System;
 using System.Web.Mvc;
+using TPGP.Context;
 using TPGP.DAL.Interfaces;
 using TPGP.DAL.Repositories;
 using TPGP.Models.DAL.Repositories;
 using Unity;
 using Unity.AspNet.Mvc;
+using Unity.Lifetime;
 
 namespace TPGP
 {
@@ -46,6 +48,7 @@ namespace TPGP
 
             // TODO: Register your type's mappings here.
             // container.RegisterType<IProductRepository, ProductRepository>();
+            container.RegisterType<TPGPContext>(new PerRequestLifetimeManager());
             container.RegisterType<IUserRepository, UserRepository>();
             container.RegisterType<IRoleRepository, RoleRepository>();
             container.RegisterType<IPortfolioRepository, PortfolioRepository>();

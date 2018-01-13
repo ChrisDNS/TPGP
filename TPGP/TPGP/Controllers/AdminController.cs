@@ -1,6 +1,5 @@
 ﻿using System.Web.Mvc;
 using TPGP.ActionFilters;
-using TPGP.Models.Jobs;
 using System.Linq;
 using TPGP.DAL.Interfaces;
 using TPGP.ViewModels;
@@ -30,7 +29,7 @@ namespace TPGP.Controllers
 
         public ActionResult Save(UserViewModel uvm)
         {
-            var usr = userRepository.GetBy(u => u.Id == uvm.User.Id).FirstOrDefault();
+            var usr = userRepository.GetByFilter(u => u.Id == uvm.User.Id).FirstOrDefault();
 
             if (usr != null)
             {
