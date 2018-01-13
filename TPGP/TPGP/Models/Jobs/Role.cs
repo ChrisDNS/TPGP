@@ -14,6 +14,8 @@ namespace TPGP.Models.Jobs
         public ICollection<Permission> Permissions { get; set; }
         public ICollection<User> Users { get; set; }
 
+        public bool IsBeingProcessed;
+
         public Role()
         {
         }

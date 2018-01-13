@@ -15,6 +15,7 @@ namespace TPGP.Context
         public DbSet<Permission> Permissions { get; set; }
         public DbSet<Portfolio> Portfolios { get; set; }
         public DbSet<Contract> Contracts { get; set; }
+        public DbSet<File> Files { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

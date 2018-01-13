@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using TPGP.Context;
+using TPGP.DAL.Interfaces;
 using TPGP.Models.Jobs;
 
 namespace TPGP.Controllers
@@ -14,12 +16,25 @@ namespace TPGP.Controllers
     public class AccountController : Controller
     {
         private TPGPContext db = new TPGPContext();
+        private readonly IUserRepository userRepository;
+
+        public AccountController(IUserRepository userRepository)
+        {
+            this.userRepository = userRepository;
+            
+        }
 
         // GET: Account
         public ActionResult Index()
         {
-            var users = db.Users.Include(u => u.Role);
-            return View(users.ToList());
+            string username = (string)Session["username"];
+            User user = userRepository.GetBy(u => u.Username == username).First();
+          
+           
+                return View("index",user);
+            
+          
+
         }
 
         // GET: Account/Details/5
@@ -38,29 +53,39 @@ namespace TPGP.Controllers
         }
 
         // GET: Account/Create
-        public ActionResult Create()
+       public ActionResult Create()
         {
-            ViewBag.RoleId = new SelectList(db.Roles, "Id", "Id");
             return View();
         }
+       
 
         // POST: Account/Create
         // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
         // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Username,Firstname,Lastname,Email,RoleId")] User user)
+        public ActionResult Create(TPGP.Models.Jobs.File f, HttpPostedFileBase file)
         {
+            string username = (string)Session["username"];
+            User user = userRepository.GetBy(u => u.Username == username).First();
             if (ModelState.IsValid)
             {
-                db.Users.Add(user);
+                string path = Path.Combine(Server.MapPath("~/pdf"), Path.GetFileName(file.FileName));
+                file.SaveAs(path);
+                var newFile = new Models.Jobs.File
+                {
+                    Id = f.Id,
+                    FilePath = "~/pdf/" + file.FileName
+                };
+                db.Files.Add(newFile);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                user.file = newFile;
+                user.Role.IsBeingProcessed = true;
             }
-
-            ViewBag.RoleId = new SelectList(db.Roles, "Id", "Id", user.RoleId);
-            return View(user);
+                return View("Index", user);
+            
         }
+
 
         // GET: Account/Edit/5
         public ActionResult Edit(long? id)

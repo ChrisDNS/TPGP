@@ -22,6 +22,8 @@ namespace TPGP.Models.Jobs
         public long RoleId { get; set; }
         public virtual Role Role { get; set; }
 
+        public File file { get; set; }
+
         public User()
         {
         }
