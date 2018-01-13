@@ -10,9 +10,9 @@ namespace LDAP
         public string Email { get; set; }
         public string Position { get; set; }
         public string Address { get; set; }
-        //Ajoute pays
+        public string Zone { get; set; }
 
-        public LDAPUser(string firstname, string lastname, string username, string password, string email, string position, string address)
+        public LDAPUser(string firstname, string lastname, string username, string password, string email, string position, string address, string zone)
         {
             Firstname = firstname;
             Lastname = lastname;
@@ -21,6 +21,7 @@ namespace LDAP
             Email = email;
             Position = position;
             Address = address;
+            Zone = zone;
         }
     }
 }

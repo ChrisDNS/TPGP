@@ -1,10 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using TPGP.Context;
-using TPGP.DAL.Interfaces;
-using TPGP.DAL.Repositories;
 using TPGP.Models.Enums;
-using TPGP.Models.Jobs;
 
 namespace TPGP.ActionFilters
 {
@@ -16,13 +13,10 @@ namespace TPGP.ActionFilters
         public string Username { get; set; }
         public UserRole Role { get; set; }
 
-        private readonly IUserRepository userRepository = new UserRepository(new TPGPContext());
-        private readonly IRoleRepository roleRepository = new RoleRepository(new TPGPContext());
-
         public RBACUser(string username)
         {
-            this.Username = username;
-            this.IsAdmin = false;
+            Username = username;
+            IsAdmin = false;
 
             GetUserRolePermissions();
         }
@@ -34,21 +28,24 @@ namespace TPGP.ActionFilters
 
         private void GetUserRolePermissions()
         {
-            User user = userRepository.GetBy(u => u.Username == Username).First();
-            Role role = roleRepository.GetById(user.RoleId);
-            if (user != null && role != null)
+            using (TPGPContext ctx = new TPGPContext())
             {
-                Id = user.Id;
-                UserRole userRole = new UserRole { Id = role.Id, RoleName = role.RoleName };
-//                foreach (var permission in role.Permissions)
-//                {
-//                    userRole.Permissions.Add(new RolePermission { Id = permission.Id, PermissionName = permission.Name});
-//                }
+                var user = ctx.Users.Where(u => u.Username == Username).FirstOrDefault();
+                if (user != null)
+                {
+                    user.Role.Permissions = ctx.Roles.Where(r => r.Id == user.RoleId).SelectMany(r => r.Permissions).ToList();
 
-                Role = userRole;
+                    Id = user.Id;
+                    Role = new UserRole { Id = user.Role.Id, RoleName = user.Role.RoleName };
 
-                if (!IsAdmin)
-                    IsAdmin = role.IsAdmin;
+                    user.Role.Permissions.ToList().ForEach(p => Role.Permissions.Add(new RolePermission
+                    {
+                        Id = p.Id,
+                        PermissionName = p.Name
+                    }));
+
+                    IsAdmin = user.Role.IsAdmin;
+                }
             }
         }
     }

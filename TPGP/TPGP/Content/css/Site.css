@@ -26,6 +26,10 @@ h1, h2, h3, h4 {
     text-align: center;
 }
 
+hr {
+    padding-bottom: 30px;
+}
+
 .body-content {
     background-color: #bfd3f2;
     box-shadow: 0 0 10px black;

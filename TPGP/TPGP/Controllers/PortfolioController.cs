@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using PagedList;
+using System.Diagnostics;
 using System.Linq;
 using System.Web.Mvc;
 using TPGP.ActionFilters;
@@ -9,7 +10,7 @@ using TPGP.ViewModels;
 
 namespace TPGP.Controllers
 {
-    [CustomAuthorizeOthers]
+    [CustomAuthorize]
     public class PortfolioController : Controller
     {
         private readonly IContractRepository contractRepository;
@@ -23,13 +24,11 @@ namespace TPGP.Controllers
 
         public ActionResult Index(int? page, string sortOrder)
         {
-            int noPage = (page ?? 1);
+            int noPage = (page ?? 1) - 1;
+            var portfolios = portfolioRepository.Pagination<string>(p => p.Sector, noPage, Constants.ITEMS_PER_PAGE, out int total);
             var portfoliosViewModels = new PortfoliosViewModel
             {
-                Portfolios = Util.Pagination<Portfolio, string>(portfolioRepository.GetAll(),
-                                                                p => p.Sector,
-                                                                noPage,
-                                                                Constants.ITEMS_PER_PAGE)
+                Portfolios = new StaticPagedList<Portfolio>(portfolios, noPage + 1, Constants.ITEMS_PER_PAGE, total)
             };
 
             return View(portfoliosViewModels);
@@ -37,7 +36,7 @@ namespace TPGP.Controllers
 
         public ActionResult Contracts(long id, int? page, string sortOrder, string currentFilter, string searchString)
         {
-            int noPage = (page ?? 1);
+            int noPage = (page ?? 1) - 1;
             var contractsViewModels = new ContractsViewModel
             {
                 CurrentSort = sortOrder
@@ -50,7 +49,8 @@ namespace TPGP.Controllers
 
             contractsViewModels.CurrentFilter = searchString;
 
-            var contracts = contractRepository.GetAllFromPortfolio(id);
+            var contracts = contractRepository.Pagination<string>(p => p.PortfolioId == id, c => c.Name, noPage, Constants.ITEMS_PER_PAGE, out int total);
+
             if (contracts.Count() == 0)
             {
                 contractsViewModels.IsListEmpty = true;
@@ -60,9 +60,7 @@ namespace TPGP.Controllers
             if (!string.IsNullOrEmpty(searchString))
                 contracts = contracts.Where(c => c.Name.Contains(searchString));
 
-            contractsViewModels.Contracts = Util.Pagination<Contract, string>(contracts, p => p.Name,
-                                                                             noPage,
-                                                                             Constants.ITEMS_PER_PAGE);
+            contractsViewModels.Contracts = new StaticPagedList<Contract>(contracts, noPage + 1, Constants.ITEMS_PER_PAGE, total);
 
             return View(contractsViewModels);
         }

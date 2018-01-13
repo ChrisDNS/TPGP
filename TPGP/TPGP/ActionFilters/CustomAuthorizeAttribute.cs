@@ -5,7 +5,7 @@ using System.Web.Routing;
 
 namespace TPGP.ActionFilters
 {
-    public class CustomAuthorizeAdminAttribute : AuthorizeAttribute
+    public class CustomAuthorizeAttribute : AuthorizeAttribute
     {
         public override void OnAuthorization(AuthorizationContext filterContext)
         {
@@ -18,7 +18,7 @@ namespace TPGP.ActionFilters
             {
                 username = HttpContext.Current.Session["username"].ToString();
                 authUser = new RBACUser(username);
-                if (/*!authUser.HasPermission(requiredPermission) & */!authUser.IsAdmin)
+                if (!authUser.HasPermission(requiredPermission))
                 {
                     filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary
                     {

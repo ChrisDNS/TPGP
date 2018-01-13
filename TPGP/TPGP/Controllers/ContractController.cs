@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-using System.Linq;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using TPGP.ActionFilters;
 using TPGP.DAL.Interfaces;
 using TPGP.Models.Jobs;
@@ -8,7 +6,7 @@ using TPGP.ViewModels;
 
 namespace TPGP.Controllers
 {
-    [CustomAuthorizeOthers]
+    [CustomAuthorize]
     public class ContractController : Controller
     {
         private readonly IContractRepository contractRepository;
@@ -28,17 +26,22 @@ namespace TPGP.Controllers
 
         public ActionResult Details(long id)
         {
-            return View(contractRepository.GetById(id));
+            var cvm = new ContractViewModel
+            {
+                Contract = contractRepository.GetById(id)
+            };
+
+            return View(cvm);
         }
 
         public ActionResult Create()
         {
-            var contractViewModel = new ContractViewModel
+            var cvm = new ContractViewModel
             {
                 Portfolios = new SelectList(portfolioRepository.GetAll(), dataValueField: "Id", dataTextField: "Sector")
             };
 
-            return View(contractViewModel);
+            return View(cvm);
         }
 
         [HttpPost]

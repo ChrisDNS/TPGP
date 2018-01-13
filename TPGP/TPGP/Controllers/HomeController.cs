@@ -1,7 +1,7 @@
 ﻿using LDAP;
+using System.Diagnostics;
 using System.Linq;
 using System.Web.Mvc;
-using TPGP.Context;
 using TPGP.DAL.Interfaces;
 using TPGP.Models.Enums;
 using TPGP.Models.Jobs;
@@ -22,13 +22,6 @@ namespace TPGP.Controllers
 
         public ActionResult Index()
         {
-            //juste pour créer la database
-            using (var ctx = new TPGPContext())
-            {
-                var rolesCount = ctx.Roles.Count();
-            }
-            //juste pour créer la database
-
             if (Session["username"] != null)
                 return View("_AlreadyLoggedIn");
 
@@ -44,26 +37,27 @@ namespace TPGP.Controllers
                 if (ldapUserDetails == null)
                 {
                     ModelState.AddModelError(string.Empty, "Wrong username or password.");
-                    return View("Index", uvm.User);
+                    return View("Index", uvm);
                 }
 
-                User user = userRepository.GetBy(u => u.Username == uvm.User.Username).First();
+                var user = userRepository.GetByFilter(u => u.Username == uvm.User.Username).FirstOrDefault();
                 if (user == null)
                 {
-                    User newUser = new User
+                    var newUser = new User
                     {
                         Firstname = ldapUserDetails.Firstname,
                         Lastname = ldapUserDetails.Lastname,
                         Username = ldapUserDetails.Username,
                         Email = ldapUserDetails.Email,
-                        Role = new Role() { RoleName = Roles.COLLABORATOR, IsAdmin = false }
+                        //Zone = ldapUserDetails.Zone,
+                        Role = roleRepository.GetByFilter(r => r.RoleName == Roles.COLLABORATOR).FirstOrDefault()
                     };
 
                     userRepository.Insert(newUser);
                     userRepository.SaveChanges();
 
-                    Session["username"] = user.Username;
-                    Session["role"] = user.Role.RoleName.ToString("g");
+                    Session["username"] = newUser.Username;
+                    Session["role"] = newUser.Role.RoleName.ToString("g");
                 }
                 else
                 {

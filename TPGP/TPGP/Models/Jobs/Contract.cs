@@ -11,14 +11,22 @@ namespace TPGP.Models.Jobs
         [Required(ErrorMessage = "The Name field is required.")]
         public string Name { get; set; }
 
-        [Display(Name = "Date")]
-        [Required(ErrorMessage = "The Date field is required.")]
+        [Display(Name = "Begin Date")]
+        [Required(ErrorMessage = "The Begin Date field is required.")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MMM/yyyy}")]
         public DateTime InitDate { get; set; }
+
+        [Display(Name = "End Date")]
+        [Required(ErrorMessage = "The End Date field is required.")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MMM/yyyy}")]
+        public DateTime EndDate { get; set; }
 
         [Display(Name = "Bonus")]
         [Required(ErrorMessage = "The Bonus field is required.")]
         public double Bonus { get; set; }
+
+        [Display(Name = "Company")]
+        public string Company { get; set; }
 
         [Required(ErrorMessage = "The Sector field is required.")]
         public long PortfolioId { get; set; }
@@ -28,12 +36,13 @@ namespace TPGP.Models.Jobs
         {
         }
 
-        public Contract(long id, string name, DateTime initDate, double bonus)
+        public Contract(long id, string name, DateTime initDate, double bonus, string company)
         {
             Id = id;
             Name = name;
             InitDate = initDate;
             Bonus = bonus;
+            Company = company;
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using TPGP.Context;
+﻿using TPGP.Context;
 using TPGP.DAL.Interfaces;
 using TPGP.Models.Jobs;
 
