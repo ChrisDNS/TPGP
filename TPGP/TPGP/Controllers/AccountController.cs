@@ -28,7 +28,7 @@ namespace TPGP.Controllers
         public ActionResult Index()
         {
             string username = (string)Session["username"];
-            User user = userRepository.GetBy(u => u.Username == username).First();
+            User user = userRepository.GetByFilter(u => u.Username == username).First();
           
            
                 return View("index",user);
@@ -67,7 +67,7 @@ namespace TPGP.Controllers
         public ActionResult Create(TPGP.Models.Jobs.File f, HttpPostedFileBase file)
         {
             string username = (string)Session["username"];
-            User user = userRepository.GetBy(u => u.Username == username).First();
+            User user = userRepository.GetByFilter(u => u.Username == username).First();
             if (ModelState.IsValid)
             {
                 string path = Path.Combine(Server.MapPath("~/pdf"), Path.GetFileName(file.FileName));
