@@ -44,7 +44,7 @@ namespace TPGP.DAL.Repositories
         public IEnumerable<T> Pagination<TKey>(Expression<Func<T, bool>> filter, Expression<Func<T, TKey>> sort, int noPage, int itemsPerPage, out int total)
         {
             var pagedList = dbContext.Set<T>().Where(filter).OrderBy(sort).Skip(itemsPerPage * noPage).Take(itemsPerPage);
-            total = pagedList.Count();
+            total = dbContext.Set<T>().Where(filter).Count();
 
             return pagedList;
         }
