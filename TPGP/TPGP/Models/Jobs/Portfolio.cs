@@ -8,7 +8,7 @@ namespace TPGP.Models.Jobs
 
         public string Sector { get; set; }
 
-        public ICollection<Contract> Contracts { get; set; }
+        public virtual ICollection<Contract> Contracts { get; set; }
 
         public Portfolio()
         {

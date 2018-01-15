@@ -1,7 +1,7 @@
 ﻿using LDAP;
-using System.Diagnostics;
 using System.Linq;
 using System.Web.Mvc;
+using TPGP.ActionFilters;
 using TPGP.DAL.Interfaces;
 using TPGP.Models.Enums;
 using TPGP.Models.Jobs;
@@ -58,6 +58,7 @@ namespace TPGP.Controllers
 
                     Session["username"] = newUser.Username;
                     Session["role"] = newUser.Role.RoleName.ToString("g");
+                    //Session["zone"] = newUser.Zone
                 }
                 else
                 {
@@ -65,8 +66,9 @@ namespace TPGP.Controllers
 
                     Session["username"] = user.Username;
                     Session["role"] = user.Role.RoleName.ToString("g");
+                    //Session["zone"] = user.Zone.
 
-                    if (user.Role.RoleName == Roles.ADMIN)
+                    if (this.IsAdmin())
                         return RedirectToAction("Index", "Admin");
                     else
                         return RedirectToAction("Index", "Portfolio");
@@ -83,7 +85,7 @@ namespace TPGP.Controllers
             Session["username"] = null;
             Session["role"] = null;
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index");
         }
 
         public ActionResult About()

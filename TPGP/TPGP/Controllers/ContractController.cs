@@ -1,7 +1,11 @@
-﻿using System.Web.Mvc;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Web.Mvc;
 using TPGP.ActionFilters;
+using TPGP.Context;
 using TPGP.DAL.Interfaces;
 using TPGP.Models.Jobs;
+using TPGP.Models.ViewModels;
 using TPGP.ViewModels;
 
 namespace TPGP.Controllers
@@ -38,12 +42,32 @@ namespace TPGP.Controllers
         {
             var cvm = new ContractViewModel
             {
-                Portfolios = new SelectList(portfolioRepository.GetAll(), dataValueField: "Id", dataTextField: "Sector")
+                Portfolios = new SelectList(portfolioRepository.GetAll(), dataValueField: "Id", dataTextField: "Sector"),
+                Zones = CreateData()               
             };
 
             return View(cvm);
         }
 
+        private IEnumerable<AssignedGeographicalZoneData> CreateData()
+        {
+            var ctx = new TPGPContext();
+            var zones = ctx.Zones;
+            var assignedZones = new List<AssignedGeographicalZoneData>();
+
+            foreach(var item in zones)
+            {
+                assignedZones.Add(new AssignedGeographicalZoneData
+                {
+                    Id = item.Id,
+                    Label = item.Label,
+                    Assigned = false
+                });
+            }
+
+            return assignedZones;
+        }
+ 
         [HttpPost]
         public ActionResult Save(ContractViewModel cvm)
         {

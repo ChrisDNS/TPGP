@@ -30,6 +30,13 @@ namespace TPGP.Context
                                                  pr.MapRightKey("role_id");
                                                  pr.ToTable("link_permissions_roles");
                                              });
+            modelBuilder.Entity<Contract>().HasMany(c => c.Zones).WithMany(z => z.Contracts)
+                                             .Map(cz =>
+                                             {
+                                                 cz.MapLeftKey("contract_id");
+                                                 cz.MapRightKey("zone_id");
+                                                 cz.ToTable("link_contracts_zones");
+                                             });
         }
     }
 }

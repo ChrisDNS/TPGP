@@ -1,0 +1,6 @@
+﻿@model TPGP.Models.ViewModels.AssignedGeographicalZoneData
+@using TPGP.Models.ViewModels
+
+@Html.HiddenFor(model => model.Id)
+@Html.CheckBoxFor(model => model.Assigned)
+@Html.DisplayFor(model => model.Label)

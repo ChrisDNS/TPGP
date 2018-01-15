@@ -12,6 +12,8 @@ namespace TPGP.Models.Jobs
         public virtual GeographicalZone Parent { get; set; }
         public virtual ICollection<GeographicalZone> Children { get; set; }
 
+        public virtual ICollection<Contract> Contracts { get; set; }
+
         public GeographicalZone()
         {
         }

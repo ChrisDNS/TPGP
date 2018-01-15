@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace TPGP.Models.Jobs
@@ -27,6 +28,9 @@ namespace TPGP.Models.Jobs
 
         [Display(Name = "Company")]
         public string Company { get; set; }
+
+        [Display(Name = "Area")]
+        public virtual ICollection<GeographicalZone> Zones { get; set; }
 
         [Required(ErrorMessage = "The Sector field is required.")]
         public long PortfolioId { get; set; }
