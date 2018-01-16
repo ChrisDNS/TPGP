@@ -53,6 +53,7 @@ namespace TPGP
             container.RegisterType<IRoleRepository, RoleRepository>();
             container.RegisterType<IPortfolioRepository, PortfolioRepository>();
             container.RegisterType<IContractRepository, ContractRepository>();
+            container.RegisterType<IGeographicalZoneRepository, GeographicalZoneRepository>();
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }
     }

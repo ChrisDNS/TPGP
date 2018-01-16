@@ -317,8 +317,10 @@
     <Compile Include="Controllers\UnauthorizedController.cs" />
     <Compile Include="Controllers\PortfolioController.cs" />
     <Compile Include="DAL\Interfaces\IFileRepository.cs" />
+    <Compile Include="DAL\Interfaces\IGeographicalZoneRepository.cs" />
     <Compile Include="DAL\Interfaces\IPortfolioRepository.cs" />
     <Compile Include="DAL\Repositories\FileRepository.cs" />
+    <Compile Include="DAL\Repositories\GeographicalZoneRepository.cs" />
     <Compile Include="DAL\Repositories\PortfolioRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

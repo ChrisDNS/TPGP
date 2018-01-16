@@ -3,6 +3,7 @@ using TPGP.ActionFilters;
 using System.Linq;
 using TPGP.DAL.Interfaces;
 using TPGP.ViewModels;
+using System.Diagnostics;
 
 namespace TPGP.Controllers
 {
@@ -10,10 +11,12 @@ namespace TPGP.Controllers
     public class AdminController : Controller
     {
         private readonly IUserRepository userRepository;
+        private readonly IRoleRepository roleRepository;
 
-        public AdminController(IUserRepository userRepository)
+        public AdminController(IUserRepository userRepository, IRoleRepository roleRepository)
         {
             this.userRepository = userRepository;
+            this.roleRepository = roleRepository;
         }
 
         // GET: Admin
@@ -24,7 +27,13 @@ namespace TPGP.Controllers
 
         public ActionResult Edit(long id)
         {
-            return View(new UserViewModel(userRepository.GetById(id)));
+            var userViewModel = new UserViewModel
+            {
+                User = userRepository.GetById(id),
+                Roles = new SelectList(roleRepository.GetAll(), dataValueField: "Id", dataTextField: "RoleName")
+            };
+
+            return View(userViewModel);
         }
 
         public ActionResult Save(UserViewModel uvm)
@@ -33,8 +42,7 @@ namespace TPGP.Controllers
 
             if (usr != null)
             {
-                usr.Username = uvm.User.Username;
-                usr.Role.RoleName = uvm.User.Role.RoleName;
+                usr.RoleId = uvm.User.RoleId;
             }
 
             userRepository.Update(usr);
