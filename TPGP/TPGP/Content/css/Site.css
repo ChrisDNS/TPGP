@@ -3,11 +3,6 @@
     margin-bottom: 10px;
 }
 
-.center {
-    margin-right: 5%;
-    margin-left: 5%;
-}
-
 .container {
     display: flex;
     flex-direction: column;
@@ -33,8 +28,6 @@ hr {
 .body-content {
     background-color: #bfd3f2;
     box-shadow: 0 0 10px black;
-    margin-left: 5%;
-    margin-right: 5%;
     margin-top: 50px;
 }
 
