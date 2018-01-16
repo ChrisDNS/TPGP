@@ -9,20 +9,12 @@
     justify-content: space-between;
 }
 
-.util {
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    background-color: #ffedff;
-}
-
 h1, h2, h3, h4 {
     text-align: center;
 }
 
-hr {
-    padding-bottom: 30px;
+dl {
+    padding-left: 13px;
 }
 
 .body-content {

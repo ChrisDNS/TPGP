@@ -209,6 +209,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\signin.css" />
+    <Content Include="Content\dataTables.bootstrap4.min.css" />
     <Content Include="Content\images\logo.png" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\themes\base\accordion.css" />
@@ -271,6 +272,7 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="NewFile.txt" />
+    <Content Include="scripts\dataTables.bootstrap4.min.js" />
     <Content Include="scripts\datepicker.js" />
     <Content Include="scripts\jquery-3.2.1.js" />
     <Content Include="scripts\jquery-3.2.1.min.js" />
@@ -283,11 +285,13 @@
     <None Include="scripts\jquery.validate-vsdoc.js" />
     <Content Include="scripts\jquery-ui-1.12.1.js" />
     <Content Include="scripts\jquery-ui-1.12.1.min.js" />
+    <Content Include="scripts\jquery.dataTables.min.js" />
     <Content Include="scripts\jquery.validate.js" />
     <Content Include="scripts\jquery.validate.min.js" />
     <Content Include="scripts\jquery.validate.unobtrusive.js" />
     <Content Include="scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="scripts\modernizr-2.8.3.js" />
+    <Content Include="scripts\show-table.js" />
     <Content Include="scripts\vendor\jquery\ai.0.22.9-build00167.js" />
     <Content Include="scripts\vendor\jquery\ai.0.22.9-build00167.min.js" />
     <Content Include="scripts\vendor\bootstrap\js\bootstrap.bundle.js" />

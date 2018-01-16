@@ -12,24 +12,42 @@
 
 <h1>Portfolios of contracts</h1>
 <hr />
+<div class="row col-lg-3" style="margin:0 auto; padding-bottom:20px">
+
+    @using (Html.BeginForm("Contracts", "Portfolio", FormMethod.Get))
+    {
+        <div class="input-group">
+            @Html.TextBox("SearchString", null, new { @class = "form-control", @placeholder = "Search..." })
+            <span class="input-group-btn">
+                <button class="btn btn-secondary" type="submit" value="Search">Go!</button>
+            </span>
+        </div>
+    }
+
+</div>
+
 <div>
-    <table class="table">
-        <tr>
-            <th>Sector</th>
-        </tr>
-
-        @foreach (var item in Model.Portfolios)
-        {
+    <table class="table table-striped table-bordered">
+        <thead class="thead-inverse">
             <tr>
-                <td>
-                    @Html.ActionLink(@item.Sector, "Contracts", "Portfolio", new { id = item.Id }, null)
-                </td>
+                <th>Sector</th>
             </tr>
-        }
+        </thead>
+        <tbody>
 
+            @foreach (var item in Model.Portfolios)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink(@item.Sector, "Contracts", "Portfolio", new { id = item.Id }, null)
+                    </td>
+                </tr>
+            }
+
+        </tbody>
     </table>
 
-    <div class="container pagination pager">
+    <div class="row pagination pager" style="margin:0 auto; padding-left:13px">
         @Html.PagedListPager(Model.Portfolios, page => Url.Action("Index", new { page }))
     </div>
 </div>

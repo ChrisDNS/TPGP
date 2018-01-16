@@ -42,8 +42,8 @@
         </dd>
     </dl>
 </div>
-<hr />
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Contract.Id }, new { @class = "btn btn-primary" })
+
+<p style="padding-left:13px">
     @Html.ActionLink("Back to List", "Contracts", "Portfolio", new { id = Model.Contract.PortfolioId }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Contract.Id }, new { @class = "btn btn-primary" })
 </p>
