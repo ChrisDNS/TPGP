@@ -5,7 +5,6 @@ using TPGP.ActionFilters;
 using TPGP.DAL.Interfaces;
 using TPGP.Models.Jobs;
 using TPGP.Models.ViewModels;
-using TPGP.ViewModels;
 
 namespace TPGP.Controllers
 {

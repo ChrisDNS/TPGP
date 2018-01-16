@@ -2,8 +2,7 @@
 using TPGP.ActionFilters;
 using System.Linq;
 using TPGP.DAL.Interfaces;
-using TPGP.ViewModels;
-using System.Diagnostics;
+using TPGP.Models.ViewModels;
 
 namespace TPGP.Controllers
 {

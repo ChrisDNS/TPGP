@@ -5,7 +5,7 @@ using TPGP.ActionFilters;
 using TPGP.DAL.Interfaces;
 using TPGP.Models.Enums;
 using TPGP.Models.Jobs;
-using TPGP.ViewModels;
+using TPGP.Models.ViewModels;
 
 namespace TPGP.Controllers
 {

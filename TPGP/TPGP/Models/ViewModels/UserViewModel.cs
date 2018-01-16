@@ -2,7 +2,7 @@
 using System.Web.Mvc;
 using TPGP.Models.Jobs;
 
-namespace TPGP.ViewModels
+namespace TPGP.Models.ViewModels
 {
     public class UserViewModel
     {
@@ -11,11 +11,6 @@ namespace TPGP.ViewModels
 
         public UserViewModel()
         {
-        }
-
-        public UserViewModel(User u)
-        {
-            User = u;
         }
     }
 }

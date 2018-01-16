@@ -1,12 +1,11 @@
 ﻿using PagedList;
-using System.Diagnostics;
 using System.Linq;
 using System.Web.Mvc;
 using TPGP.ActionFilters;
 using TPGP.DAL.Interfaces;
 using TPGP.Models.Jobs;
+using TPGP.Models.ViewModels;
 using TPGP.Utils;
-using TPGP.ViewModels;
 
 namespace TPGP.Controllers
 {

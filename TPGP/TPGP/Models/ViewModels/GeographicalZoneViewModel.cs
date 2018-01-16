@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using TPGP.Models.Jobs;
-using TPGP.ViewModels;
 
 namespace TPGP.Models.ViewModels
 {

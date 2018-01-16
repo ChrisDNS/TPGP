@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
 using TPGP.Models.Jobs;
-using TPGP.Models.ViewModels;
 
-namespace TPGP.ViewModels
+namespace TPGP.Models.ViewModels
 {
     public class ContractViewModel
     {

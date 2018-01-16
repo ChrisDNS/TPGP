@@ -1,7 +1,7 @@
 ﻿using PagedList;
 using TPGP.Models.Jobs;
 
-namespace TPGP.ViewModels
+namespace TPGP.Models.ViewModels
 {
     public class PortfoliosViewModel
     {
