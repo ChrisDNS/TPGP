@@ -10,11 +10,11 @@
     <link href="@Url.Content("~/Content/PagedList.css")" rel="stylesheet" />
 }
 
-<h1>Portfolios of contracts</h1>
+<h1>Portfolios</h1>
 <hr />
 <div class="col-lg-4" style="padding-bottom:25px; text-align: right;">
 
-    @using (Html.BeginForm("Contracts", "Portfolio", FormMethod.Get))
+    @using (Html.BeginForm("Index", "Portfolio", FormMethod.Get))
     {
         <div class="input-group">
             @Html.TextBox("SearchString", null, new { @class = "form-control", @placeholder = "Search..." })

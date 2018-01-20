@@ -3,6 +3,9 @@ using TPGP.ActionFilters;
 using System.Linq;
 using TPGP.DAL.Interfaces;
 using TPGP.Models.ViewModels;
+using PagedList;
+using TPGP.Models.Jobs;
+using TPGP.Utils;
 
 namespace TPGP.Controllers
 {
@@ -18,10 +21,24 @@ namespace TPGP.Controllers
             this.roleRepository = roleRepository;
         }
 
-        // GET: Admin
-        public ActionResult Index()
+        public ActionResult Index(int? page, string sortOrder, string searchString)
         {
-            return View(userRepository.GetAll());
+            int noPage = (page ?? 1) - 1;
+
+            if (searchString != null)
+                page = 1;
+
+            var users = userRepository.Pagination<string>(p => p.Username, noPage, Constants.ITEMS_PER_PAGE, out int total);
+
+            if (!string.IsNullOrEmpty(searchString))
+                users = users.Where(c => c.Username.Contains(searchString));
+
+            var usersViewModels = new UsersViewModel
+            {
+                Users = new StaticPagedList<User>(users, noPage + 1, Constants.ITEMS_PER_PAGE, total)
+            };
+
+            return View(usersViewModels);
         }
 
         public ActionResult Edit(long id)
@@ -47,7 +64,7 @@ namespace TPGP.Controllers
             userRepository.Update(usr);
             userRepository.SaveChanges();
 
-            return View("Index", userRepository.GetAll());
+            return View("Index");
         }
     }
 }

@@ -3,6 +3,8 @@
 @model TPGP.Models.ViewModels.ContractsViewModel
 
 @{
+    /**/
+
     ViewBag.Title = "Contracts";
 }
 
@@ -10,10 +12,16 @@
     <link href="@Url.Content("~/Content/PagedList.css")" rel="stylesheet" />
 }
 
-<h1>Contracts</h1>
+<h1><font color="rebeccapurple">@Model.Portfolio</font></h1>
 <hr />
 @if (!Model.IsListEmpty)
 {
+    <div class="row">
+        <div class="col-lg-4">
+            @Html.ActionLink("Create New", "Create", "Contract", null, new { @class = "btn btn-primary" })
+        </div>
+    </div>
+
     <div class="col-lg-4" style="padding-bottom:25px; text-align: right;">
 
         @using (Html.BeginForm("Contracts", "Portfolio", FormMethod.Get))

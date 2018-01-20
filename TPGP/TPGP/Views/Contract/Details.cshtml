@@ -4,7 +4,7 @@
     ViewBag.Title = "Details";
 }
 
-<h1>Details</h1>
+<h1><font color="rebeccapurple">@Model.Contract.Name</font></h1>
 <hr />
 <div>
     <dl class="dl-horizontal">
@@ -25,19 +25,27 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.Contract.EndDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Contract.EndDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Contract.Company)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Contract.Company)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.Contract.Bonus)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Contract.Bonus)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Contract.PortfolioId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Contract.Portfolio.Sector)
         </dd>
     </dl>
 </div>

@@ -1,4 +1,5 @@
 ﻿using PagedList;
+using System.Diagnostics;
 using System.Linq;
 using System.Web.Mvc;
 using TPGP.ActionFilters;
@@ -21,10 +22,21 @@ namespace TPGP.Controllers
             this.portfolioRepository = portfolioRepository;
         }
 
-        public ActionResult Index(int? page, string sortOrder)
+        public ActionResult Index(int? page, string sortOrder, string searchString)
         {
             int noPage = (page ?? 1) - 1;
-            var portfolios = portfolioRepository.Pagination<string>(p => p.Sector, noPage, Constants.ITEMS_PER_PAGE, out int total);
+
+            if (searchString != null)
+                page = 1;
+
+
+            var portfolios = portfolioRepository.GetPortfoliosByUserScope((long)Session["id"], p => p.Sector, noPage, Constants.ITEMS_PER_PAGE, out int total);
+            if (portfolios.Count() == 0)
+                portfolios = portfolioRepository.Pagination(p => p.Sector, noPage, Constants.ITEMS_PER_PAGE, out total);
+
+            if (!string.IsNullOrEmpty(searchString))
+                portfolios = portfolios.Where(c => c.Sector.Contains(searchString));
+
             var portfoliosViewModels = new PortfoliosViewModel
             {
                 Portfolios = new StaticPagedList<Portfolio>(portfolios, noPage + 1, Constants.ITEMS_PER_PAGE, total)
@@ -38,7 +50,8 @@ namespace TPGP.Controllers
             int noPage = (page ?? 1) - 1;
             var contractsViewModels = new ContractsViewModel
             {
-                CurrentSort = sortOrder
+                CurrentSort = sortOrder,
+                Portfolio = portfolioRepository.GetById(id).Sector
             };
 
             if (searchString != null)
@@ -48,7 +61,7 @@ namespace TPGP.Controllers
 
             contractsViewModels.CurrentFilter = searchString;
 
-            var contracts = contractRepository.Pagination<string>(p => p.PortfolioId == id, c => c.Name, noPage, Constants.ITEMS_PER_PAGE, out int total);
+            var contracts = contractRepository.Pagination(p => p.PortfolioId == id, c => c.Name, noPage, Constants.ITEMS_PER_PAGE, out int total);
 
             if (contracts.Count() == 0)
             {

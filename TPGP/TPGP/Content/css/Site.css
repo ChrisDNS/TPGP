@@ -16,6 +16,13 @@ h1, h2, h3, h4 {
 dl {
     padding-left: 13px;
 }
+dd {
+    color: black;
+}
+
+dt {
+    color: rebeccapurple;
+}
 
 .body-content {
     background-color: #bfd3f2;

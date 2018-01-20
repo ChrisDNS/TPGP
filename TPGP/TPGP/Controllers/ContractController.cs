@@ -24,7 +24,7 @@ namespace TPGP.Controllers
             this.zoneRepository = zoneRepository;
         }
 
-        public ActionResult Index(string currentFilter, string searchString)
+        public ActionResult Index()
         {
             return View();
         }

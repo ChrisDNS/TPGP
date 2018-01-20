@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Web.Mvc;
 using TPGP.ActionFilters;
+using TPGP.Context;
 using TPGP.DAL.Interfaces;
 using TPGP.Models.Enums;
 using TPGP.Models.Jobs;
@@ -22,6 +23,11 @@ namespace TPGP.Controllers
 
         public ActionResult Index()
         {
+            using (var ctx = new TPGPContext())
+            {
+                ctx.Roles.Count();
+            }
+
             if (Session["username"] != null)
                 return View("_AlreadyLoggedIn");
 
@@ -58,6 +64,7 @@ namespace TPGP.Controllers
 
                     Session["username"] = newUser.Username;
                     Session["role"] = newUser.Role.RoleName.ToString("g");
+                    Session["id"] = newUser.Id;
                     //Session["zone"] = newUser.Zone
                 }
                 else
@@ -66,6 +73,7 @@ namespace TPGP.Controllers
 
                     Session["username"] = user.Username;
                     Session["role"] = user.Role.RoleName.ToString("g");
+                    Session["id"] = user.Id;
                     //Session["zone"] = user.Zone.
 
                     if (this.IsAdmin())

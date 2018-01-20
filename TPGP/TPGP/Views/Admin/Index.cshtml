@@ -1,14 +1,19 @@
-﻿@model IEnumerable<TPGP.Models.Jobs.User>
+﻿@using PagedList.Mvc
+@model TPGP.Models.ViewModels.UsersViewModel
 
 @{
     ViewBag.Title = "AdminView";
 }
 
-<h1>List of users</h1>
+@section css {
+    <link href="@Url.Content("~/Content/PagedList.css")" rel="stylesheet" />
+}
+
+<h1>Users</h1>
 <hr />
 <div class="col-lg-4" style="padding-bottom:25px; text-align: right;">
 
-    @using (Html.BeginForm("Contracts", "Portfolio", FormMethod.Get))
+    @using (Html.BeginForm("Index", "Admin", FormMethod.Get))
     {
         <div class="input-group">
             @Html.TextBox("SearchString", null, new { @class = "form-control", @placeholder = "Search..." })
@@ -24,25 +29,25 @@
     <thead class="thead-inverse">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Username)
+                @Html.DisplayNameFor(model => model.Users[0].Username)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Firstname)
+                @Html.DisplayNameFor(model => model.Users[0].Firstname)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Lastname)
+                @Html.DisplayNameFor(model => model.Users[0].Lastname)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Email)
+                @Html.DisplayNameFor(model => model.Users[0].Email)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Role.RoleName)
+                @Html.DisplayNameFor(model => model.Users[0].Role.RoleName)
             </th>
         </tr>
     </thead>
     <tbody>
 
-        @foreach (var item in Model)
+        @foreach (var item in Model.Users)
         {
             <tr>
                 <td>
@@ -68,3 +73,7 @@
 
     </tbody>
 </table>
+
+<div class="row pagination pager">
+    @Html.PagedListPager(Model.Users, page => Url.Action("Index", new { page }))
+</div>

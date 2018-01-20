@@ -4,14 +4,17 @@
     {
         public long Id { get; set; }
 
-        public User User { get; set; }
-        public Portfolio Portfolio { get; set; }
+        public long UserId { get; set; }
+        public long PortfolioId { get; set; }
 
-        public Scope(long id, User user, Portfolio portfolio)
+        public Scope()
         {
-            Id = id;
-            User = user;
-            Portfolio = portfolio;
+        }
+
+        public Scope(long userId, long portfolioId)
+        {
+            UserId = userId;
+            PortfolioId = portfolioId;
         }
     }
 }
