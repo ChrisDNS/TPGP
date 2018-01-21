@@ -7,7 +7,7 @@ using TPGP.Models.Jobs;
 
 namespace TPGP.DAL.Interfaces
 {
-    interface IFileRepository : IRepository<File>
+    public interface IFileRepository : IRepository<File>
     {
     }
 }

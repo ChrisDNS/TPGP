@@ -11,36 +11,40 @@
     <title>Create</title>
 </head>
 <body>
-    @using (Html.BeginForm("create", "account", FormMethod.Post, new {enctype= "multipart/form-data"})) 
-    {
-        @Html.AntiForgeryToken()
-        
-        <div class="form-horizontal">
-            <h4>User</h4>
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-         
-            <div class="form-group">
-                @Html.LabelFor(model => model.file.FilePath, "file", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <input type="file" name="file" id="file" /> <br><br>
+    <div class="container col-lg-11">
+        <p> Your status is actually  @Model.Role.RoleName </p>
+        @using (Html.BeginForm("create", "account", FormMethod.Post, new { enctype = "multipart/form-data" }))
+         {
+            <p> Please choice the status you want : @Html.DropDownList("roleChoisi", (SelectList)ViewBag.Roles) </p>
+            <p>Then download and complete this form : @Html.ActionLink("download form", "download", "account", FormMethod.Post)</p>
 
-                 </div>
-            </div>
 
-            <div class="form-group">
-                  <div class="col-md-offset-2 col-md-10">
-                      <input type="submit" value="Create" class="btn btn-default" />
-                   </div>
+            @Html.AntiForgeryToken();
 
-             </div>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+              
+                   
+                     <p>Upload it: <input type="file" name="file" id="file" /> </p>
+
+                    
+               
+            
+        <p> We will process your request as soon as possible </p>
+
+                      <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Validate" class="btn btn-default" />
+                            </div>
+
+                      </div>
     
-       </div>
-       
-    }
-    
-    <div>
-        @Html.ActionLink("Back to List", "Index")
-    </div>
+               
+     
+        }
+        </div>
+    </p>
+   
+  
 </body>
 </html>

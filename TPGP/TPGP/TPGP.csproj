@@ -392,7 +392,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="pdf\" />
+    <Folder Include="pdf_download\" />
+    <Folder Include="pdf_upload\" />
     <Folder Include="Services\" />
     <Folder Include="Views\ErrorHandler\" />
   </ItemGroup>

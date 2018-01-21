@@ -15,13 +15,15 @@ namespace TPGP.Controllers
 {
     public class AccountController : Controller
     {
-        private TPGPContext db = new TPGPContext();
+       
         private readonly IUserRepository userRepository;
+        private readonly IFileRepository fileRepository;
 
-        public AccountController(IUserRepository userRepository)
+        public AccountController(IUserRepository userRepository, IFileRepository fileRepository)
         {
             this.userRepository = userRepository;
-            
+            this.fileRepository = fileRepository;
+
         }
 
         // GET: Account
@@ -29,130 +31,160 @@ namespace TPGP.Controllers
         {
             string username = (string)Session["username"];
             User user = userRepository.GetByFilter(u => u.Username == username).First();
-          
-           
-                return View("index",user);
-            
-          
+
+            return View("index", user);
+
+
 
         }
 
         // GET: Account/Details/5
-        public ActionResult Details(long? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            User user = db.Users.Find(id);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            return View(user);
-        }
+        /*  public ActionResult Details(long? id)
+          {
+             if (id == null)
+              {
+                  return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+              }
+              User user = db.Users.Find(id);
+              if (user == null)
+              {
+                  return HttpNotFound();
+              }
+              return View(user);
+          }*/
 
         // GET: Account/Create
-       public ActionResult Create()
+        public ActionResult Create()
         {
-            return View();
+            string username = (string)Session["username"];
+            User user = userRepository.GetByFilter(u => u.Username == username).First();
+            List<Models.Enums.Roles> roles = new List<Models.Enums.Roles>
+            {
+                Models.Enums.Roles.ACTUARY,
+                Models.Enums.Roles.ADMIN,
+                Models.Enums.Roles.COLLABORATOR,
+                Models.Enums.Roles.MANAGER,
+                Models.Enums.Roles.SUBSCRIBER,
+            };
+            roles.Remove(user.Role.RoleName);
+            ViewBag.Roles = new SelectList(roles);
+            return View("create", user);
         }
-       
+
+        //GET
+        /*  public ActionResult Download()
+          {
+              var dir = new System.IO.DirectoryInfo(Server.MapPath("~/pdf_status/"));
+              System.IO.FileInfo[] filename = dir.GetFiles("status");
+              return View(filename[0].Name);
+
+          }*/
+
+        public FileResult Download()
+        {
+            var FileVirtualePath = "~/pdf_download/status" + ".pdf";
+            return File(FileVirtualePath, "application/force-download", Path.GetFileName(FileVirtualePath));
+        }
+
 
         // POST: Account/Create
         // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
         // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(TPGP.Models.Jobs.File f, HttpPostedFileBase file)
+        public ActionResult Create(TPGP.Models.Jobs.File f, HttpPostedFileBase file, TPGP.Models.Enums.Roles roleChoisi)
         {
             string username = (string)Session["username"];
             User user = userRepository.GetByFilter(u => u.Username == username).First();
             if (ModelState.IsValid)
             {
-                string path = Path.Combine(Server.MapPath("~/pdf"), Path.GetFileName(file.FileName));
+                string path = Path.Combine(Server.MapPath("~/pdf_upload"), Path.GetFileName(file.FileName));
                 file.SaveAs(path);
                 var newFile = new Models.Jobs.File
                 {
                     Id = f.Id,
-                    FilePath = "~/pdf/" + file.FileName
+                    FilePath = "~/pdf_upload/" + file.FileName
                 };
-                db.Files.Add(newFile);
-                db.SaveChanges();
+               
+                fileRepository.Insert(newFile);
+                fileRepository.SaveChanges();
                 user.file = newFile;
                 user.Role.IsBeingProcessed = true;
+                user.Role.DesiredRole = roleChoisi;
+                userRepository.Update(user);
+                userRepository.SaveChanges();
             }
-                return View("Index", user);
-            
+            return View("Index", user);
+
         }
 
 
         // GET: Account/Edit/5
-        public ActionResult Edit(long? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            User user = db.Users.Find(id);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.RoleId = new SelectList(db.Roles, "Id", "Id", user.RoleId);
-            return View(user);
-        }
+        /* public ActionResult Edit(long? id)
+         {
+             if (id == null)
+             {
+                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+             }
+             User user = db.Users.Find(id);
+             if (user == null)
+             {
+                 return HttpNotFound();
+             }
+             ViewBag.RoleId = new SelectList(db.Roles, "Id", "Id", user.RoleId);
+             return View(user);
+         }*/
 
         // POST: Account/Edit/5
         // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
         // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+       /* [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Username,Firstname,Lastname,Email,RoleId")] User user)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(user).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.RoleId = new SelectList(db.Roles, "Id", "Id", user.RoleId);
-            return View(user);
-        }
+         public ActionResult Edit([Bind(Include = "Id,Username,Firstname,Lastname,Email,RoleId")] User user)
+         {
+             if (ModelState.IsValid)
+             {
+                 db.Entry(user).State = EntityState.Modified;
+                 db.SaveChanges();
+                 return RedirectToAction("Index");
+             }
+             ViewBag.RoleId = new SelectList(db.Roles, "Id", "Id", user.RoleId);
+             return View(user);
+         }*/
 
         // GET: Account/Delete/5
-        public ActionResult Delete(long? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            User user = db.Users.Find(id);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            return View(user);
-        }
+        /* public ActionResult Delete(long? id)
+         {
+             if (id == null)
+             {
+                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+             }
+             User user = db.Users.Find(id);
+             if (user == null)
+             {
+                 return HttpNotFound();
+             }
+             return View(user);
+         }*/
 
         // POST: Account/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(long id)
-        {
-            User user = db.Users.Find(id);
-            db.Users.Remove(user);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        /* [HttpPost, ActionName("Delete")]
+         [ValidateAntiForgeryToken]
+         public ActionResult DeleteConfirmed(long id)
+         {
+             User user = db.Users.Find(id);
+             db.Users.Remove(user);
+             db.SaveChanges();
+             return RedirectToAction("Index");
+         }
+         */
+        /* protected override void Dispose(bool disposing)
+         {
+             if (disposing)
+             {
+                 db.Dispose();
+             }
+             base.Dispose(disposing);
+         }*/
     }
 }

@@ -61,9 +61,11 @@
        
             @if (Model.Role.IsBeingProcessed == true)
             {
-                <p>Your changed is being processed</p>
+                <dt> About Your status</dt>
+                <p>You have asked to changed your status from @Model.Role.RoleName to  @Model.Role.DesiredRole. Your request is being processes</p>
             }else{
-                <a href="/account/create"> change your status</a>
+                @Html.ActionLink("change your status", "create", "account");
+                
             }
 
     </div>
