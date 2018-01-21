@@ -7,7 +7,7 @@ namespace TPGP.Context
     {
         public TPGPContext() : base()
         {
-            Database.SetInitializer<TPGPContext>(new TPGPDbInitializer());
+            Database.SetInitializer(new TPGPDbInitializer());
         }
 
         public DbSet<User> Users { get; set; }
@@ -16,13 +16,14 @@ namespace TPGP.Context
         public DbSet<Portfolio> Portfolios { get; set; }
         public DbSet<Contract> Contracts { get; set; }
         public DbSet<GeographicalZone> Zones { get; set; }
+        public DbSet<Scope> Scopes { get; set; }
         public DbSet<File> Files { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>().HasRequired<Role>(u => u.Role).WithMany(r => r.Users);
-            modelBuilder.Entity<Contract>().HasRequired<Portfolio>(c => c.Portfolio).WithMany(p => p.Contracts);
-            modelBuilder.Entity<GeographicalZone>().HasOptional(g => g.Parent).WithMany().HasForeignKey<long?>(g => g.ParentId);
+            modelBuilder.Entity<User>().HasRequired(u => u.Role).WithMany(r => r.Users);
+            modelBuilder.Entity<Contract>().HasRequired(c => c.Portfolio).WithMany(p => p.Contracts);
+            modelBuilder.Entity<GeographicalZone>().HasOptional(g => g.Parent).WithMany().HasForeignKey(g => g.ParentId);
             modelBuilder.Entity<Permission>().HasMany(p => p.Roles).WithMany(p => p.Permissions)
                                              .Map(pr =>
                                              {

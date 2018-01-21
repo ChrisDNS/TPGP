@@ -1,4 +1,4 @@
-﻿@model TPGP.ViewModels.UserViewModel
+﻿@model TPGP.Models.ViewModels.UserViewModel
 
 @{
     ViewBag.Title = "Index";
@@ -19,9 +19,9 @@
 </head>
 
 <body>
-    <div class="container col-lg-11">
-        @Html.Partial("_Navbar")
+    @Html.Partial("_Navbar")
 
+    <div class="container col-lg-11">
         <div class="login-form">
 
             @using (Html.BeginForm("Login", "Home", FormMethod.Post, new { role = "login" }))
@@ -44,9 +44,9 @@
             }
 
         </div>
-
-        @Html.Partial("_Footer")
     </div>
+
+    @Html.Partial("_Footer")
 
     <script src="~/scripts/vendor/jquery/jquery-3.2.1.min.js"></script>
     <script src="~/scripts/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

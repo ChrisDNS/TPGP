@@ -209,6 +209,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\signin.css" />
+    <Content Include="Content\dataTables.bootstrap4.min.css" />
     <Content Include="Content\images\logo.png" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\themes\base\accordion.css" />
@@ -271,6 +272,7 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="NewFile.txt" />
+    <Content Include="scripts\dataTables.bootstrap4.min.js" />
     <Content Include="scripts\datepicker.js" />
     <Content Include="scripts\jquery-3.2.1.js" />
     <Content Include="scripts\jquery-3.2.1.min.js" />
@@ -283,11 +285,13 @@
     <None Include="scripts\jquery.validate-vsdoc.js" />
     <Content Include="scripts\jquery-ui-1.12.1.js" />
     <Content Include="scripts\jquery-ui-1.12.1.min.js" />
+    <Content Include="scripts\jquery.dataTables.min.js" />
     <Content Include="scripts\jquery.validate.js" />
     <Content Include="scripts\jquery.validate.min.js" />
     <Content Include="scripts\jquery.validate.unobtrusive.js" />
     <Content Include="scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="scripts\modernizr-2.8.3.js" />
+    <Content Include="scripts\show-table.js" />
     <Content Include="scripts\vendor\jquery\ai.0.22.9-build00167.js" />
     <Content Include="scripts\vendor\jquery\ai.0.22.9-build00167.min.js" />
     <Content Include="scripts\vendor\bootstrap\js\bootstrap.bundle.js" />
@@ -312,14 +316,17 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ContractController.cs" />
-    <Compile Include="Controllers\ErrorHandlerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UnauthorizedController.cs" />
     <Compile Include="Controllers\PortfolioController.cs" />
     <Compile Include="DAL\Interfaces\IFileRepository.cs" />
+    <Compile Include="DAL\Interfaces\IGeographicalZoneRepository.cs" />
     <Compile Include="DAL\Interfaces\IPortfolioRepository.cs" />
+    <Compile Include="DAL\Interfaces\IScopeRepository.cs" />
     <Compile Include="DAL\Repositories\FileRepository.cs" />
+    <Compile Include="DAL\Repositories\GeographicalZoneRepository.cs" />
     <Compile Include="DAL\Repositories\PortfolioRepository.cs" />
+    <Compile Include="DAL\Repositories\ScopeRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -339,6 +346,7 @@
     <Compile Include="Models\Jobs\Permission.cs" />
     <Compile Include="Models\Jobs\Portfolio.cs" />
     <Compile Include="Models\Jobs\Role.cs" />
+    <Compile Include="Models\Jobs\Scope.cs" />
     <Compile Include="Models\Jobs\User.cs" />
     <Compile Include="DAL\Repositories\Repository.cs" />
     <Compile Include="DAL\TPGPContext.cs" />
@@ -348,7 +356,6 @@
     <Compile Include="TPGPDbInitializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\Constants.cs" />
-    <Compile Include="Utils\Util.cs" />
     <Compile Include="Models\ViewModels\ContractsViewModel.cs" />
     <Compile Include="Models\ViewModels\ContractViewModel.cs" />
     <Compile Include="Models\ViewModels\PortfoliosViewModel.cs" />

@@ -14,12 +14,12 @@ namespace TPGP.Models.Jobs
 
         [Display(Name = "Begin Date")]
         [Required(ErrorMessage = "The Begin Date field is required.")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MMM/yyyy}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy/MMM/dd}")]
         public DateTime InitDate { get; set; }
 
         [Display(Name = "End Date")]
         [Required(ErrorMessage = "The End Date field is required.")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MMM/yyyy}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy/MMM/dd}")]
         public DateTime EndDate { get; set; }
 
         [Display(Name = "Bonus")]

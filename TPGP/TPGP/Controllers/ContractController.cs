@@ -2,11 +2,9 @@
 using System.Linq;
 using System.Web.Mvc;
 using TPGP.ActionFilters;
-using TPGP.Context;
 using TPGP.DAL.Interfaces;
 using TPGP.Models.Jobs;
 using TPGP.Models.ViewModels;
-using TPGP.ViewModels;
 
 namespace TPGP.Controllers
 {
@@ -15,15 +13,18 @@ namespace TPGP.Controllers
     {
         private readonly IContractRepository contractRepository;
         private readonly IPortfolioRepository portfolioRepository;
+        private readonly IGeographicalZoneRepository zoneRepository;
 
         public ContractController(IContractRepository contractRepository,
-                                  IPortfolioRepository portfolioRepository)
+                                  IPortfolioRepository portfolioRepository,
+                                  IGeographicalZoneRepository zoneRepository)
         {
             this.contractRepository = contractRepository;
             this.portfolioRepository = portfolioRepository;
+            this.zoneRepository = zoneRepository;
         }
 
-        public ActionResult Index(string currentFilter, string searchString)
+        public ActionResult Index()
         {
             return View();
         }
@@ -43,48 +44,53 @@ namespace TPGP.Controllers
             var cvm = new ContractViewModel
             {
                 Portfolios = new SelectList(portfolioRepository.GetAll(), dataValueField: "Id", dataTextField: "Sector"),
-                Zones = CreateData()               
+                Zones = CreateZoneData()
             };
 
             return View(cvm);
         }
 
-        private IEnumerable<AssignedGeographicalZoneData> CreateData()
+        private IEnumerable<AssignedGeographicalZoneData> CreateZoneData()
         {
-            var ctx = new TPGPContext();
-            var zones = ctx.Zones;
+            var zones = zoneRepository.GetAll().ToList();
             var assignedZones = new List<AssignedGeographicalZoneData>();
 
-            foreach(var item in zones)
+            zones.ForEach(z => assignedZones.Add(new AssignedGeographicalZoneData
             {
-                assignedZones.Add(new AssignedGeographicalZoneData
-                {
-                    Id = item.Id,
-                    Label = item.Label,
-                    Assigned = false
-                });
-            }
+                Id = z.Id,
+                Label = z.Label,
+                Assigned = false
+            }));
 
             return assignedZones;
         }
- 
+
         [HttpPost]
         public ActionResult Save(ContractViewModel cvm)
         {
             if (ModelState.IsValid)
             {
+                var zones = cvm.Zones.Where(z => z.Assigned == true).ToList();
+                var zonesIds = zones.Select(z => z.Id);
+                var zonesFromDb = zoneRepository.GetByFilter(z => zonesIds.Contains(z.Id));
+
+                var listZones = new List<GeographicalZone>();
+                zonesFromDb.ToList().ForEach(z => listZones.Add(z));
+
                 var contract = new Contract
                 {
                     Name = cvm.Contract.Name,
                     InitDate = cvm.Contract.InitDate,
+                    EndDate = cvm.Contract.EndDate,
                     Bonus = cvm.Contract.Bonus,
-                    PortfolioId = cvm.Contract.PortfolioId
+                    PortfolioId = cvm.Contract.PortfolioId,
+                    Zones = listZones
                 };
 
                 contractRepository.Insert(contract);
                 contractRepository.SaveChanges();
 
-                return RedirectToAction("Index", "Portfolio");
+                return RedirectToAction("Index", "Portfolio/" + contract.PortfolioId);
             }
 
             return View();

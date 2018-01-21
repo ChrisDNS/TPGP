@@ -1,4 +1,4 @@
-﻿@model TPGP.ViewModels.UserViewModel
+﻿@model TPGP.Models.ViewModels.UserViewModel
 
 @{
     ViewBag.Title = "Edition";
@@ -19,7 +19,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.User.Username, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.User.Username, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.User.Username, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                     @Html.ValidationMessageFor(model => model.User.Username, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -27,7 +27,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.User.Firstname, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.User.Firstname, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.User.Firstname, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                     @Html.ValidationMessageFor(model => model.User.Firstname, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -35,7 +35,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.User.Lastname, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.User.Lastname, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.User.Lastname, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                     @Html.ValidationMessageFor(model => model.User.Lastname, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -43,20 +43,16 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.User.Email, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.User.Email, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.User.Email, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                     @Html.ValidationMessageFor(model => model.User.Email, "", new { @class = "text-danger" })
                 </div>
             </div>
+
             <div class="form-group">
                 @Html.LabelFor(model => model.User.Role.RoleName, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.User.Role.RoleName,
-                                                          new SelectList(new[]{ TPGP.Models.Enums.Roles.ACTUARY.ToString(),
-                                                            TPGP.Models.Enums.Roles.ADMIN.ToString(),
-                                                            TPGP.Models.Enums.Roles.COLLABORATOR.ToString(),
-                                                            TPGP.Models.Enums.Roles.MANAGER.ToString(),
-                                                            TPGP.Models.Enums.Roles.SUBSCRIBER.ToString() }))
-                    @Html.ValidationMessageFor(model => model.User.Email, "", new { @class = "text-danger" })
+                    @Html.DropDownListFor(model => model.User.RoleId, Model.Roles, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.User.Role, "", new { @class = "text-danger" })
                 </div>
             </div>
 

@@ -1,13 +1,12 @@
-﻿@model TPGP.ViewModels.ContractViewModel
+﻿@model TPGP.Models.ViewModels.ContractViewModel
 
 @{
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
-
+<h1><font color="rebeccapurple">@Model.Contract.Name</font></h1>
+<hr />
 <div>
-    <hr />
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Contract.Name)
@@ -26,24 +25,32 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.Contract.EndDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Contract.EndDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Contract.Company)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Contract.Company)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.Contract.Bonus)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Contract.Bonus)
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Contract.PortfolioId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Contract.Portfolio.Sector)
-        </dd>
     </dl>
 </div>
-<hr />
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Contract.Id }, new { @class = "btn btn-primary" })
+
+<p style="padding-left:13px">
     @Html.ActionLink("Back to List", "Contracts", "Portfolio", new { id = Model.Contract.PortfolioId }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Contract.Id }, new { @class = "btn btn-primary" })
 </p>
