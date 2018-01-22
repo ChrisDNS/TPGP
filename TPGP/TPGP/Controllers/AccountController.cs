@@ -18,12 +18,13 @@ namespace TPGP.Controllers
        
         private readonly IUserRepository userRepository;
         private readonly IFileRepository fileRepository;
+        private readonly IRoleRepository roleRepository;
 
-        public AccountController(IUserRepository userRepository, IFileRepository fileRepository)
+        public AccountController(IUserRepository userRepository, IFileRepository fileRepository, IRoleRepository roleRepository)
         {
             this.userRepository = userRepository;
             this.fileRepository = fileRepository;
-
+            this.roleRepository = roleRepository;
         }
 
         // GET: Account
@@ -31,6 +32,8 @@ namespace TPGP.Controllers
         {
             string username = (string)Session["username"];
             User user = userRepository.GetByFilter(u => u.Username == username).First();
+           
+            ViewBag.User = user;
 
             return View("index", user);
 
@@ -111,10 +114,14 @@ namespace TPGP.Controllers
                 user.file = newFile;
                 user.Role.IsBeingProcessed = true;
                 user.Role.DesiredRole = roleChoisi;
+                roleRepository.Update(user.Role);
+                roleRepository.SaveChanges();
                 userRepository.Update(user);
                 userRepository.SaveChanges();
             }
-            return View("Index", user);
+           
+            ViewBag.User = user;
+            return View("Index",user);
 
         }
 

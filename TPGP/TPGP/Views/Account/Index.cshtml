@@ -19,7 +19,7 @@
             <dt>
                 @Html.DisplayNameFor(model => model.Username)
             </dt>
-           
+
 
             <dd>
                 @Html.DisplayFor(model => model.Username)
@@ -57,18 +57,25 @@
             </dd>
 
         </dl>
+        @{ TPGP.Models.Jobs.User user = (TPGP.Models.Jobs.User)ViewBag.User;}
        
-       
-            @if (Model.Role.IsBeingProcessed == true)
-            {
-                <dt> About Your status</dt>
-                <p>You have asked to changed your status from @Model.Role.RoleName to  @Model.Role.DesiredRole. Your request is being processes</p>
-            }else{
-                @Html.ActionLink("change your status", "create", "account");
-                
-            }
+        @if(user != null && user.Role.IsBeingProcessed)
+        {
+           
+            <dl>
+            <dt> About Your status </dt> </dl>
+           
+                <p>You have asked to changed your status from @user.Role.RoleName to  @user.Role.DesiredRole. Your request is being processes</p>
+        }
+        else
+        {
+            @Html.ActionLink("change your status", "create", "account");
+
+        }
 
     </div>
+
+
  
 </body>
 </html>
