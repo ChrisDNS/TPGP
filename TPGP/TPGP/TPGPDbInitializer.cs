@@ -133,7 +133,11 @@ namespace TPGP
 
             IList<Scope> scopes = new List<Scope>
             {
-                new Scope { UserId = 3, PortfolioId = 1 }
+                new Scope { UserId = 3, PortfolioId = 1, Initial = true },
+                new Scope { UserId = 3, PortfolioId = 2, Initial = false },
+                new Scope { UserId = 3, PortfolioId = 3, Initial = false },
+                new Scope { UserId = 3, PortfolioId = 4, Initial = false },
+                new Scope { UserId = 3, PortfolioId = 5, Initial = false }
             };
 
             foreach (var user in users)

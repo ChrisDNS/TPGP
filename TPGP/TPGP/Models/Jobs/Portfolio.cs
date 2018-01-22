@@ -7,6 +7,7 @@ namespace TPGP.Models.Jobs
         public long Id { get; set; }
 
         public string Sector { get; set; }
+        public string Scope { get; set; }
 
         public virtual ICollection<Contract> Contracts { get; set; }
 

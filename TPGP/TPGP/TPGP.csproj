@@ -291,7 +291,6 @@
     <Content Include="scripts\jquery.validate.unobtrusive.js" />
     <Content Include="scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="scripts\modernizr-2.8.3.js" />
-    <Content Include="scripts\show-table.js" />
     <Content Include="scripts\vendor\jquery\ai.0.22.9-build00167.js" />
     <Content Include="scripts\vendor\jquery\ai.0.22.9-build00167.min.js" />
     <Content Include="scripts\vendor\bootstrap\js\bootstrap.bundle.js" />

@@ -55,6 +55,7 @@ namespace TPGP
             container.RegisterType<IContractRepository, ContractRepository>();
             container.RegisterType<IFileRepository, FileRepository>();
             container.RegisterType<IGeographicalZoneRepository, GeographicalZoneRepository>();
+            container.RegisterType<IScopeRepository, ScopeRepository>();
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }
     }

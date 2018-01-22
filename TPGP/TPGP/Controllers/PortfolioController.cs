@@ -1,5 +1,4 @@
 ﻿using PagedList;
-using System.Diagnostics;
 using System.Linq;
 using System.Web.Mvc;
 using TPGP.ActionFilters;
@@ -15,11 +14,14 @@ namespace TPGP.Controllers
     {
         private readonly IContractRepository contractRepository;
         private readonly IPortfolioRepository portfolioRepository;
+        private readonly IScopeRepository scopeRepository;
 
-        public PortfolioController(IContractRepository contractRepository, IPortfolioRepository portfolioRepository)
+        public PortfolioController(IContractRepository contractRepository, IPortfolioRepository portfolioRepository,
+                                                                           IScopeRepository scopeRepository)
         {
             this.contractRepository = contractRepository;
             this.portfolioRepository = portfolioRepository;
+            this.scopeRepository = scopeRepository;
         }
 
         public ActionResult Index(int? page, string sortOrder, string searchString)
@@ -29,8 +31,9 @@ namespace TPGP.Controllers
             if (searchString != null)
                 page = 1;
 
-
             var portfolios = portfolioRepository.GetPortfoliosByUserScope((long)Session["id"], p => p.Sector, noPage, Constants.ITEMS_PER_PAGE, out int total);
+            portfolios.ToList().ForEach(p => p.Scope = scopeRepository.GetScopeByPortfolio(p.Id) ? "Initial" : "Extent");
+
             if (portfolios.Count() == 0)
                 portfolios = portfolioRepository.Pagination(p => p.Sector, noPage, Constants.ITEMS_PER_PAGE, out total);
 
@@ -45,23 +48,19 @@ namespace TPGP.Controllers
             return View(portfoliosViewModels);
         }
 
-        public ActionResult Contracts(long id, int? page, string sortOrder, string currentFilter, string searchString)
+        public ActionResult Contracts(long id, int? page, string sortOrder, string searchString)
         {
             int noPage = (page ?? 1) - 1;
             var contractsViewModels = new ContractsViewModel
             {
-                CurrentSort = sortOrder,
-                Portfolio = portfolioRepository.GetById(id).Sector
+                Portfolio = portfolioRepository.GetById(id)
             };
 
             if (searchString != null)
                 page = 1;
-            else
-                searchString = currentFilter;
-
-            contractsViewModels.CurrentFilter = searchString;
 
             var contracts = contractRepository.Pagination(p => p.PortfolioId == id, c => c.Name, noPage, Constants.ITEMS_PER_PAGE, out int total);
+            contractsViewModels.Portfolio.Scope = scopeRepository.GetScopeByPortfolio(id) ? "Initial" : "Extent";
 
             if (contracts.Count() == 0)
             {
