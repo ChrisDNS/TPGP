@@ -3,10 +3,14 @@
     margin-bottom: 10px;
 }
 
-.container {
+.tools {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+}
+
+.areas {
+    list-style-type: none;
 }
 
 h1, h2, h3, h4 {
@@ -16,6 +20,7 @@ h1, h2, h3, h4 {
 dl {
     padding-left: 13px;
 }
+
 dd {
     color: black;
 }

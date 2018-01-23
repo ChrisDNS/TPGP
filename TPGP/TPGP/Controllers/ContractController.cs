@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web.Mvc;
 using TPGP.ActionFilters;
@@ -70,12 +71,12 @@ namespace TPGP.Controllers
         {
             if (ModelState.IsValid)
             {
-                var zones = cvm.Zones.Where(z => z.Assigned == true).ToList();
-                var zonesIds = zones.Select(z => z.Id);
-                var zonesFromDb = zoneRepository.GetByFilter(z => zonesIds.Contains(z.Id));
+                var selectedZones = cvm.Zones.Where(z => cvm.ZonesIds.Contains(z.Id)).ToList();
+                var zonesIds = selectedZones.Select(z => z.Id);
+                var zonesFromDbs = zoneRepository.GetByFilter(z => zonesIds.Contains(z.Id));
 
                 var listZones = new List<GeographicalZone>();
-                zonesFromDb.ToList().ForEach(z => listZones.Add(z));
+                zonesFromDbs.ToList().ForEach(z => listZones.Add(z));
 
                 var contract = new Contract
                 {

@@ -11,6 +11,7 @@ namespace TPGP.Models.ViewModels
 
         public IEnumerable<SelectListItem> Portfolios { get; set; }
         public IEnumerable<AssignedGeographicalZoneData> Zones { get; set; }
+        public IEnumerable<long> ZonesIds { get; set; }
 
         public ContractViewModel()
         {            

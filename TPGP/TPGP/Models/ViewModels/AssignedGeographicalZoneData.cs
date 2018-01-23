@@ -1,6 +1,8 @@
-﻿namespace TPGP.Models.ViewModels
+﻿using System.Web.Mvc;
+
+namespace TPGP.Models.ViewModels
 {
-    public class AssignedGeographicalZoneData
+    public class AssignedGeographicalZoneData : SelectListItem
     {
         public long Id { get; set; }
 

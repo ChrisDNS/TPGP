@@ -56,6 +56,28 @@
         @Html.EditorFor(model => model.Zones)
 
         <div class="form-group">
+            @Html.LabelFor(model => model.Contract.Zones, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="dropdown col-md-2">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Geographical Zones
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <ul class="areas">
+
+                        @foreach (var item in Model.Zones)
+                        {
+                        <li>
+                            <label class="control-label" for="ZonesIds[@item.Id]">@item.Label</label>
+                            <input type="checkbox" name="ZonesIds" id="ZonesIds[@item.Id]" value="@item.Id">
+                        </li>
+                        }
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
@@ -63,10 +85,9 @@
     </div>
 }
 
-<hr />
-<div>
+<p style="padding-left:13px">
     @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary" })
-</div>
+</p>
 
 @section js {
     @Scripts.Render("~/scripts/datepicker.js")
