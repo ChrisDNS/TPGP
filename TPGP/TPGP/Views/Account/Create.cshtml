@@ -17,6 +17,7 @@
          {
             <p> Please choice the status you want : @Html.DropDownList("roleChoisi", (SelectList)ViewBag.Roles) </p>
             <p>Then download and complete this form : @Html.ActionLink("download form", "download", "account", FormMethod.Post)</p>
+           
 
 
             @Html.AntiForgeryToken();

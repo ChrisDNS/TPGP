@@ -35,7 +35,7 @@ namespace TPGP.Controllers
            
             ViewBag.User = user;
 
-            return View("index", user);
+            return View("index",user);
 
 
 
@@ -64,7 +64,6 @@ namespace TPGP.Controllers
             List<Models.Enums.Roles> roles = new List<Models.Enums.Roles>
             {
                 Models.Enums.Roles.ACTUARY,
-                Models.Enums.Roles.ADMIN,
                 Models.Enums.Roles.COLLABORATOR,
                 Models.Enums.Roles.MANAGER,
                 Models.Enums.Roles.SUBSCRIBER,
@@ -114,8 +113,6 @@ namespace TPGP.Controllers
                 user.file = newFile;
                 user.Role.IsBeingProcessed = true;
                 user.Role.DesiredRole = roleChoisi;
-                roleRepository.Update(user.Role);
-                roleRepository.SaveChanges();
                 userRepository.Update(user);
                 userRepository.SaveChanges();
             }
