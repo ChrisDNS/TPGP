@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Web.Mvc;
 using TPGP.ActionFilters;
@@ -25,8 +24,10 @@ namespace TPGP.Controllers
             this.zoneRepository = zoneRepository;
         }
 
-        public ActionResult Index()
+        public ActionResult Index(long id, int? page, string sortOrder, string searchString)
         {
+            //TODO
+
             return View();
         }
 

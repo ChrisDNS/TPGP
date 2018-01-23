@@ -21,16 +21,19 @@
     <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
+
                 @{
                     if ((string)Session["role"] != "ADMIN")
                     {
                         <a class="nav-link" href="/Portfolio">Portfolios<span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="/Contract">Contracts<span class="sr-only">(current)</span></a>
                     }
                     else
                     {
                         <a class="nav-link" href="/Admin">Users<span class="sr-only">(current)</span></a>
                     }
                 }
+
             </li>
         </ul>
         <a class="navbar-brand navbar-right" href="#">
