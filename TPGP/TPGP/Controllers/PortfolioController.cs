@@ -27,11 +27,12 @@ namespace TPGP.Controllers
         public ActionResult Index(int? page, string sortOrder, string searchString)
         {
             int noPage = (page ?? 1) - 1;
+            int total = 0;
 
             if (searchString != null)
                 page = 1;
 
-            var portfolios = portfolioRepository.GetPortfoliosByUserScope((long)Session["id"], p => p.Sector, noPage, Constants.ITEMS_PER_PAGE, out int total);
+            var portfolios = portfolioRepository.GetPortfoliosByUserScope((long)Session["id"]);
             portfolios.ToList().ForEach(p => p.Scope = scopeRepository.GetScopeByPortfolio(p.Id) ? "Initial" : "Extent");
 
             if (portfolios.Count() == 0)

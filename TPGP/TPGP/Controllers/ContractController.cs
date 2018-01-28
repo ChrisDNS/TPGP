@@ -14,14 +14,18 @@ namespace TPGP.Controllers
         private readonly IContractRepository contractRepository;
         private readonly IPortfolioRepository portfolioRepository;
         private readonly IGeographicalZoneRepository zoneRepository;
+        private readonly IScopeRepository scopeRepository;
+
 
         public ContractController(IContractRepository contractRepository,
                                   IPortfolioRepository portfolioRepository,
-                                  IGeographicalZoneRepository zoneRepository)
+                                  IGeographicalZoneRepository zoneRepository,
+                                  IScopeRepository scopeRepository)
         {
             this.contractRepository = contractRepository;
             this.portfolioRepository = portfolioRepository;
             this.zoneRepository = zoneRepository;
+            this.scopeRepository = scopeRepository;
         }
 
         public ActionResult Index(long id, int? page, string sortOrder, string searchString)
@@ -41,9 +45,13 @@ namespace TPGP.Controllers
 
         public ActionResult Create()
         {
+            var initialPortfolios = portfolioRepository.GetPortfoliosByUserScope((long)Session["id"]);
+            initialPortfolios.ToList().ForEach(p => p.Scope = scopeRepository.GetScopeByPortfolio(p.Id) ? "Initial" : "Extent");
+            initialPortfolios = initialPortfolios.Where(p => p.Scope == "Initial");
+
             var cvm = new ContractViewModel
             {
-                Portfolios = new SelectList(portfolioRepository.GetAll(), dataValueField: "Id", dataTextField: "Sector"),
+                Portfolios = new SelectList(initialPortfolios, dataValueField: "Id", dataTextField: "Sector"),
                 Zones = zoneRepository.GetAll()
             };
 

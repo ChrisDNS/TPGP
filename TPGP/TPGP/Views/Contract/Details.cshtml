@@ -53,9 +53,10 @@
         </dt>
 
         <dd>
+
             @foreach (var item in Model.Contract.Zones)
             {
-            <div>@item.Label</div>
+                <div>@(item.Parent != null ? item.Label + " (" + item.Parent.Label + ")" : item.Label)</div>
             }
     </dl>
 </div>
