@@ -14,6 +14,11 @@
 
 h1, h2, h3, h4 {
     text-align: center;
+    color: rebeccapurple;
+}
+
+label {
+    color: black;
 }
 
 dl {
@@ -26,6 +31,10 @@ dd {
 
 dt {
     color: rebeccapurple;
+}
+
+.back {
+    padding: 15px;
 }
 
 .body-content {

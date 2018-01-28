@@ -4,7 +4,7 @@
     ViewBag.Title = "Details";
 }
 
-<h1><font color="rebeccapurple">@Model.Contract.Name</font></h1>
+<h1>@Model.Contract.Name</h1>
 <hr />
 <div>
     <dl class="dl-horizontal">
@@ -33,6 +33,14 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.Contract.Bonus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Contract.Bonus)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.Contract.Company)
         </dt>
 
@@ -41,16 +49,18 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Contract.Bonus)
+            @Html.DisplayNameFor(model => model.Contract.Zones)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Contract.Bonus)
-        </dd>
+            @foreach (var item in Model.Contract.Zones)
+            {
+            <div>@item.Label</div>
+            }
     </dl>
 </div>
 
 <p style="padding-left:13px; padding-bottom:13px; padding-top:13px;">
-    @Html.ActionLink("Back to List", "Contracts", "Portfolio", new { id = Model.Contract.PortfolioId }, new { @class = "btn btn-primary" })
     @Html.ActionLink("Edit", "Edit", new { id = Model.Contract.Id }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Back", "Contracts", "Portfolio", new { id = Model.Contract.PortfolioId }, new { @class = "btn btn-secondary" })
 </p>

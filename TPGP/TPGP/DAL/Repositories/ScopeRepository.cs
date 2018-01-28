@@ -11,11 +11,6 @@ namespace TPGP.DAL.Repositories
         {
         }
 
-        public bool GetScopeByPortfolio(long portfolioId)
-        {
-            var portfolio = dbContext.Scopes.Where(s => s.PortfolioId == portfolioId).FirstOrDefault();
-
-            return portfolio.Initial;
-        }
+        public bool GetScopeByPortfolio(long portfolioId) => dbContext.Scopes.Where(s => s.PortfolioId == portfolioId).FirstOrDefault().Initial;
     }
 }

@@ -1,0 +1,104 @@
+﻿@model TPGP.Models.ViewModels.ContractViewModel
+
+@using (Html.BeginForm("Edit", "Contract", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h1>Editing @Model.Contract.Name</h1>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Contract.Id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Contract.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.EditorFor(model => model.Contract.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Contract.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Contract.InitDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.EditorFor(model => model.Contract.InitDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Contract.InitDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Contract.EndDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.EditorFor(model => model.Contract.EndDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Contract.EndDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Contract.Bonus, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.EditorFor(model => model.Contract.Bonus, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Contract.Bonus, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Contract.Company, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.EditorFor(model => model.Contract.Company, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Contract.Company, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Contract.Portfolio, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.DropDownListFor(model => model.Contract.PortfolioId, Model.Portfolios, htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Contract.Zones, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="dropdown col-md-2">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Geographical Zones
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <ul class="areas">
+
+                    @foreach (var item in Model.Zones)
+                    {
+
+                        <li>
+                            <label class="control-label" for="ZonesIds[@item.Id]">@item.Label</label>
+
+                            @if (Model.ZonesIds.Any(id => id == item.Id))
+                            {
+                                <input type="checkbox" name="ZonesIds" id="ZonesIds[@item.Id]" value="@item.Id" checked>
+                            }
+                            else
+                            {
+                                <input type="checkbox" name="ZonesIds" id="ZonesIds[@item.Id]" value="@item.Id">
+                            }
+
+                        </li>
+                    }
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="back">
+        <input type="submit" value="Save" class="btn btn-primary" />
+        @Html.ActionLink("Back", "Contracts", "Portfolio", new { id = Model.Contract.PortfolioId }, new { @class = "btn btn-secondary" })
+    </div>
+}
+
+@section js {
+    @Scripts.Render("~/scripts/jquery.validate.min.js")
+    @Scripts.Render("~/scripts/jquery.validate.unobtrusive.min.js")
+    @Scripts.Render("~/scripts/datepicker.js")
+    @Scripts.Render("~/scripts/moment.min.js")
+}
