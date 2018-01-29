@@ -33,9 +33,6 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Portfolios[0].Sector)
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Portfolios[0].Scope)
-                </th>
             </tr>
         </thead>
         <tbody>
@@ -44,10 +41,7 @@
             {
                 <tr>
                     <td>
-                        @Html.ActionLink(@item.Sector, "Contracts", "Portfolio", new { id = item.Id }, null)
-                    </td>
-                    <td>
-                        <div class="font-italic font-weight-bold"><font color="rebeccapurple">@Html.DisplayFor(model => item.Scope)</font></div>
+                        @Html.ActionLink(@item.Sector + " (" + item.Scope + ")", "Contracts", "Portfolio", new { id = item.Id }, null)
                     </td>
                 </tr>
             }

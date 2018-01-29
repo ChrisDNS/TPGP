@@ -1,10 +1,9 @@
 ﻿@{
     ViewBag.Title = "Unauthorised Request";
-    Layout = null;
 }
 
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -14,9 +13,13 @@
 </head>
 
 <body>
-    <h1>
-        Error 401 : Unauthorised Request
-    </h1>
-    <h2>You do not have permission to access the requested resource due to security restrictions.  In order to gain access, please speak to your system administrator.</h2>
+    <div style="padding:15px;">
+        <h1>
+            Error 401 : Unauthorised Request
+        </h1>
+        <h2>You do not have permission to access the requested resource due to security restrictions.  In order to gain access, please speak to your system administrator.</h2>
+
+        <center style="padding-top:30px;">@Html.ActionLink("Change your status", "Create", "Account", null, new { @class = "btn btn-lg btn-success" })</center>
+    </div>
 </body>
 </html>
