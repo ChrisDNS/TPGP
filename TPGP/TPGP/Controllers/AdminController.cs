@@ -59,6 +59,7 @@ namespace TPGP.Controllers
             if (usr != null)
             {
                 usr.RoleId = uvm.User.RoleId;
+                usr.Role.IsBeingProcessed = false;
             }
 
             userRepository.Update(usr);
