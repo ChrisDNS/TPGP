@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq.Expressions;
 
 namespace TPGP.DAL.Interfaces
 {
     public interface IRepository<T> where T : class
     {
-        IEnumerable<T> GetAll();
+        DbSet<T> GetAll();
 
         IEnumerable<T> GetByFilter(Expression<Func<T, bool>> filter);
 

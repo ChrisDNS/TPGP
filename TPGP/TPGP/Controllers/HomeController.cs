@@ -14,11 +14,14 @@ namespace TPGP.Controllers
     {
         private readonly IUserRepository userRepository;
         private readonly IRoleRepository roleRepository;
+        private readonly IGeographicalZoneRepository zoneRepository;
 
-        public HomeController(IUserRepository userRepository, IRoleRepository roleRepository)
+        public HomeController(IUserRepository userRepository, IRoleRepository roleRepository,
+                                                              IGeographicalZoneRepository zoneRepository)
         {
             this.userRepository = userRepository;
             this.roleRepository = roleRepository;
+            this.zoneRepository = zoneRepository;
         }
 
         public ActionResult Index()
@@ -43,10 +46,12 @@ namespace TPGP.Controllers
                 if (ldapUserDetails == null)
                 {
                     ModelState.AddModelError(string.Empty, "Wrong username or password.");
+
                     return View("Index", uvm);
                 }
 
                 var user = userRepository.GetByFilter(u => u.Username == uvm.User.Username).FirstOrDefault();
+
                 if (user == null)
                 {
                     var newUser = new User
@@ -55,7 +60,7 @@ namespace TPGP.Controllers
                         Lastname = ldapUserDetails.Lastname,
                         Username = ldapUserDetails.Username,
                         Email = ldapUserDetails.Email,
-                        //Zone = ldapUserDetails.Zone,
+                        Zone = zoneRepository.GetByFilter(z => z.Label == ldapUserDetails.Zone).FirstOrDefault(),
                         Role = roleRepository.GetByFilter(r => r.RoleName == Roles.COLLABORATOR).FirstOrDefault()
                     };
 
@@ -65,7 +70,7 @@ namespace TPGP.Controllers
                     Session["username"] = newUser.Username;
                     Session["role"] = newUser.Role.RoleName.ToString("g");
                     Session["id"] = newUser.Id;
-                    //Session["zone"] = newUser.Zone
+                    //Session["zone"] = newUser.Zone;
                 }
                 else
                 {
@@ -78,14 +83,12 @@ namespace TPGP.Controllers
 
                     if (this.IsAdmin())
                         return RedirectToAction("Index", "Admin");
-                    else
-                        return RedirectToAction("Index", "Portfolio");
                 }
 
-                return View("Index");
+                return RedirectToAction("Index", "Portfolio");
             }
 
-            return View("Index");
+            return View();
         }
 
         public ActionResult Logout()

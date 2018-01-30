@@ -20,7 +20,7 @@ namespace TPGP.DAL.Repositories
             dbSet = dbContext.Set<T>();
         }
 
-        public IEnumerable<T> GetAll() => dbSet.AsQueryable();
+        public DbSet<T> GetAll() => dbSet;
 
         public IEnumerable<T> GetByFilter(Expression<Func<T, bool>> filter) => dbSet.Where(filter);
 

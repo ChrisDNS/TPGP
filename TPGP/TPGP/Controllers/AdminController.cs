@@ -28,7 +28,7 @@ namespace TPGP.Controllers
             if (searchString != null)
                 page = 1;
 
-            var users = userRepository.Pagination<string>(p => p.Username, noPage, Constants.ITEMS_PER_PAGE, out int total);
+            var users = userRepository.Pagination(p => p.Username, noPage, Constants.ITEMS_PER_PAGE, out int total);
 
             if (!string.IsNullOrEmpty(searchString))
                 users = users.Where(c => c.Username.Contains(searchString));

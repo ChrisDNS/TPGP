@@ -29,7 +29,7 @@ namespace TPGP.Models.Jobs
         [Display(Name = "Company")]
         public string Company { get; set; }
 
-        [Display(Name = "Area")]
+        [Display(Name = "Areas")]
         public virtual ICollection<GeographicalZone> Zones { get; set; }
 
         [Required(ErrorMessage = "The Sector field is required.")]
