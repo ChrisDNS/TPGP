@@ -72,5 +72,10 @@ namespace TPGP.Controllers
 
             return RedirectToAction("Index");
         }
+        public FileResult Download()
+        {
+            var FileVirtualePath = "~/pdf_download/status" + ".pdf";
+            return File(FileVirtualePath, "application/force-download", System.IO.Path.GetFileName(FileVirtualePath));
+        }
     }
 }
