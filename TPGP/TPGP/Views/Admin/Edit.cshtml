@@ -47,17 +47,56 @@
                 @Html.ValidationMessageFor(model => model.User.Email, "", new { @class = "text-danger" })
             </div>
         </div>
+        <!--
+        <div class="form-group">
+            Html.LabelFor(model => model.User.Role.RoleName, htmlAttributes: new { class = "control-label col-md-2" })
+            <div class="col-md-10">
+                Html.DropDownListFor(model => model.User.RoleId, Model.Roles, htmlAttributes: new { class = "form-control" })
+                Html.ValidationMessageFor(model => model.User.Role, "", new { class = "text-danger" })
+            </div>
+        </div>
 
-        <!--   <div class="form-group">
-                Html.LabelFor(model => model.User.Role.RoleName, htmlAttributes: new { class = "control-label col-md-2" })
-                 <div class="col-md-10">
-    Html.DropDownListFor(model => model.User.RoleId, Model.Roles, htmlAttributes: new {class = "form-control" })
-    Html.ValidationMessageFor(model => model.User.Role, "", new { class = "text-danger" })
-     </div>
 
-        </div> -->
+    <div class="form-group">
+        <div class="col-md-10">
+            Html.Label("Current Role")
+            Html.EditorFor(model => model.User.Role.RoleName, new { htmlAttributes = new { class = "form-control", readonly = "readonly" } })
+            Html.ValidationMessageFor(model => model.User.Email, "", new { class = "text-danger" })
+        </div>
+    </div>
+    -->
 
+        @{
+        if (Model.User.Role.IsBeingProcessed)
+        {
 
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.Label("Current Role")
+                    @Html.EditorFor(model => model.User.Role.RoleName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.User.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.Label("Request Role")
+
+                    <div class="rolechange">
+                        <div>
+                            @Html.EditorFor(model => model.User.Role.DesiredRole, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                            @Html.ValidationMessageFor(model => model.User.Role, "", new { @class = "text-danger" })
+                        </div>
+                        <div>
+                            <input type="submit" value="Validate" class="btn btn-default" />
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+    }
+    else
+    {
         <div class="form-group">
             <div class="col-md-10">
                 @Html.Label("Current Role")
@@ -65,38 +104,18 @@
                 @Html.ValidationMessageFor(model => model.User.Email, "", new { @class = "text-danger" })
             </div>
         </div>
-
-        @{ 
-            if(Model.User.Role.IsBeingProcessed)
-            { 
-        <div class="form-group">
-            <div class="col-md-10">
-                @Html.Label("Request Role")
-
-                <div class="rolechange">
-                    <div>
-                        @Html.EditorFor(model => model.User.Role.DesiredRole, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                        @Html.ValidationMessageFor(model => model.User.Role, "", new { @class = "text-danger" })
-                    </div>
-                     <div>
-                        <input type="submit" value="Validate" class="btn btn-default" />
-                    </div>
-                </div>
-
-            </div>
-        </div>
-            }
+}
         }
 
-    </div>
-       <!-- <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </div> -->
-            }
+    </div>   <!--
+             <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Save" class="btn btn-default" />
+                    </div>
+              </div> -->
+                    }
 
-    <div>
-        @Html.ActionLink("Back to List", "Index")
-    </div>
-</div>
+            <div>
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        </div>

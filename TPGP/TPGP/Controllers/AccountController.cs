@@ -63,7 +63,7 @@ namespace TPGP.Controllers
             User user = userRepository.GetByFilter(u => u.Username == username).First();
             List<Models.Enums.Roles> roles = new List<Models.Enums.Roles>
             {
-                Models.Enums.Roles.ACTUARY,
+               // Models.Enums.Roles.ACTUARY,
                 Models.Enums.Roles.COLLABORATOR,
                 Models.Enums.Roles.MANAGER,
                 Models.Enums.Roles.SUBSCRIBER,

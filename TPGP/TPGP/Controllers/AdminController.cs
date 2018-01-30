@@ -54,18 +54,23 @@ namespace TPGP.Controllers
 
         public ActionResult Save(UserViewModel uvm)
         {
+
             var usr = userRepository.GetByFilter(u => u.Id == uvm.User.Id).FirstOrDefault();
 
             if (usr != null)
             {
-                usr.RoleId = uvm.User.RoleId;
+                long i = usr.RoleId;
+                usr.Role = roleRepository.GetByFilter(r => r.RoleName== usr.Role.DesiredRole).FirstOrDefault();
+                
+                // usr.RoleId = uvm.User.RoleId;
+               // usr.Lastname = "sdsdssf " + usr.RoleId +" encien"+ usr.Role.DesiredRole;
                 usr.Role.IsBeingProcessed = false;
             }
 
             userRepository.Update(usr);
             userRepository.SaveChanges();
 
-            return View("Index");
+            return RedirectToAction("Index");
         }
     }
 }
