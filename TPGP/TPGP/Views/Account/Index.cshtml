@@ -1,81 +1,61 @@
-﻿@model TPGP.Models.Jobs.User
+﻿@model TPGP.Models.ViewModels.UserViewModel
 
-@{
-}
+<h1>@Session["username"]'s account</h1>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.User.Username)
+        </dt>
 
-<!DOCTYPE html>
+        <dd>
+            @Html.DisplayFor(model => model.User.Username)
+        </dd>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Details</title>
-</head>
-<body>
-    <div>
-        <h4> Welcome to your account @Session["username"]</h4>
-        <hr />
-        <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.User.Firstname)
+        </dt>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Username)
-            </dt>
+        <dd>
+            @Html.DisplayFor(model => model.User.Firstname)
+        </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.User.Lastname)
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Username)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.User.Lastname)
+        </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Firstname)
-            </dt>
+        <dt>
+            @Html.DisplayNameFor(model => model.User.Email)
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Firstname)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.User.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.User.Role.RoleName)
+        </dt>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Lastname)
-            </dt>
+        <dd>
+            @Html.DisplayFor(model => model.User.Role.RoleName)
+        </dd>
 
-            <dd>
-                @Html.DisplayFor(model => model.Lastname)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Email)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Email)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Role.RoleName)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Role.RoleName)
-            </dd>
-
-        </dl>
-        @{ TPGP.Models.Jobs.User user = (TPGP.Models.Jobs.User)ViewBag.User;}
-       
-        @if(user != null && user.Role.IsBeingProcessed)
+        @if (Model.User.Role.IsBeingProcessed)
         {
-           
-            <dl>
-            <dt> About Your status </dt> </dl>
-           
-                <p>You have asked to changed your status from @user.Role.RoleName to  @user.Role.DesiredRole. Your request is being processes</p>
-        }
-        else
-        {
-            @Html.ActionLink("change your status", "create", "account");
-
+            <dt> About Your status </dt>
+            <dd>You have asked to change your status from <strong>@Model.User.Role.RoleName</strong> to <strong>@Model.User.Role.DesiredRole</strong>. Your request is being processed.</dd>
         }
 
-    </div>
+    </dl>
 
+    @if (!Model.User.Role.IsBeingProcessed)
+    {
+        <div class="back">
+            @Html.ActionLink("Change your status", "ChangeStatus", "Account", null, new { @class = "btn btn-info" })
+        </div>
+    }
 
- 
-</body>
-</html>
+</div>

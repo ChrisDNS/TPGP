@@ -430,7 +430,7 @@
     <Content Include="Views\Contract\Details.cshtml" />
     <Content Include="Views\Contract\Create.cshtml" />
     <Content Include="Views\Admin\Edit.cshtml" />
-    <Content Include="Views\Account\Create.cshtml" />
+    <Content Include="Views\Account\ChangeStatus.cshtml" />
     <Content Include="Views\Account\Delete.cshtml" />
     <Content Include="Views\Account\Details.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />

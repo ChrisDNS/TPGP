@@ -16,7 +16,6 @@ namespace TPGP.Controllers
         private readonly IGeographicalZoneRepository zoneRepository;
         private readonly IScopeRepository scopeRepository;
 
-
         public ContractController(IContractRepository contractRepository,
                                   IPortfolioRepository portfolioRepository,
                                   IGeographicalZoneRepository zoneRepository,

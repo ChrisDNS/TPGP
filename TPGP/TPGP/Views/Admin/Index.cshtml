@@ -25,10 +25,9 @@
 
 </div>
 
-<table class="table table-striped table-bordered">
+<table class="table table-striped table-hover">
     <thead class="thead-inverse">
         <tr>
-
             <th>
                 @Html.DisplayNameFor(model => model.Users[0].Username)
             </th>
@@ -51,39 +50,42 @@
 
         @foreach (var item in Model.Users)
         {
-        <tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Username)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Firstname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Lastname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Role.RoleName)
+                </td>
 
+                <td>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.Username)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Firstname)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Lastname)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Role.RoleName)
-            </td>
+                    @{
+                        if (item.Role.IsBeingProcessed)
+                        {
+                            <p><strong><font color="DarkOrange">@Html.DisplayName(item.Role.DesiredRole.ToString())</font></strong></p>
+                        }
+                        else
+                        {
+                            <p><strong><font color="green">None</font></strong></p>
+                        }
+                    }
 
-            <td>
-                @{
-            if (item.Role.IsBeingProcessed)
-            {
-               @Html.DisplayName(item.Role.DesiredRole.ToString());
-            }
-                }
-            </td>
+                </td>
 
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-info" })
-            </td>
-
-        </tr>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-info" })
+                </td>
+            </tr>
         }
 
     </tbody>

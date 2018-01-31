@@ -60,10 +60,10 @@ namespace TPGP.Controllers
             if (usr != null)
             {
                 long i = usr.RoleId;
-                usr.Role = roleRepository.GetByFilter(r => r.RoleName== usr.Role.DesiredRole).FirstOrDefault();
-                
+                usr.Role = roleRepository.GetByFilter(r => r.RoleName == usr.Role.DesiredRole).FirstOrDefault();
+
                 // usr.RoleId = uvm.User.RoleId;
-               // usr.Lastname = "sdsdssf " + usr.RoleId +" encien"+ usr.Role.DesiredRole;
+                // usr.Lastname = "sdsdssf " + usr.RoleId +" encien"+ usr.Role.DesiredRole;
                 usr.Role.IsBeingProcessed = false;
             }
 

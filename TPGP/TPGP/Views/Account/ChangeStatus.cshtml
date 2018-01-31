@@ -1,0 +1,48 @@
+﻿@model TPGP.Models.ViewModels.UserViewModel
+
+@using (Html.BeginForm("ChangeStatus", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.User.Username, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.EditorFor(model => model.User.Username, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.User.Username, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            Please, select the status you want :
+            <div class="col-md-3">
+                @Html.DropDownListFor(model => model.User.Role.DesiredRole, Model.Roles, htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            Then download and complete this form :
+            <div class="col-md-3">
+                @Html.ActionLink("Download form", "Download", "Account", FormMethod.Post)
+            </div>
+        </div>
+
+        <div class="form-group">
+            Upload it :
+            <div class="col-md-3">
+                <input type="file" name="file" id="file" />
+            </div>
+        </div>
+
+        <div> We will process your request as soon as possible </div>
+
+        <div class="back">
+            <input type="submit" value="Confirm" class="btn btn-success" />
+            @Html.ActionLink("Back", "Index", "Account", null, new { @class = "btn btn-secondary" })
+        </div>
+
+    </div>
+}

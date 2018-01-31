@@ -2,6 +2,6 @@
 {
     public enum Roles
     {
-        ADMIN, COLLABORATOR, MANAGER, ACTUARY, SUBSCRIBER
+        ADMIN, COLLABORATOR, MANAGER, SUBSCRIBER
     }
 }
