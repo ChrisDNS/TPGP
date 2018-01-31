@@ -1,96 +1,120 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web;
 using System.Web.Http;
 using TPGP.Context;
 using TPGP.DAL.Interfaces;
 using TPGP.Models.DAL.Repositories;
 using TPGP.Models.Jobs;
 using TPGPServices.Models;
+using TPGPServices.View_Model;
 
 namespace TPGPServices.Controllers
 {
+    
     public class ContractsController : ApiController
     {
      
-       // private IContractRepository c = new ContractRepository(new TPGPContext());
-           
         private readonly IContractRepository contractRepository;
         private readonly IPortfolioRepository portfolioRepository;
+     
          public ContractsController(IContractRepository contractRepository, IPortfolioRepository portfolioRepository)
          {
              this.contractRepository = contractRepository;
             this.portfolioRepository = portfolioRepository;
+           
          }
 
-          public List<Contracts_VM> GetAllContracts()
+
+       
+          public HttpResponseMessage GetAllContracts()
           {
-
-            IEnumerable<Contract> contracts = contractRepository.GetAll();
-            var contracts_vm = new List<Contracts_VM>();
-            foreach(Contract c in contracts)
-            {
+             if (!IsConnected())
+             {
+                 return Request.CreateErrorResponse(HttpStatusCode.Unauthorized, "You must b connected");
+            }
+             IEnumerable<Contract> contracts = contractRepository.GetAll();
+             List<Contract_VM> contracts_vm = new List<Contract_VM>();
+            // var jsonSerialiser = new JavaScriptSerializer();
+           // List<JObject> contracts_Json = new List<JObject>();
+            
+            foreach (Contract c in contracts)
+              {
                
-                Portfolio p = GetPortfolioById(c.PortfolioId);
-                contracts_vm.Add(new Contracts_VM()
-                {
-                    IDContract = c.Id,
-                    Name = c.Name,
-                    InitDate = c.InitDate,
-                    EndDate = c.EndDate,
-                    Bonus = c.Bonus,
-                    Company = c.Company,
-                    Sector= p.Sector
-                });
-            }
-            return contracts_vm;
-          }
+                 List<string> g = geographicalZonesTOjson(c.Zones.ToList());
+               
+                contracts_vm.Add(ContractTOjson(c));
+              }
+            return Request.CreateResponse(HttpStatusCode.OK, contracts_vm);
 
-        public IHttpActionResult GetContractById(int id)
+
+        }
+       
+        public HttpResponseMessage GetByZone(string id)
         {
-            Contract c =contractRepository.GetById(id);
-            if(c == null)
+            if (!IsConnected())
             {
-                return NotFound();
+                return Request.CreateErrorResponse(HttpStatusCode.Unauthorized, "You must be connected");
             }
-            Portfolio p = GetPortfolioById(c.PortfolioId);
-            Contracts_VM c_vm = new Contracts_VM()
+            int number;
+            if(int.TryParse(id,out number))
             {
-                IDContract = c.Id,
-                Name = c.Name,
-                InitDate = c.InitDate,
-                EndDate = c.EndDate,
-                Bonus = c.Bonus,
-                Company = c.Company,
-                Sector = p.Sector
+                return ContractById(number);
+            }
+           
+            IEnumerable<Contract> contracts = contractRepository.GetAll();
+             List<Contract> contracts_zone = new List<Contract>();
+          
+            foreach ( Contract c in contracts)
+            {
+               foreach(GeographicalZone g in c.Zones)
+                {
+                    if (g.Label.Equals(id))
+                    {
+                        contracts_zone.Add(c);
+                    }
+                }
+             
+            }
+            List<Contract_VM> contracts_VM = new List<Contract_VM>();
+            foreach(Contract c in contracts_zone)
+            {
+                contracts_VM.Add(ContractTOjson(c));
+            }
 
-            };
-            return Ok(c_vm);
+          
+            return Request.CreateResponse(HttpStatusCode.OK, contracts_VM);
+
         }
 
         
-        public IHttpActionResult Post(string name)
+        public IHttpActionResult PostCreate([FromBody] Contract c)
         {
-           /* if (!ModelState.IsValid)
-            {
-                return BadRequest("Invalid data.");
-            }
-            contractRepository.Insert(new Contract()
-            {
-                Name = c_vm.Name,
-                InitDate = c_vm.InitDate,
-                EndDate = c_vm.EndDate,
-                Bonus = c_vm.Bonus,
-                Company = c_vm.Company,
-                Portfolio = GetPortfolioBySector(c_vm.Sector)
-                
-
-            });
-            contractRepository.SaveChanges();*/
-            return Ok("success");
+           
+           // string name = o["name"].ToString();
+            return Ok("success "+ c.Name);
         }
+        //************************ Private Mehode ****************************************
+        private HttpResponseMessage ContractById(int id)
+        {
+            if (!IsConnected())
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.Unauthorized, "You must be connected");
+            }
+
+
+            Contract c = contractRepository.GetById(id);
+            if (c == null)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Contract doesn't exist");
+            }
+
+            return Request.CreateResponse(HttpStatusCode.OK, ContractTOjson(c));
+
+        }
+
 
         private Portfolio GetPortfolioById(long id)
         {
@@ -104,7 +128,48 @@ namespace TPGPServices.Controllers
             return p;
         }
 
+       
+        private List<string> geographicalZonesTOjson(List<GeographicalZone> zones)
+        {
+            List<string> geo_VM = new List<string>();
+            foreach (GeographicalZone g in zones)
+            {
+                geo_VM.Add(g.Label);
+            }
+            return geo_VM;
+        }
 
+        private Contract_VM ContractTOjson(Contract c)
+        {
+            List<string> g = geographicalZonesTOjson(c.Zones.ToList());
+            Portfolio p = GetPortfolioById(c.PortfolioId);
+            Portfolio_VM p_vm = new Portfolio_VM()
+            {
+                Scope = p.Scope,
+                Sector = p.Sector
+            };
+            Contract_VM c_vm = new Contract_VM()
+            {
+                Id = c.Id,
+                Name = c.Name,
+                InitDate = c.InitDate,
+                EndDate = c.EndDate,
+                Bonus = c.Bonus,
+                Company = c.Company,
+                Portfolio = p_vm,
+                Zones = g
+
+            };
+            return c_vm;
+        }
+        private bool IsConnected()
+        {
+            if(HttpContext.Current.Session !=null && HttpContext.Current.Session["Username"] != null)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }
 

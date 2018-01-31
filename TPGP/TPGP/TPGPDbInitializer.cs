@@ -68,9 +68,34 @@ namespace TPGP
                 new Portfolio { Sector = "Food-processing Industry"}
             };
 
+            GeographicalZone world = new GeographicalZone
+            {
+                Label = "World",
+                Parent = null
+            };
+
+            IList<GeographicalZone> continents = new List<GeographicalZone>
+            {
+                new GeographicalZone { Label = "Europe", Parent = world },
+                new GeographicalZone { Label = "Asie", Parent = world },
+                new GeographicalZone { Label = "Océanie", Parent = world },
+                new GeographicalZone { Label = "Afrique", Parent = world },
+                new GeographicalZone { Label = "Amérique", Parent = world },
+                new GeographicalZone { Label = "Antarctique", Parent = world }
+            };
+
+            IList<GeographicalZone> countries = new List<GeographicalZone>
+            {
+                new GeographicalZone { Label = "France", Parent = continents[0] },
+                new GeographicalZone { Label = "Allemagne", Parent = continents[0] },
+                new GeographicalZone { Label = "Chine", Parent = continents[1] },
+                new GeographicalZone { Label = "Algérie", Parent = continents[3] },
+                new GeographicalZone { Label = "Canada", Parent = continents[4] },
+            };
+
             IList<Contract> contracts = new List<Contract>
             {
-                new Contract { Name = "Contract-1", InitDate = DateTime.Now, EndDate = DateTime.Now.AddDays(214), Bonus = 125.445, Company = "Nike", Portfolio = portfolios[0] },
+                new Contract { Name = "Contract-1", InitDate = DateTime.Now, EndDate = DateTime.Now.AddDays(214), Bonus = 125.445, Company = "Nike", Portfolio = portfolios[0], Zones=countries },
                 new Contract { Name = "Contract-2", InitDate = DateTime.Now, EndDate = DateTime.Now.AddDays(546), Bonus = 1201.45, Company = "Auchan", Portfolio = portfolios[0] },
                 new Contract { Name = "Contract-3", InitDate = DateTime.Now, EndDate = DateTime.Now.AddDays(111), Bonus = 201.15, Company = "Smarties", Portfolio = portfolios[1] },
                 new Contract { Name = "Contract-4", InitDate = DateTime.Now, EndDate = DateTime.Now.AddDays(799), Bonus = 2221.74, Company = "Playboy", Portfolio = portfolios[3] },
@@ -98,34 +123,12 @@ namespace TPGP
                 new Contract { Name = "Contract-26", InitDate = DateTime.Now, EndDate = DateTime.Now.AddDays(1174), Bonus = 291.74, Company = "Corsair", Portfolio = portfolios[9] }
             };
 
-            GeographicalZone world = new GeographicalZone
-            {
-                Label = "World",
-                Parent = null
-            };
 
-            IList<GeographicalZone> continents = new List<GeographicalZone>
-            {
-                new GeographicalZone { Label = "Europe", Parent = world },
-                new GeographicalZone { Label = "Asie", Parent = world },
-                new GeographicalZone { Label = "Océanie", Parent = world },
-                new GeographicalZone { Label = "Afrique", Parent = world },
-                new GeographicalZone { Label = "Amérique", Parent = world },
-                new GeographicalZone { Label = "Antarctique", Parent = world }
-            };
-
-            IList<GeographicalZone> countries = new List<GeographicalZone>
-            {
-                new GeographicalZone { Label = "France", Parent = continents[0] },
-                new GeographicalZone { Label = "Allemagne", Parent = continents[0] },
-                new GeographicalZone { Label = "Chine", Parent = continents[1] },
-                new GeographicalZone { Label = "Algérie", Parent = continents[3] },
-                new GeographicalZone { Label = "Canada", Parent = continents[4] },
-            };
+            
 
             IList<User> users = new List<User>
             {
-                new User { Username = "Sarra", Firstname = "Sarra", Lastname = "Sarra", Email = "sarra@sarra.sarra", Zone = countries[0], Role = roles[0] },
+               new User { Username = "Sarra", Firstname = "Sarra", Lastname = "Sarra", Email = "sarra@sarra.sarra", Zone = countries[0], Role = roles[0] },
                 new User { Username = "Pierre", Firstname = "Pierre", Lastname = "Pierre", Email = "pierre@pierre.pierre", Zone = countries[0], Role = roles[1] },
                 new User { Username = "Sidi", Firstname = "Sidi", Lastname = "Sidi", Email = "sidi@sidi.sidi", Zone = countries[1], Role = roles[2] },
                 new User { Username = "Chris", Firstname = "Chris", Lastname = "Chris", Email = "chris@chris.chris", Zone = countries[1], Role = roles[3] }
