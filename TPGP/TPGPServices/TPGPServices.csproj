@@ -132,20 +132,25 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="View\Contract.html" />
+    <Content Include="Contract.html" />
     <Content Include="Global.asax" />
-    <Content Include="View\index.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\UnityResolv.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ContractsController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Handler\SessionableControllerHandler.cs" />
+    <Compile Include="Handler\SessionStateRouteHandler.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Contracts_VM.cs" />
+    <Compile Include="View_Model\Contracts_VM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View_Model\GeographicalZone_VM.cs" />
+    <Compile Include="View_Model\Portfolio_VM.cs" />
+    <Compile Include="View_Model\User_VM.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -158,8 +163,14 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
+    <Folder Include="View\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\LDAP\LDAP.csproj">
+      <Project>{CF9D47D3-C21A-4E37-AB93-50AA1B66D23B}</Project>
+      <Name>LDAP</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TPGP\TPGP.csproj">
       <Project>{18E8CD56-7824-4B32-9DC7-57C70BAC4736}</Project>
       <Name>TPGP</Name>

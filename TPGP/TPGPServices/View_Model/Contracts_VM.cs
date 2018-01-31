@@ -3,17 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using TPGP.Models.Jobs;
+using TPGPServices.View_Model;
 
 namespace TPGPServices.Models
 {
-    public class Contracts_VM
+    public class Contract_VM
     {
-        public long IDContract { get; set; }
+        public long Id { get; set; }
         public string Name { get; set; }
         public DateTime InitDate { get; set; }
         public DateTime EndDate { get; set; }
         public double Bonus { get; set; }
         public string Company { get; set; }
-        public string Sector { get; set; }
+        public Portfolio_VM Portfolio { get; set; }
+        public List<string> Zones { get; set; }
     }
 }

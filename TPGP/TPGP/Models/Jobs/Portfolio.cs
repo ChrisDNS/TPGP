@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace TPGP.Models.Jobs
 {
@@ -8,7 +9,7 @@ namespace TPGP.Models.Jobs
 
         public string Sector { get; set; }
         public string Scope { get; set; }
-
+     
         public virtual ICollection<Contract> Contracts { get; set; }
 
         public Portfolio()

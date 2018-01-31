@@ -82,15 +82,15 @@
                         <div class="col-md-3">
                             @Html.Label("Request Role")
 
-                            <div class="rolechange">
-                                <div>
-                                    @Html.EditorFor(model => model.User.Role.DesiredRole, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                                    @Html.ValidationMessageFor(model => model.User.Role, "", new { @class = "text-danger" })
-                                </div>
-                                <div>
-                                    <input type="submit" value="Validate" class="btn btn-default" />
-                                </div>
-                            </div>
+                    <div class="rolechange">
+                        <div>
+                            @Html.EditorFor(model => model.User.Role.DesiredRole, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                            @Html.ValidationMessageFor(model => model.User.Role, "", new { @class = "text-danger" })
+                        </div>
+                        <div>
+                            <input type="submit" value="Validate" class="btn btn-default" />
+                        </div>
+                    </div>
 
                         </div>
                     </div>
