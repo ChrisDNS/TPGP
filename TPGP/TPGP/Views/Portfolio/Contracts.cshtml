@@ -10,7 +10,7 @@
     <link href="@Url.Content("~/Content/PagedList.css")" rel="stylesheet" />
 }
 
-<h1><font color="rebeccapurple">@Model.Portfolio.Sector</font></h1>
+<h1>@Model.Portfolio.Sector</h1>
 <hr />
 @if (!Model.IsListEmpty)
 {
@@ -19,7 +19,7 @@
         @if (Model.Portfolio.Scope == "Initial")
         {
             <div class="col-lg-4">
-                @Html.ActionLink("Create New", "Create", "Contract", null, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Create new contract", "Create", "Contract", null, new { @class = "btn btn-primary" })
             </div>
         }
 
@@ -30,7 +30,7 @@
                 <div class="input-group">
                     @Html.TextBox("SearchString", null, new { @class = "form-control", @placeholder = "Search..." })
                     <span class="input-group-btn">
-                        <button class="btn btn-secondary" type="submit" value="Search">Go!</button>
+                        <button class="btn btn-secondary" type="submit" value="Search">Search</button>
                     </span>
                 </div>
             }
@@ -77,7 +77,7 @@
                         <td>
                             @if (Model.Portfolio.Scope == "Initial")
                             {
-                                @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-info" })
+                                @Html.ActionLink("Edit", "Edit", "Contract", new { id = item.Id }, new { @class = "btn btn-info" })
                             }
 
                             @Html.ActionLink("Details", "Details", "Contract", new { id = item.Id }, new { @class = "btn btn-info" })

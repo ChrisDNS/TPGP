@@ -20,21 +20,25 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
 
-                @{
-                    if ((string)Session["role"] != "ADMIN")
-                    {
-                        <a class="nav-link" href="/Portfolio">Portfolios<span class="sr-only">(current)</span></a>
-                        <a class="nav-link" href="/Contract">Contracts<span class="sr-only">(current)</span></a>
-                    }
-                    else
-                    {
+            @{
+                if ((string)Session["role"] == "ADMIN")
+                {
+                    <li class="nav-item active">
                         <a class="nav-link" href="/Admin">Users<span class="sr-only">(current)</span></a>
-                    }
+                    </li>
                 }
+                else
+                {
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/Portfolio">Portfolios<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/Contract">Contracts<span class="sr-only">(current)</span></a>
+                    </li>
+                }
+            }
 
-            </li>
         </ul>
         <a class="navbar-brand navbar-right" href="#">
             <img src="~/Content/images/logo.png" alt="logo" width="33" height="33">

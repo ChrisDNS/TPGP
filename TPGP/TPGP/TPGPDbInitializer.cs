@@ -34,7 +34,9 @@ namespace TPGP
                 new Permission { Name = "Contract-Index" },
                 new Permission { Name = "Contract-Details" },
                 new Permission { Name = "Contract-Create" },
-                new Permission { Name = "Contract-Save" }
+                new Permission { Name = "Contract-Save" },
+                new Permission { Name = "Contract-Edit" },
+                new Permission { Name = "Contract-Update" }
             };
 
             IList<Permission> managerPermissions = new List<Permission>

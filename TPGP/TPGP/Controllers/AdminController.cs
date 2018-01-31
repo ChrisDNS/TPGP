@@ -28,7 +28,7 @@ namespace TPGP.Controllers
             if (searchString != null)
                 page = 1;
 
-            var users = userRepository.Pagination<string>(p => p.Username, noPage, Constants.ITEMS_PER_PAGE, out int total);
+            var users = userRepository.Pagination(p => p.Username, noPage, Constants.ITEMS_PER_PAGE, out int total);
 
             if (!string.IsNullOrEmpty(searchString))
                 users = users.Where(c => c.Username.Contains(searchString));
@@ -54,17 +54,28 @@ namespace TPGP.Controllers
 
         public ActionResult Save(UserViewModel uvm)
         {
+
             var usr = userRepository.GetByFilter(u => u.Id == uvm.User.Id).FirstOrDefault();
 
             if (usr != null)
             {
-                usr.RoleId = uvm.User.RoleId;
+                long i = usr.RoleId;
+                usr.Role = roleRepository.GetByFilter(r => r.RoleName== usr.Role.DesiredRole).FirstOrDefault();
+                
+                // usr.RoleId = uvm.User.RoleId;
+               // usr.Lastname = "sdsdssf " + usr.RoleId +" encien"+ usr.Role.DesiredRole;
+                usr.Role.IsBeingProcessed = false;
             }
 
             userRepository.Update(usr);
             userRepository.SaveChanges();
 
-            return View("Index");
+            return RedirectToAction("Index");
+        }
+        public FileResult Download()
+        {
+            var FileVirtualePath = "~/pdf_download/status" + ".pdf";
+            return File(FileVirtualePath, "application/force-download", System.IO.Path.GetFileName(FileVirtualePath));
         }
     }
 }
