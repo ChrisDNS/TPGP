@@ -45,8 +45,10 @@
 
         @if (Model.User.Role.IsBeingProcessed)
         {
-            <dt> About Your status </dt>
-            <dd>You have asked to change your status from <strong>@Model.User.Role.RoleName</strong> to <strong>@Model.User.Role.DesiredRole</strong>. Your request is being processed.</dd>
+            <dt> About your status... </dt>
+            <dd>
+                <strong><font color="green">You have asked to change your status from @Model.User.Role.RoleName to @Model.User.Role.DesiredRole. Your request is being processed.</font></strong>
+            </dd>
         }
 
     </dl>
