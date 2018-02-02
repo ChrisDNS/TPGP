@@ -90,12 +90,20 @@ namespace TPGPServices.Controllers
         }
 
         
-        public IHttpActionResult PostCreate([FromBody] Contract c)
+       /* public IHttpActionResult PostCreate([FromBody] Product c)
         {
-           
-           // string name = o["name"].ToString();
-            return Ok("success "+ c.Name);
-        }
+
+            // string name = o["name"].ToString();
+
+            string Name = c.Name;
+            /* DateTime InitDate =  
+        public DateTime EndDate { get; set; }
+        public double Bonus { get; set; }
+        public string Company { get; set; }
+        public Portfolio_VM Portfolio { get; set; }
+        public List<string> Zones { get; set; }*/
+            //return Ok("success "+ c.Name);
+        //}
         //************************ Private Mehode ****************************************
         private HttpResponseMessage ContractById(int id)
         {
