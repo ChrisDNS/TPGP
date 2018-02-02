@@ -1,57 +1,92 @@
-﻿@model IEnumerable<TPGP.Models.Jobs.Contract>
+﻿@using PagedList.Mvc
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.InitDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EndDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Bonus)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Company)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PortfolioId)
-        </th>
-        <th></th>
-    </tr>
+@model TPGP.Models.ViewModels.ContractsViewModel
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.InitDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EndDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Bonus)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Company)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PortfolioId)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
+@{
+    ViewBag.Title = "Contracts";
 }
 
-</table>
+@section css {
+    <link href="@Url.Content("~/Content/PagedList.css")" rel="stylesheet" />
+}
+
+<h1>Contracts</h1>
+<hr />
+@if (!Model.IsListEmpty)
+{
+    <div class="tools">
+
+        <div class="col-lg-4" style="padding-bottom:25px;">
+
+            @using (Html.BeginForm("Index", "Contract", FormMethod.Get))
+            {
+                <div class="input-group">
+                    @Html.TextBox("SearchString", null, new { @class = "form-control", @placeholder = "Search..." })
+                    <span class="input-group-btn">
+                        <button class="btn btn-secondary" type="submit" value="Search">Search</button>
+                    </span>
+                </div>
+            }
+
+        </div>
+    </div>
+
+    <div>
+        <table class="table table-striped table-hover">
+            <thead class="thead-inverse">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Contracts[0].Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Contracts[0].InitDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Contracts[0].EndDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Contracts[0].Company)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model.Contracts)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.InitDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EndDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Company)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Details", "Details", "Contract", new { id = item.Id }, new { @class = "btn btn-info" })
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+
+        <div class="row pagination pager">
+            @Html.PagedListPager(Model.Contracts, page => Url.Action("Index", new { page }))
+        </div>
+    </div>
+}
+
+else
+{
+    <div class="container">
+        <div class="alert alert-info">
+            <strong>Info!</strong> There is no contract yet in this portfolio.
+        </div>
+    </div>
+}

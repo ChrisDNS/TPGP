@@ -40,15 +40,13 @@ namespace TPGP.Controllers
             string username = (string)Session["username"];
 
             var user = userRepository.GetByFilter(u => u.Username == username).FirstOrDefault();
-            var roles = roleRepository.GetByFilter(r => r.RoleName != user.Role.RoleName && r.RoleName != Roles.ADMIN);
+            var roles = roleRepository.GetByFilter(r => r.RoleName != user.Role.RoleName && r.RoleName != Roles.ADMIN && r.RoleName != Roles.COLLABORATOR);
 
             var uvm = new UserViewModel
             {
                 User = user,
                 Roles = new SelectList(roles, dataValueField: "Id", dataTextField: "RoleName")
             };
-
-            Debug.WriteLine(user.Username);
 
             return View(uvm);
         }

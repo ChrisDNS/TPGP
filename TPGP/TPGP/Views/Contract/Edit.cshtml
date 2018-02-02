@@ -72,7 +72,6 @@
 
                         <li>
                             <label class="control-label" for="ZonesIds[@item.Id]">@item.Label</label>
-
                             @if (Model.ZonesIds.Any(id => id == item.Id))
                             {
                                 <input type="checkbox" name="ZonesIds" id="ZonesIds[@item.Id]" value="@item.Id" checked>

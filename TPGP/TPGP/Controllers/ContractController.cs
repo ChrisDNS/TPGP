@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using PagedList;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using TPGP.ActionFilters;
@@ -27,9 +28,36 @@ namespace TPGP.Controllers
             this.scopeRepository = scopeRepository;
         }
 
-        public ActionResult Index(long id, int? page, string sortOrder, string searchString)
+        public ActionResult Index(int? page, string sortOrder, string searchString)
         {
-            return View();
+            int noPage = (page ?? 1) - 1;
+            var contractsViewModels = new ContractsViewModel
+            {
+
+            };
+
+            if (searchString != null)
+                page = 1;
+
+            var contracts = contractRepository.Pagination(c => c.Name, noPage, 10, out int total);
+
+            if (contracts.Count() == 0)
+            {
+                contractsViewModels.IsListEmpty = true;
+                return View(contractsViewModels);
+            }
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                contracts = contractRepository.GetByFilter(c => c.Name.ToLower().Contains(searchString.ToLower()));
+
+                //var zones = zoneRepository.GetAll().Include("Contracts").Where(z => z.Label.ToLower().Contains(searchString.ToLower()));
+                //contracts.ToList().ForEach(c => zones.Where(z => z.Label.Contains(searchString)));
+            }
+
+            contractsViewModels.Contracts = new StaticPagedList<Contract>(contracts, noPage + 1, 10, total);
+
+            return View(contractsViewModels);
         }
 
         public ActionResult Details(long id)
@@ -66,6 +94,9 @@ namespace TPGP.Controllers
 
                 var selectedZones = new List<GeographicalZone>();
                 zonesFromDbs.ToList().ForEach(z => selectedZones.Add(z));
+
+                var userZone = (string)Session["zone"];
+                selectedZones.Add(zoneRepository.GetByFilter(z => z.Label == userZone).FirstOrDefault());
 
                 var contract = new Contract
                 {

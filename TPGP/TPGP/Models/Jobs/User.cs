@@ -24,8 +24,9 @@ namespace TPGP.Models.Jobs
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [Display(Name = "Zone")]
-        public GeographicalZone Zone { get; set; }
+        public long ZoneId { get; set; }
+        [Display(Name = "Zones")]
+        public virtual GeographicalZone Zone { get; set; }
 
         public long RoleId { get; set; }
         public virtual Role Role { get; set; }

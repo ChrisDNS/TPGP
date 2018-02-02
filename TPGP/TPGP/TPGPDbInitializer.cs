@@ -49,10 +49,10 @@ namespace TPGP
 
             IList<Role> roles = new List<Role>
             {
-                new Role { RoleName = Roles.ADMIN, IsAdmin = true, Permissions = adminPermissions, IsBeingProcessed=false },
-                new Role { RoleName = Roles.COLLABORATOR, IsAdmin = false, Permissions = collaboratorPermissions, IsBeingProcessed= false },
-                new Role { RoleName = Roles.SUBSCRIBER, IsAdmin = false, Permissions = subscriberPermissions, IsBeingProcessed=false },
-                new Role { RoleName = Roles.MANAGER, IsAdmin = false, Permissions = managerPermissions, IsBeingProcessed=false }
+                new Role { RoleName = Roles.ADMIN, IsAdmin = true, Permissions = adminPermissions, IsBeingProcessed = false },
+                new Role { RoleName = Roles.COLLABORATOR, IsAdmin = false, Permissions = collaboratorPermissions, IsBeingProcessed = false },
+                new Role { RoleName = Roles.SUBSCRIBER, IsAdmin = false, Permissions = subscriberPermissions, IsBeingProcessed = false },
+                new Role { RoleName = Roles.MANAGER, IsAdmin = false, Permissions = managerPermissions, IsBeingProcessed = false }
             };
 
             IList<Portfolio> portfolios = new List<Portfolio>
@@ -124,7 +124,7 @@ namespace TPGP
                 new Contract { Name = "Contract-25", InitDate = DateTime.Now, EndDate = DateTime.Now.AddDays(765), Bonus = 278.74, Company = "Yahoo", Portfolio = portfolios[8] },
                 new Contract { Name = "Contract-26", InitDate = DateTime.Now, EndDate = DateTime.Now.AddDays(1174), Bonus = 291.74, Company = "Corsair", Portfolio = portfolios[9] }
             };
-        
+
             IList<User> users = new List<User>
             {
                new User { Username = "Sarra", Firstname = "Sarra", Lastname = "Sarra", Email = "sarra@sarra.sarra", Zone = countries[0], Role = roles[0] },
