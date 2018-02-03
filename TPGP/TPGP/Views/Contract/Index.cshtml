@@ -16,6 +16,12 @@
 {
     <div class="tools">
 
+
+        <div class="col-lg-4">
+            @Html.ActionLink("Create new contract", "Create", "Contract", null, new { @class = "btn btn-primary" })
+        </div>
+
+
         <div class="col-lg-4" style="padding-bottom:25px;">
 
             @using (Html.BeginForm("Index", "Contract", FormMethod.Get))

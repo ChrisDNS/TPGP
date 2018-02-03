@@ -1,5 +1,6 @@
 ﻿using PagedList;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web.Mvc;
 using TPGP.ActionFilters;
@@ -31,9 +32,10 @@ namespace TPGP.Controllers
         public ActionResult Index(int? page, string sortOrder, string searchString)
         {
             int noPage = (page ?? 1) - 1;
-            var contractsViewModels = new ContractsViewModel
-            {
 
+            var cvm = new ContractsViewModel
+            {
+                Portfolios = portfolioRepository.GetPortfoliosByUserScope((long)Session["id"])
             };
 
             if (searchString != null)
@@ -41,23 +43,25 @@ namespace TPGP.Controllers
 
             var contracts = contractRepository.Pagination(c => c.Name, noPage, 10, out int total);
 
+            var caca = contractRepository.GetContractsByUserScope((long)Session["id"]);
+            Debug.WriteLine(caca.Count());
             if (contracts.Count() == 0)
             {
-                contractsViewModels.IsListEmpty = true;
-                return View(contractsViewModels);
+                cvm.IsListEmpty = true;
+                return View(cvm);
             }
 
             if (!string.IsNullOrEmpty(searchString))
             {
                 contracts = contractRepository.GetByFilter(c => c.Name.ToLower().Contains(searchString.ToLower()));
 
-                //var zones = zoneRepository.GetAll().Include("Contracts").Where(z => z.Label.ToLower().Contains(searchString.ToLower()));
-                //contracts.ToList().ForEach(c => zones.Where(z => z.Label.Contains(searchString)));
+                if (contracts.Count() == 0)
+                    contracts = zoneRepository.GetAll().Include("Contracts").Where(z => z.Label.ToLower().Contains(searchString.ToLower())).SelectMany(z => z.Contracts);
             }
 
-            contractsViewModels.Contracts = new StaticPagedList<Contract>(contracts, noPage + 1, 10, total);
+            cvm.Contracts = new StaticPagedList<Contract>(contracts, noPage + 1, 10, total);
 
-            return View(contractsViewModels);
+            return View(cvm);
         }
 
         public ActionResult Details(long id)
@@ -73,6 +77,7 @@ namespace TPGP.Controllers
         public ActionResult Create()
         {
             var initialPortfolios = portfolioRepository.GetPortfoliosByUserScope((long)Session["id"]);
+
             initialPortfolios.ToList().ForEach(p => p.Scope = scopeRepository.GetScopeByPortfolio(p.Id) ? "Initial" : "Extent");
             initialPortfolios = initialPortfolios.Where(p => p.Scope == "Initial");
 
