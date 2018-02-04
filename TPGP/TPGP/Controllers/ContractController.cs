@@ -43,8 +43,8 @@ namespace TPGP.Controllers
 
             var contracts = contractRepository.Pagination(c => c.Name, noPage, 10, out int total);
 
-            var caca = contractRepository.GetContractsByUserScope((long)Session["id"]);
-            Debug.WriteLine(caca.Count());
+            //var caca = contractRepository.GetContractsByUserScope((long)Session["id"]);
+
             if (contracts.Count() == 0)
             {
                 cvm.IsListEmpty = true;

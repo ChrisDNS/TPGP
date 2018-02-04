@@ -130,6 +130,7 @@ namespace TPGP
                new User { Username = "Sarra", Firstname = "Sarra", Lastname = "Sarra", Email = "sarra@sarra.sarra", Zone = countries[0], Role = roles[0] },
                 new User { Username = "Pierre", Firstname = "Pierre", Lastname = "Pierre", Email = "pierre@pierre.pierre", Zone = countries[0], Role = roles[1] },
                 new User { Username = "Sidi", Firstname = "Sidi", Lastname = "Sidi", Email = "sidi@sidi.sidi", Zone = countries[1], Role = roles[2] },
+                new User { Username = "Sidi2", Firstname = "Sidi2", Lastname = "Sidi2", Email = "sidi2@sidi2.sidi2", Zone = countries[2], Role = roles[2] },
                 new User { Username = "Chris", Firstname = "Chris", Lastname = "Chris", Email = "chris@chris.chris", Zone = countries[1], Role = roles[3] }
             };
 
@@ -139,7 +140,13 @@ namespace TPGP
                 new Scope { UserId = 3, PortfolioId = 2, Initial = false },
                 new Scope { UserId = 3, PortfolioId = 3, Initial = false },
                 new Scope { UserId = 3, PortfolioId = 4, Initial = false },
-                new Scope { UserId = 3, PortfolioId = 5, Initial = false }
+                new Scope { UserId = 3, PortfolioId = 5, Initial = false },
+
+                new Scope { UserId = 4, PortfolioId = 1, Initial = true },
+                new Scope { UserId = 4, PortfolioId = 2, Initial = false },
+                new Scope { UserId = 4, PortfolioId = 3, Initial = false },
+                new Scope { UserId = 4, PortfolioId = 4, Initial = false },
+                new Scope { UserId = 4, PortfolioId = 5, Initial = false }
             };
 
             foreach (var user in users)
