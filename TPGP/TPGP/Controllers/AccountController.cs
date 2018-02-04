@@ -63,6 +63,7 @@ namespace TPGP.Controllers
 
                 var newFile = new Models.Jobs.File
                 {
+                    UserId=user.Id,
                     Id = f.Id,
                     FilePath = "~/pdf_upload/" + file.FileName
                 };

@@ -14,11 +14,13 @@ namespace TPGP.Controllers
     {
         private readonly IUserRepository userRepository;
         private readonly IRoleRepository roleRepository;
+        private readonly IFileRepository fileRepository;
 
-        public AdminController(IUserRepository userRepository, IRoleRepository roleRepository)
+        public AdminController(IUserRepository userRepository, IRoleRepository roleRepository, IFileRepository fileRepository)
         {
             this.userRepository = userRepository;
             this.roleRepository = roleRepository;
+            this.fileRepository = fileRepository;
         }
 
         public ActionResult Index(int? page, string sortOrder, string searchString)
@@ -72,10 +74,12 @@ namespace TPGP.Controllers
 
             return RedirectToAction("Index");
         }
-        public FileResult Download()
+        public FileResult Download(long id)
         {
-            var FileVirtualePath = "~/pdf_download/status" + ".pdf";
-            return File(FileVirtualePath, "application/force-download", System.IO.Path.GetFileName(FileVirtualePath));
+            File file = fileRepository.GetByFilter(f=>f.UserId==id).FirstOrDefault();
+            var fileVirtualePath =file.FilePath;
+
+            return File(fileVirtualePath, "application/force-download", System.IO.Path.GetFileName(fileVirtualePath));
         }
     }
 }

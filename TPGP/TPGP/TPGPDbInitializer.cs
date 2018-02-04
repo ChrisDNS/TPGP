@@ -19,7 +19,8 @@ namespace TPGP
             {
                 new Permission { Name = "Admin-Index" },
                 new Permission { Name = "Admin-Edit" },
-                new Permission { Name = "Admin-Save" }
+                new Permission { Name = "Admin-Save" },
+                 new Permission { Name = "Admin-Download" }
             };
 
             IList<Permission> collaboratorPermissions = new List<Permission>
