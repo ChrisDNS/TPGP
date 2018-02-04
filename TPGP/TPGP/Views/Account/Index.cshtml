@@ -53,16 +53,16 @@
         </dd>
 
         @if (Model.User.Role.IsBeingProcessed)
-    {
-        <dt> About your status... </dt>
-        <dd>
-            <strong><font color="green">You have asked to change your status from @Model.User.Role.RoleName to @Model.User.Role.DesiredRole. Your request is being processed.</font></strong>
-        </dd>
-}
+        {
+            <dt> About your status... </dt>
+            <dd>
+                <strong><font color="green">You have asked to change your status from @Model.User.Role.RoleName to @Model.User.Role.DesiredRole. Your request is being processed.</font></strong>
+            </dd>
+        }
 
     </dl>
 
-    @if (!Model.User.Role.IsBeingProcessed)
+    @if (!Model.User.Role.IsBeingProcessed && !Model.User.Role.IsAdmin)
     {
         <div class="back">
             @Html.ActionLink("Change your status", "ChangeStatus", "Account", null, new { @class = "btn btn-info" })

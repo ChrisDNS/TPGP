@@ -29,9 +29,10 @@ namespace TPGP.Models.Jobs
         public virtual GeographicalZone Zone { get; set; }
 
         public long RoleId { get; set; }
+        [Display(Name = "Role")]
         public virtual Role Role { get; set; }
 
-        public File file { get; set; }
+        public File File { get; set; }
 
         public User()
         {

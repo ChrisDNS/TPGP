@@ -20,32 +20,48 @@ namespace TPGP
                 new Permission { Name = "Admin-Index" },
                 new Permission { Name = "Admin-Edit" },
                 new Permission { Name = "Admin-Save" },
-                 new Permission { Name = "Admin-Download" }
+                new Permission { Name = "Admin-Download" },
+
+                new Permission { Name = "Account-Index" }
             };
 
             IList<Permission> collaboratorPermissions = new List<Permission>
             {
-                new Permission { Name = "Portfolio-Index" }
+                new Permission { Name = "Portfolio-Index" },
+
+                new Permission { Name = "Account-Index" },
+                new Permission { Name = "Account-ChangeStatus" },
+                new Permission { Name = "Account-Download" }
             };
 
             IList<Permission> subscriberPermissions = new List<Permission>
             {
                 new Permission { Name = "Portfolio-Index" },
                 new Permission { Name = "Portfolio-Contracts" },
+
                 new Permission { Name = "Contract-Index" },
                 new Permission { Name = "Contract-Details" },
                 new Permission { Name = "Contract-Create" },
                 new Permission { Name = "Contract-Save" },
                 new Permission { Name = "Contract-Edit" },
-                new Permission { Name = "Contract-Update" }
+                new Permission { Name = "Contract-Update" },
+
+                new Permission { Name = "Account-Index" },
+                new Permission { Name = "Account-ChangeStatus" },
+                new Permission { Name = "Account-Download" }
             };
 
             IList<Permission> managerPermissions = new List<Permission>
             {
                 new Permission { Name = "Portfolio-Index" },
                 new Permission { Name = "Portfolio-Contracts" },
+
                 new Permission { Name = "Contract-Index" },
-                new Permission { Name = "Contract-Details" }
+                new Permission { Name = "Contract-Details" },
+
+                new Permission { Name = "Account-Index" },
+                new Permission { Name = "Account-ChangeStatus" },
+                new Permission { Name = "Account-Download" }
             };
 
             IList<Role> roles = new List<Role>

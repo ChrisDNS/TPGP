@@ -15,6 +15,7 @@ namespace TPGP.Models.Jobs
         public virtual ICollection<User> Users { get; set; }
 
         public bool IsBeingProcessed { get; set; }
+        [Display(Name = "Desired role")]
         public Roles DesiredRole { get; set; }
 
         public Role()

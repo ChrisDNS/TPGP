@@ -63,9 +63,6 @@ namespace TPGP.Controllers
             {
                 long i = usr.RoleId;
                 usr.Role = roleRepository.GetByFilter(r => r.RoleName == usr.Role.DesiredRole).FirstOrDefault();
-
-                // usr.RoleId = uvm.User.RoleId;
-                // usr.Lastname = "sdsdssf " + usr.RoleId +" encien"+ usr.Role.DesiredRole;
                 usr.Role.IsBeingProcessed = false;
             }
 
@@ -76,8 +73,8 @@ namespace TPGP.Controllers
         }
         public FileResult Download(long id)
         {
-            File file = fileRepository.GetByFilter(f=>f.UserId==id).FirstOrDefault();
-            var fileVirtualePath =file.FilePath;
+            var file = fileRepository.GetByFilter(f => f.UserId == id).FirstOrDefault();
+            var fileVirtualePath = file.FilePath;
 
             return File(fileVirtualePath, "application/force-download", System.IO.Path.GetFileName(fileVirtualePath));
         }

@@ -11,6 +11,8 @@ namespace TPGP.App_Start
                       "~/scripts/jquery-ui-1.12.1.js"));
             bundles.Add(new StyleBundle("~/Content/cssjqryUi").Include(
                    "~/Content/themes/base/jquery-ui.css"));
+            bundles.Add(new StyleBundle("~/Content/css/bootstrap").Include(
+                "~/Content/bootstrap.min.css", new CssRewriteUrlTransform()));
         }
     }
 }
