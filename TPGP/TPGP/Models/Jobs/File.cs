@@ -9,6 +9,8 @@ namespace TPGP.Models.Jobs
     {
         public long Id { get; set; }
         public string FilePath { get; set; }
+        public long UserId { get; set; }
+
 
         public File()
         {
