@@ -41,7 +41,7 @@ namespace TPGP.Controllers
             string username = (string)Session["username"];
 
             var user = userRepository.GetByFilter(u => u.Username == username).FirstOrDefault();
-            var roles = roleRepository.GetAll();
+            var roles = roleRepository.GetByFilter(r => r.RoleName != user.Role.RoleName && r.RoleName != Roles.ADMIN && r.RoleName != Roles.COLLABORATOR);
 
             var uvm = new UserViewModel
             {

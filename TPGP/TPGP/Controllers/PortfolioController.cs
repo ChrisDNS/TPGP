@@ -67,7 +67,7 @@ namespace TPGP.Controllers
             contractsViewModels.Portfolio.Scope = scopeRepository.GetScopeByPortfolio(id) ? "Initial" : "Extent";
 
             string zoneUser = (string)Session["zone"];
-            contracts = zoneRepository.GetAll().Include("Contracts").Where(z => z.Label == zoneUser).SelectMany(z => z.Contracts);
+            contracts = zoneRepository.GetAll().Include("Contracts").Where(z => z.Label == zoneUser).SelectMany(z => z.Contracts).Where(c => c.PortfolioId == id);
 
             if (contracts.Count() == 0)
             {
