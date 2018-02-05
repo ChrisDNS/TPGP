@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
+using TPGP.Models.Enums;
 using TPGP.Models.Jobs;
 
 namespace TPGP.Models.ViewModels

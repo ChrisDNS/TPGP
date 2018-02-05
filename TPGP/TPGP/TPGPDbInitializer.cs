@@ -66,10 +66,10 @@ namespace TPGP
 
             IList<Role> roles = new List<Role>
             {
-                new Role { RoleName = Roles.ADMIN, IsAdmin = true, Permissions = adminPermissions, IsBeingProcessed = false },
-                new Role { RoleName = Roles.COLLABORATOR, IsAdmin = false, Permissions = collaboratorPermissions, IsBeingProcessed = false },
-                new Role { RoleName = Roles.SUBSCRIBER, IsAdmin = false, Permissions = subscriberPermissions, IsBeingProcessed = false },
-                new Role { RoleName = Roles.MANAGER, IsAdmin = false, Permissions = managerPermissions, IsBeingProcessed = false }
+                new Role { RoleName = Roles.ADMIN, IsAdmin = true, Permissions = adminPermissions },
+                new Role { RoleName = Roles.COLLABORATOR, IsAdmin = false, Permissions = collaboratorPermissions },
+                new Role { RoleName = Roles.SUBSCRIBER, IsAdmin = false, Permissions = subscriberPermissions },
+                new Role { RoleName = Roles.MANAGER, IsAdmin = false, Permissions = managerPermissions }
             };
 
             IList<Portfolio> portfolios = new List<Portfolio>

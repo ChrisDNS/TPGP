@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using TPGP.Models.Enums;
 
 namespace TPGP.Models.Jobs
 {
@@ -31,6 +32,10 @@ namespace TPGP.Models.Jobs
         public long RoleId { get; set; }
         [Display(Name = "Role")]
         public virtual Role Role { get; set; }
+
+        public long DesiredRoleId { get; set; }
+        public Roles DesiredRoleName { get; set; }
+        public bool IsBeingProcessed { get; set; }
 
         public File File { get; set; }
 

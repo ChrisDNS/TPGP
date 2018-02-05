@@ -1,10 +1,10 @@
 ﻿@model TPGP.Models.ViewModels.UserViewModel
 
-@if (Model.User.Role.IsBeingProcessed)
+@if (Model.User.IsBeingProcessed)
 {
     <div class="container" style="padding:50px;">
         <div class="alert alert-info">
-            <strong>Info!</strong> Your changing status process from <strong>@Model.User.Role.RoleName</strong> to <strong>@Model.User.Role.DesiredRole</strong> is currently ongoing.
+            <strong>Info!</strong> Your changing status process from <strong>@Model.User.Role.RoleName</strong> to <strong>@Model.User.DesiredRoleName</strong> is currently ongoing.
         </div>
     </div>
 }
@@ -31,7 +31,7 @@ else
                     Please, select the <strong>status</strong> you want :
                 </label>
                 <div class="col-md-3">
-                    @Html.DropDownListFor(model => model.User.Role.DesiredRole, Model.Roles, htmlAttributes: new { @class = "form-control" })
+                    @Html.DropDownListFor(model => model.User.DesiredRoleId, Model.Roles, htmlAttributes: new { @class = "form-control" })
                 </div>
             </div>
 

@@ -52,17 +52,17 @@
             @Html.DisplayFor(model => model.User.Zone.Label)
         </dd>
 
-        @if (Model.User.Role.IsBeingProcessed)
+        @if (Model.User.IsBeingProcessed)
         {
             <dt> About your status... </dt>
             <dd>
-                <strong><font color="green">You have asked to change your status from @Model.User.Role.RoleName to @Model.User.Role.DesiredRole. Your request is being processed.</font></strong>
+                <strong><font color="green">You have asked to change your status from @Model.User.Role.RoleName to @Model.User.DesiredRoleName. Your request is being processed.</font></strong>
             </dd>
         }
 
     </dl>
 
-    @if (!Model.User.Role.IsBeingProcessed && !Model.User.Role.IsAdmin)
+    @if (!Model.User.IsBeingProcessed && !Model.User.Role.IsAdmin)
     {
         <div class="back">
             @Html.ActionLink("Change your status", "ChangeStatus", "Account", null, new { @class = "btn btn-info" })

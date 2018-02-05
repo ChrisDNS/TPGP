@@ -47,7 +47,7 @@
         </div>
 
         @{
-            if (Model.User.Role.IsBeingProcessed)
+            if (Model.User.IsBeingProcessed)
             {
                 <div class="form-group">
                     @Html.LabelFor(model => model.User.Role, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -59,11 +59,11 @@
 
                 <div class="form-group" id="requsRole">
                     <div class="col-md-12">
-                        <font color="red">@Html.LabelFor(model => model.User.Role.DesiredRole, htmlAttributes: new { @class = "control-label col-md-2" })</font>
+                        <font color="red">@Html.LabelFor(model => model.User.DesiredRoleName, htmlAttributes: new { @class = "control-label col-md-2" })</font>
                         <div class="rolechange">
                             <div>
-                                @Html.EditorFor(model => model.User.Role.DesiredRole, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                                @Html.ValidationMessageFor(model => model.User.Role.DesiredRole, "", new { @class = "text-danger" })
+                                @Html.EditorFor(model => model.User.DesiredRoleName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                @Html.ValidationMessageFor(model => model.User.DesiredRoleName, "", new { @class = "text-danger" })
                             </div>
                             <div id="seepdf">
                                 @Html.ActionLink("See PDF", "Download", "Admin", new { id = Model.User.Id }, new { @class = "btn btn-primary btn-block" })

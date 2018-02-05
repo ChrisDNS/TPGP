@@ -71,9 +71,9 @@
                 <td>
 
                     @{
-                        if (item.Role.IsBeingProcessed)
+                        if (item.IsBeingProcessed)
                         {
-                            <p><strong><font color="DarkOrange">@Html.DisplayName(item.Role.DesiredRole.ToString())</font></strong></p>
+                            <p><strong><font color="DarkOrange">@Html.DisplayName(item.DesiredRoleName.ToString())</font></strong></p>
                         }
                         else
                         {

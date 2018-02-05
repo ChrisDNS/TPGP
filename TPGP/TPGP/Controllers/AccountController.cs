@@ -41,7 +41,7 @@ namespace TPGP.Controllers
             string username = (string)Session["username"];
 
             var user = userRepository.GetByFilter(u => u.Username == username).FirstOrDefault();
-            var roles = roleRepository.GetByFilter(r => r.RoleName != user.Role.RoleName && r.RoleName != Roles.ADMIN && r.RoleName != Roles.COLLABORATOR);
+            var roles = roleRepository.GetAll();
 
             var uvm = new UserViewModel
             {
@@ -73,8 +73,9 @@ namespace TPGP.Controllers
                 fileRepository.SaveChanges();
 
                 user.File = newFile;
-                user.Role.IsBeingProcessed = true;
-                user.Role.DesiredRole = uvm.User.Role.DesiredRole;
+                user.IsBeingProcessed = true;
+                user.DesiredRoleId = uvm.User.DesiredRoleId;
+                user.DesiredRoleName = roleRepository.GetByFilter(r => user.DesiredRoleId == r.Id).FirstOrDefault().RoleName;
 
                 userRepository.Update(user);
                 userRepository.SaveChanges();          
