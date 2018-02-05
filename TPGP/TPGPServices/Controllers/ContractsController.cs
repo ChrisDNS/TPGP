@@ -38,7 +38,7 @@ namespace TPGPServices.Controllers
           {
              if (!IsConnected())
              {
-                 return Request.CreateErrorResponse(HttpStatusCode.Unauthorized, "You must b connected");
+                 return Request.CreateErrorResponse(HttpStatusCode.Unauthorized, "You must be connected");
             }
              IEnumerable<Contract> contracts = contractRepository.GetAll();
              List<Contract_VM> contracts_vm = new List<Contract_VM>();
@@ -57,7 +57,7 @@ namespace TPGPServices.Controllers
 
         }
        
-        public HttpResponseMessage GetByZone(string id)
+        public HttpResponseMessage GetByZoneOrId(string id)
         {
             if (!IsConnected())
             {

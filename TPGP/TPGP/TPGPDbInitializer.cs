@@ -112,9 +112,11 @@ namespace TPGP
                 new GeographicalZone { Label = "Canada", Parent = continents[4] },
             };
 
+            IList<GeographicalZone> countriesContracts1 = new List<GeographicalZone>();
+            countriesContracts1.Add(countries[0]);
             IList<Contract> contracts = new List<Contract>
             {
-                new Contract { Name = "Contract-1", InitDate = DateTime.Now, EndDate = DateTime.Now.AddDays(214), Bonus = 125.445, Company = "Nike", Portfolio = portfolios[0] },
+                new Contract { Name = "Contract-1", InitDate = DateTime.Now, EndDate = DateTime.Now.AddDays(214), Bonus = 125.445, Company = "Nike", Portfolio = portfolios[0], Zones=countriesContracts1 },
                 new Contract { Name = "Contract-2", InitDate = DateTime.Now, EndDate = DateTime.Now.AddDays(546), Bonus = 1201.45, Company = "Auchan", Portfolio = portfolios[0] },
                 new Contract { Name = "Contract-3", InitDate = DateTime.Now, EndDate = DateTime.Now.AddDays(111), Bonus = 201.15, Company = "Smarties", Portfolio = portfolios[1] },
                 new Contract { Name = "Contract-4", InitDate = DateTime.Now, EndDate = DateTime.Now.AddDays(799), Bonus = 2221.74, Company = "Playboy", Portfolio = portfolios[3] },
