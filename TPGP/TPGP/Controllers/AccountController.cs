@@ -1,14 +1,15 @@
-﻿using System.Diagnostics;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TPGP.ActionFilters;
 using TPGP.DAL.Interfaces;
 using TPGP.Models.Enums;
 using TPGP.Models.ViewModels;
 
 namespace TPGP.Controllers
 {
+    [CustomAuthorize]
     public class AccountController : Controller
     {
         private readonly IUserRepository userRepository;
@@ -40,15 +41,13 @@ namespace TPGP.Controllers
             string username = (string)Session["username"];
 
             var user = userRepository.GetByFilter(u => u.Username == username).FirstOrDefault();
-            var roles = roleRepository.GetByFilter(r => r.RoleName != user.Role.RoleName && r.RoleName != Roles.ADMIN);
+            var roles = roleRepository.GetByFilter(r => r.RoleName != user.Role.RoleName && r.RoleName != Roles.ADMIN && r.RoleName != Roles.COLLABORATOR);
 
             var uvm = new UserViewModel
             {
                 User = user,
                 Roles = new SelectList(roles, dataValueField: "Id", dataTextField: "RoleName")
             };
-
-            Debug.WriteLine(user.Username);
 
             return View(uvm);
         }
@@ -65,6 +64,7 @@ namespace TPGP.Controllers
 
                 var newFile = new Models.Jobs.File
                 {
+                    UserId=user.Id,
                     Id = f.Id,
                     FilePath = "~/pdf_upload/" + file.FileName
                 };
@@ -72,7 +72,7 @@ namespace TPGP.Controllers
                 fileRepository.Insert(newFile);
                 fileRepository.SaveChanges();
 
-                user.file = newFile;
+                user.File = newFile;
                 user.Role.IsBeingProcessed = true;
                 user.Role.DesiredRole = uvm.User.Role.DesiredRole;
 

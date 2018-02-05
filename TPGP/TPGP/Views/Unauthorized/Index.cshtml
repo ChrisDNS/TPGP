@@ -17,9 +17,18 @@
         <h1>
             Error 401 : Unauthorised Request
         </h1>
-        <h2>You do not have permission to access the requested resource due to security restrictions.  In order to gain access, please speak to your system administrator.</h2>
+        <br />
+        <br />
+        <h2>
+            Please, check if you are logged in.
+            <br />
+            <br />If so, you do not have permission to access the requested resource due to security restrictions.<br />In order to gain access, please speak to your system administrator.
+        </h2>
 
-        <center style="padding-top:30px;">@Html.ActionLink("Change your status", "ChangeStatus", "Account", null, new { @class = "btn btn-lg btn-success" })</center>
+        <div>
+            <center style="padding-top:30px;">@Html.ActionLink("Log in", "Index", "Home", null, new { @class = "btn btn-lg btn-danger" })</center>
+            <center style="padding-top:30px;">@Html.ActionLink("Change your status", "ChangeStatus", "Account", null, new { @class = "btn btn-lg btn-success" })</center>
+        </div>
     </div>
 </body>
 </html>

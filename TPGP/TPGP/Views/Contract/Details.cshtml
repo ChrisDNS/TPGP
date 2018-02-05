@@ -54,9 +54,21 @@
 
         <dd>
 
+            @if(Model.Contract.Zones.Count == 0)
+            {
+                <div>None</div>
+            }
+
             @foreach (var item in Model.Contract.Zones)
             {
-                <div>@(item.Parent != null ? item.Label + " (" + item.Parent.Label + ")" : item.Label)</div>
+                if (item.Label == (string)Session["zone"])
+                {
+                    <div><font color="green">@(item.Parent != null ? item.Label + " (" + item.Parent.Label + ", initial zone)" : item.Label)</font></div>
+                }
+                else
+                {
+                    <div>@(item.Parent != null ? item.Label + " (" + item.Parent.Label + ")" : item.Label)</div>
+                }
             }
     </dl>
 </div>

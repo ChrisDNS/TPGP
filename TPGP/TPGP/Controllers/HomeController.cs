@@ -70,7 +70,7 @@ namespace TPGP.Controllers
                     Session["username"] = newUser.Username;
                     Session["role"] = newUser.Role.RoleName.ToString("g");
                     Session["id"] = newUser.Id;
-                    //Session["zone"] = newUser.Zone;
+                    Session["Zone"] = newUser.Zone.Label;
                 }
                 else
                 {
@@ -79,7 +79,7 @@ namespace TPGP.Controllers
                     Session["username"] = user.Username;
                     Session["role"] = user.Role.RoleName.ToString("g");
                     Session["id"] = user.Id;
-                    //Session["zone"] = user.Zone.
+                    Session["Zone"] = user.Zone.Label;
 
                     if (this.IsAdmin())
                         return RedirectToAction("Index", "Admin");

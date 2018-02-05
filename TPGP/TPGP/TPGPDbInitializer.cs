@@ -19,40 +19,57 @@ namespace TPGP
             {
                 new Permission { Name = "Admin-Index" },
                 new Permission { Name = "Admin-Edit" },
-                new Permission { Name = "Admin-Save" }
+                new Permission { Name = "Admin-Save" },
+                new Permission { Name = "Admin-Download" },
+
+                new Permission { Name = "Account-Index" }
             };
 
             IList<Permission> collaboratorPermissions = new List<Permission>
             {
-                new Permission { Name = "Portfolio-Index" }
+                new Permission { Name = "Portfolio-Index" },
+
+                new Permission { Name = "Account-Index" },
+                new Permission { Name = "Account-ChangeStatus" },
+                new Permission { Name = "Account-Download" }
             };
 
             IList<Permission> subscriberPermissions = new List<Permission>
             {
                 new Permission { Name = "Portfolio-Index" },
                 new Permission { Name = "Portfolio-Contracts" },
+
                 new Permission { Name = "Contract-Index" },
                 new Permission { Name = "Contract-Details" },
                 new Permission { Name = "Contract-Create" },
                 new Permission { Name = "Contract-Save" },
                 new Permission { Name = "Contract-Edit" },
-                new Permission { Name = "Contract-Update" }
+                new Permission { Name = "Contract-Update" },
+
+                new Permission { Name = "Account-Index" },
+                new Permission { Name = "Account-ChangeStatus" },
+                new Permission { Name = "Account-Download" }
             };
 
             IList<Permission> managerPermissions = new List<Permission>
             {
                 new Permission { Name = "Portfolio-Index" },
                 new Permission { Name = "Portfolio-Contracts" },
+
                 new Permission { Name = "Contract-Index" },
-                new Permission { Name = "Contract-Details" }
+                new Permission { Name = "Contract-Details" },
+
+                new Permission { Name = "Account-Index" },
+                new Permission { Name = "Account-ChangeStatus" },
+                new Permission { Name = "Account-Download" }
             };
 
             IList<Role> roles = new List<Role>
             {
-                new Role { RoleName = Roles.ADMIN, IsAdmin = true, Permissions = adminPermissions, IsBeingProcessed=false },
-                new Role { RoleName = Roles.COLLABORATOR, IsAdmin = false, Permissions = collaboratorPermissions, IsBeingProcessed= false },
-                new Role { RoleName = Roles.SUBSCRIBER, IsAdmin = false, Permissions = subscriberPermissions, IsBeingProcessed=false },
-                new Role { RoleName = Roles.MANAGER, IsAdmin = false, Permissions = managerPermissions, IsBeingProcessed=false }
+                new Role { RoleName = Roles.ADMIN, IsAdmin = true, Permissions = adminPermissions, IsBeingProcessed = false },
+                new Role { RoleName = Roles.COLLABORATOR, IsAdmin = false, Permissions = collaboratorPermissions, IsBeingProcessed = false },
+                new Role { RoleName = Roles.SUBSCRIBER, IsAdmin = false, Permissions = subscriberPermissions, IsBeingProcessed = false },
+                new Role { RoleName = Roles.MANAGER, IsAdmin = false, Permissions = managerPermissions, IsBeingProcessed = false }
             };
 
             IList<Portfolio> portfolios = new List<Portfolio>
@@ -124,12 +141,13 @@ namespace TPGP
                 new Contract { Name = "Contract-25", InitDate = DateTime.Now, EndDate = DateTime.Now.AddDays(765), Bonus = 278.74, Company = "Yahoo", Portfolio = portfolios[8] },
                 new Contract { Name = "Contract-26", InitDate = DateTime.Now, EndDate = DateTime.Now.AddDays(1174), Bonus = 291.74, Company = "Corsair", Portfolio = portfolios[9] }
             };
-        
+
             IList<User> users = new List<User>
             {
                new User { Username = "Sarra", Firstname = "Sarra", Lastname = "Sarra", Email = "sarra@sarra.sarra", Zone = countries[0], Role = roles[0] },
                 new User { Username = "Pierre", Firstname = "Pierre", Lastname = "Pierre", Email = "pierre@pierre.pierre", Zone = countries[0], Role = roles[1] },
                 new User { Username = "Sidi", Firstname = "Sidi", Lastname = "Sidi", Email = "sidi@sidi.sidi", Zone = countries[1], Role = roles[2] },
+                new User { Username = "Sidi2", Firstname = "Sidi2", Lastname = "Sidi2", Email = "sidi2@sidi2.sidi2", Zone = countries[2], Role = roles[2] },
                 new User { Username = "Chris", Firstname = "Chris", Lastname = "Chris", Email = "chris@chris.chris", Zone = countries[1], Role = roles[3] }
             };
 
@@ -139,7 +157,13 @@ namespace TPGP
                 new Scope { UserId = 3, PortfolioId = 2, Initial = false },
                 new Scope { UserId = 3, PortfolioId = 3, Initial = false },
                 new Scope { UserId = 3, PortfolioId = 4, Initial = false },
-                new Scope { UserId = 3, PortfolioId = 5, Initial = false }
+                new Scope { UserId = 3, PortfolioId = 5, Initial = false },
+
+                new Scope { UserId = 4, PortfolioId = 1, Initial = true },
+                new Scope { UserId = 4, PortfolioId = 2, Initial = false },
+                new Scope { UserId = 4, PortfolioId = 3, Initial = false },
+                new Scope { UserId = 4, PortfolioId = 4, Initial = false },
+                new Scope { UserId = 4, PortfolioId = 5, Initial = false }
             };
 
             foreach (var user in users)

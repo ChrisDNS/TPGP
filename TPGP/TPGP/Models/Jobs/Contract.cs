@@ -27,26 +27,18 @@ namespace TPGP.Models.Jobs
         public double Bonus { get; set; }
 
         [Display(Name = "Company")]
+        [Required(ErrorMessage = "The Company field is required.")]
         public string Company { get; set; }
 
-        [Display(Name = "Areas")]
+        [Display(Name = "Zones")]
         public virtual ICollection<GeographicalZone> Zones { get; set; }
 
         [Required(ErrorMessage = "The Sector field is required.")]
         public long PortfolioId { get; set; }
-        public Portfolio Portfolio { get; set; }
+        public virtual Portfolio Portfolio { get; set; }
 
         public Contract()
         {
-        }
-
-        public Contract(long id, string name, DateTime initDate, double bonus, string company)
-        {
-            Id = id;
-            Name = name;
-            InitDate = initDate;
-            Bonus = bonus;
-            Company = company;
         }
     }
 }

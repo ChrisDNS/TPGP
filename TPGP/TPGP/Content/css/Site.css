@@ -8,6 +8,14 @@
     justify-content: space-between;
 }
 
+#requsRole {
+    display: flex
+}
+
+#seepdf {
+    padding-left: 10px;
+}
+
 .areas {
     list-style-type: none;
 }
