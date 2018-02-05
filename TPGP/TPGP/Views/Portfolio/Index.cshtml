@@ -41,7 +41,16 @@
             {
                 <tr>
                     <td>
-                        @Html.ActionLink(@item.Sector + " (" + item.Scope + ")", "Contracts", "Portfolio", new { id = item.Id }, null)
+
+                        @if (item.Scope != null)
+                        {
+                            @Html.ActionLink(@item.Sector + " (" + item.Scope + ")", "Contracts", "Portfolio", new { id = item.Id }, null)
+                        }
+                        else
+                        {
+                            @Html.ActionLink(@item.Sector, "Contracts", "Portfolio", new { id = item.Id }, null)
+                        }
+
                     </td>
                 </tr>
             }

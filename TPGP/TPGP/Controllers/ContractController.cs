@@ -1,6 +1,5 @@
 ﻿using PagedList;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Web.Mvc;
 using TPGP.ActionFilters;
@@ -42,6 +41,7 @@ namespace TPGP.Controllers
                 page = 1;
 
             var contracts = contractRepository.Pagination(c => c.Name, noPage, 10, out int total);
+            contracts = zoneRepository.GetAll().Include("Contracts").Where(z => z.Label.ToLower().Contains(searchString.ToLower())).SelectMany(z => z.Contracts);
 
             if (contracts.Count() == 0)
             {
@@ -52,12 +52,9 @@ namespace TPGP.Controllers
             if (!string.IsNullOrEmpty(searchString))
             {
                 contracts = contractRepository.GetByFilter(c => c.Name.ToLower().Contains(searchString.ToLower()));
-
-                if (contracts.Count() == 0)
-                    contracts = zoneRepository.GetAll().Include("Contracts").Where(z => z.Label.ToLower().Contains(searchString.ToLower())).SelectMany(z => z.Contracts);
             }
 
-            cvm.Contracts = new StaticPagedList<Contract>(contracts, noPage + 1, 10, total);
+            cvm.Contracts = new StaticPagedList<Contract>(contracts, noPage + 1, Utils.Constants.ITEMS_PER_PAGE, total);
 
             return View(cvm);
         }
