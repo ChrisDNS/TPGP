@@ -110,6 +110,18 @@ namespace TPGP
                 new GeographicalZone { Label = "Chine", Parent = continents[1] },
                 new GeographicalZone { Label = "Algérie", Parent = continents[3] },
                 new GeographicalZone { Label = "Canada", Parent = continents[4] },
+                new GeographicalZone { Label = "Pologne", Parent = continents[0] },
+                new GeographicalZone { Label = "Hollande", Parent = continents[0] },
+                new GeographicalZone { Label = "Luxembourg", Parent = continents[0] },
+                new GeographicalZone { Label = "Autriche", Parent = continents[0] },
+                new GeographicalZone { Label = "Bolivie", Parent = continents[4] },
+                new GeographicalZone { Label = "Pérou", Parent = continents[4] },
+                new GeographicalZone { Label = "Argentine", Parent = continents[4] },
+                new GeographicalZone { Label = "Brésil", Parent = continents[4] },
+                new GeographicalZone { Label = "Japon", Parent = continents[1] },
+                new GeographicalZone { Label = "Roumanie", Parent = continents[0] },
+                new GeographicalZone { Label = "Suède", Parent = continents[0] },
+                new GeographicalZone { Label = "Cambodge", Parent = continents[1] }
             };
 
             IList<GeographicalZone> countriesContracts1 = new List<GeographicalZone>();
