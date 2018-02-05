@@ -64,7 +64,7 @@ namespace TPGP.Controllers
 
                 var newFile = new Models.Jobs.File
                 {
-                    UserId=user.Id,
+                    UserId = user.Id,
                     Id = f.Id,
                     FilePath = "~/pdf_upload/" + file.FileName
                 };
@@ -78,7 +78,7 @@ namespace TPGP.Controllers
                 user.DesiredRoleName = roleRepository.GetByFilter(r => user.DesiredRoleId == r.Id).FirstOrDefault().RoleName;
 
                 userRepository.Update(user);
-                userRepository.SaveChanges();          
+                userRepository.SaveChanges();
             }
 
             return RedirectToAction("Index", "Account", uvm);

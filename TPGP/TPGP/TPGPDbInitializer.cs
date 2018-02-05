@@ -140,15 +140,27 @@ namespace TPGP
                 new Contract { Name = "Contract-22", InitDate = DateTime.Now, EndDate = DateTime.Now.AddDays(766), Bonus = 621.74, Company = "Sanofi", Portfolio = portfolios[6] },
                 new Contract { Name = "Contract-23", InitDate = DateTime.Now, EndDate = DateTime.Now.AddDays(777), Bonus = 91.94, Company = "Lindt & Sprüngli", Portfolio = portfolios[9] },
                 new Contract { Name = "Contract-24", InitDate = DateTime.Now, EndDate = DateTime.Now.AddDays(7897), Bonus = 281.74, Company = "Google", Portfolio = portfolios[9] },
-                new Contract { Name = "Contract-25", InitDate = DateTime.Now, EndDate = DateTime.Now.AddDays(765), Bonus = 278.74, Company = "Yahoo", Portfolio = portfolios[8] },
-                new Contract { Name = "Contract-26", InitDate = DateTime.Now, EndDate = DateTime.Now.AddDays(1174), Bonus = 291.74, Company = "Corsair", Portfolio = portfolios[9] }
+                new Contract { Name = "Contract-25", InitDate = DateTime.Now, EndDate = DateTime.Now.AddDays(765), Bonus = 278.94, Company = "Yahoo", Portfolio = portfolios[8] },
+                new Contract { Name = "Contract-26", InitDate = DateTime.Now, EndDate = DateTime.Now.AddDays(117), Bonus = 291.74, Company = "Nvidia", Portfolio = portfolios[9] },
+                new Contract { Name = "Contract-27", InitDate = DateTime.Now, EndDate = DateTime.Now.AddDays(174), Bonus = 291.74, Company = "AMD", Portfolio = portfolios[2] },
+                new Contract { Name = "Contract-28", InitDate = DateTime.Now, EndDate = DateTime.Now.AddDays(114), Bonus = 231.78, Company = "BitFenix", Portfolio = portfolios[10] },
+                new Contract { Name = "Contract-29", InitDate = DateTime.Now, EndDate = DateTime.Now.AddDays(174), Bonus = 391.74, Company = "Aston Martin", Portfolio = portfolios[1] },
+                new Contract { Name = "Contract-30", InitDate = DateTime.Now, EndDate = DateTime.Now.AddDays(1174), Bonus = 291.74, Company = "Michelin", Portfolio = portfolios[0] },
+                new Contract { Name = "Contract-31", InitDate = DateTime.Now, EndDate = DateTime.Now.AddDays(119), Bonus = 291.74, Company = "Norauto", Portfolio = portfolios[3] },
+                new Contract { Name = "Contract-32", InitDate = DateTime.Now, EndDate = DateTime.Now.AddDays(1178), Bonus = 2471.24, Company = "Leclerc", Portfolio = portfolios[4] },
+                new Contract { Name = "Contract-33", InitDate = DateTime.Now, EndDate = DateTime.Now.AddDays(174), Bonus = 491.74, Company = "Serpentard", Portfolio = portfolios[5] },
+                new Contract { Name = "Contract-34", InitDate = DateTime.Now, EndDate = DateTime.Now.AddDays(1174), Bonus = 291.74, Company = "UHU", Portfolio = portfolios[5] },
+                new Contract { Name = "Contract-35", InitDate = DateTime.Now, EndDate = DateTime.Now.AddDays(164), Bonus = 2911.74, Company = "Ferrero Rocher", Portfolio = portfolios[5] },
+                new Contract { Name = "Contract-36", InitDate = DateTime.Now, EndDate = DateTime.Now.AddDays(2174), Bonus = 91.784, Company = "Nutella", Portfolio = portfolios[6] },
+                new Contract { Name = "Contract-37", InitDate = DateTime.Now, EndDate = DateTime.Now.AddDays(1074), Bonus = 2951.74, Company = "Ford", Portfolio = portfolios[9] },
+                new Contract { Name = "Contract-38", InitDate = DateTime.Now, EndDate = DateTime.Now.AddDays(114), Bonus = 2991.741, Company = "Sony", Portfolio = portfolios[9] }
             };
 
             IList<User> users = new List<User>
             {
-               new User { Username = "Sarra", Firstname = "Sarra", Lastname = "Sarra", Email = "sarra@sarra.sarra", Zone = countries[0], Role = roles[0] },
-                new User { Username = "Pierre", Firstname = "Pierre", Lastname = "Pierre", Email = "pierre@pierre.pierre", Zone = countries[0], Role = roles[1] },
-                new User { Username = "Sidi", Firstname = "Sidi", Lastname = "Sidi", Email = "sidi@sidi.sidi", Zone = countries[1], Role = roles[2] },
+                new User { Username = "Sarra", Firstname = "Sarra", Lastname = "Sarra", Email = "sarra@sarra.sarra", Zone = countries[0], Role = roles[0] },
+                new User { Username = "Pierre", Firstname = "Pierre", Lastname = "Pierre", Email = "pierre@pierre.pierre", Zone = countries[1], Role = roles[1] },
+                new User { Username = "Sidi", Firstname = "Sidi", Lastname = "Sidi", Email = "sidi@sidi.sidi", Zone = countries[4], Role = roles[2] },
                 new User { Username = "Sidi2", Firstname = "Sidi2", Lastname = "Sidi2", Email = "sidi2@sidi2.sidi2", Zone = countries[2], Role = roles[2] },
                 new User { Username = "Chris", Firstname = "Chris", Lastname = "Chris", Email = "chris@chris.chris", Zone = countries[1], Role = roles[3] }
             };
@@ -156,16 +168,14 @@ namespace TPGP
             IList<Scope> scopes = new List<Scope>
             {
                 new Scope { UserId = 3, PortfolioId = 1, Initial = true },
-                new Scope { UserId = 3, PortfolioId = 2, Initial = false },
                 new Scope { UserId = 3, PortfolioId = 3, Initial = false },
+                new Scope { UserId = 3, PortfolioId = 2, Initial = false },
                 new Scope { UserId = 3, PortfolioId = 4, Initial = false },
                 new Scope { UserId = 3, PortfolioId = 5, Initial = false },
 
-                new Scope { UserId = 4, PortfolioId = 1, Initial = true },
-                new Scope { UserId = 4, PortfolioId = 2, Initial = false },
-                new Scope { UserId = 4, PortfolioId = 3, Initial = false },
-                new Scope { UserId = 4, PortfolioId = 4, Initial = false },
-                new Scope { UserId = 4, PortfolioId = 5, Initial = false }
+                new Scope { UserId = 5, PortfolioId = 1, Initial = true },
+                new Scope { UserId = 5, PortfolioId = 10, Initial = false },
+                new Scope { UserId = 5, PortfolioId = 9, Initial = false }
             };
 
             foreach (var user in users)
@@ -188,6 +198,7 @@ namespace TPGP
 
             foreach (var country in countries)
                 context.Zones.Add(country);
+
 
             base.Seed(context);
         }

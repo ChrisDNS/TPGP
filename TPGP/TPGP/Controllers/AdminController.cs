@@ -54,16 +54,16 @@ namespace TPGP.Controllers
             return View(userViewModel);
         }
 
-        public ActionResult Save(UserViewModel uvm)
+        [HttpPost]
+        public ActionResult Edit(UserViewModel uvm)
         {
-
             var usr = userRepository.GetByFilter(u => u.Id == uvm.User.Id).FirstOrDefault();
 
             if (usr != null)
             {
-                long i = usr.RoleId;
                 usr.Role = roleRepository.GetByFilter(r => r.RoleName == usr.DesiredRoleName).FirstOrDefault();
                 usr.IsBeingProcessed = false;
+                usr.DesiredRoleId = -1;
             }
 
             userRepository.Update(usr);
@@ -71,6 +71,7 @@ namespace TPGP.Controllers
 
             return RedirectToAction("Index");
         }
+
         public FileResult Download(long id)
         {
             var file = fileRepository.GetByFilter(f => f.UserId == id).FirstOrDefault();

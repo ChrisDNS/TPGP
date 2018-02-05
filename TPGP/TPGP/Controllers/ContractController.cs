@@ -1,5 +1,6 @@
 ﻿using PagedList;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web.Mvc;
 using TPGP.ActionFilters;
@@ -41,8 +42,6 @@ namespace TPGP.Controllers
                 page = 1;
 
             var contracts = contractRepository.Pagination(c => c.Name, noPage, 10, out int total);
-
-            //var caca = contractRepository.GetContractsByUserScope((long)Session["id"]);
 
             if (contracts.Count() == 0)
             {
@@ -94,10 +93,12 @@ namespace TPGP.Controllers
         {
             if (ModelState.IsValid)
             {
-                var zonesFromDbs = zoneRepository.GetByFilter(z => cvm.ZonesIds.Contains(z.Id));
-
                 var selectedZones = new List<GeographicalZone>();
-                zonesFromDbs.ToList().ForEach(z => selectedZones.Add(z));
+                if (cvm.ZonesIds != null)
+                {
+                    var zonesFromDbs = zoneRepository.GetByFilter(z => cvm.ZonesIds.Contains(z.Id));
+                    zonesFromDbs.ToList().ForEach(z => selectedZones.Add(z));
+                }
 
                 var userZone = (string)Session["zone"];
                 selectedZones.Add(zoneRepository.GetByFilter(z => z.Label == userZone).FirstOrDefault());

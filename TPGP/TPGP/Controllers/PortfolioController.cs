@@ -15,13 +15,16 @@ namespace TPGP.Controllers
         private readonly IContractRepository contractRepository;
         private readonly IPortfolioRepository portfolioRepository;
         private readonly IScopeRepository scopeRepository;
+        private readonly IGeographicalZoneRepository zoneRepository;
 
         public PortfolioController(IContractRepository contractRepository, IPortfolioRepository portfolioRepository,
-                                                                           IScopeRepository scopeRepository)
+                                                                           IScopeRepository scopeRepository,
+                                                                           IGeographicalZoneRepository zoneRepository)
         {
             this.contractRepository = contractRepository;
             this.portfolioRepository = portfolioRepository;
             this.scopeRepository = scopeRepository;
+            this.zoneRepository = zoneRepository;
         }
 
         public ActionResult Index(int? page, string sortOrder, string searchString)
@@ -39,7 +42,7 @@ namespace TPGP.Controllers
                 portfolios = portfolioRepository.Pagination(p => p.Sector, noPage, Constants.ITEMS_PER_PAGE, out total);
 
             if (!string.IsNullOrEmpty(searchString))
-                portfolios = portfolios.Where(c => c.Sector.Contains(searchString));
+                portfolios = portfolios.Where(c => c.Sector.ToLower().Contains(searchString.ToLower()));
 
             var portfoliosViewModels = new PortfoliosViewModel
             {
@@ -63,6 +66,9 @@ namespace TPGP.Controllers
             var contracts = contractRepository.Pagination(p => p.PortfolioId == id, c => c.Name, noPage, Constants.ITEMS_PER_PAGE, out int total);
             contractsViewModels.Portfolio.Scope = scopeRepository.GetScopeByPortfolio(id) ? "Initial" : "Extent";
 
+            string zoneUser = (string)Session["zone"];
+            contracts = zoneRepository.GetAll().Include("Contracts").Where(z => z.Label == zoneUser).SelectMany(z => z.Contracts);
+
             if (contracts.Count() == 0)
             {
                 contractsViewModels.IsListEmpty = true;
@@ -70,7 +76,7 @@ namespace TPGP.Controllers
             }
 
             if (!string.IsNullOrEmpty(searchString))
-                contracts = contracts.Where(c => c.Name.Contains(searchString));
+                contracts = contracts.Where(c => c.Name.ToLower().Contains(searchString.ToLower()));
 
             contractsViewModels.Contracts = new StaticPagedList<Contract>(contracts, noPage + 1, Constants.ITEMS_PER_PAGE, total);
 
