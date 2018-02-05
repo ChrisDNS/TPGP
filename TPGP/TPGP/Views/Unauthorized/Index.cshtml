@@ -2,33 +2,20 @@
     ViewBag.Title = "Unauthorised Request";
 }
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <title>TPGP</title>
-</head>
-
-<body>
-    <div style="padding:15px;">
-        <h1>
-            Error 401 : Unauthorised Request
-        </h1>
+<div style="padding:15px;">
+    <h1>
+        Error 401 : Unauthorised Request
+    </h1>
+    <br />
+    <br />
+    <h2>
+        Please, check if you are logged in.
         <br />
-        <br />
-        <h2>
-            Please, check if you are logged in.
-            <br />
-            <br />If so, you do not have permission to access the requested resource due to security restrictions.<br />In order to gain access, please speak to your system administrator.
-        </h2>
+        <br />If so, you do not have permission to access the requested resource due to security restrictions.<br />In order to gain access, please speak to your system administrator.
+    </h2>
+</div>
 
-        <div>
-            <center style="padding-top:30px;">@Html.ActionLink("Log in", "Index", "Home", null, new { @class = "btn btn-lg btn-danger" })</center>
-            <center style="padding-top:30px;">@Html.ActionLink("Change your status", "ChangeStatus", "Account", null, new { @class = "btn btn-lg btn-success" })</center>
-        </div>
-    </div>
-</body>
-</html>
+<div class="container center" style="display: flex; padding: 30px; justify-content: center;">
+    @Html.ActionLink("Log in", "Index", "Home", null, new { @class = "btn btn-lg btn-danger" })
+    <div style="padding-left: 20px;">@Html.ActionLink("Change your status", "ChangeStatus", "Account", null, new { @class = "btn btn-lg btn-success" })</div>
+</div>

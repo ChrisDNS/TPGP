@@ -42,24 +42,5 @@ namespace TPGP.Models.Jobs
         public User()
         {
         }
-
-        public User(string username, string firstname, string lastname, string email, GeographicalZone zone, Role role)
-        {
-            Username = username;
-            Firstname = firstname;
-            Lastname = lastname;
-            Email = email;
-            Zone = zone;
-            Role = role;
-        }
-
-        public void Edit(User user)
-        {
-            Username = user.Username;
-            Firstname = user.Firstname;
-            Lastname = user.Lastname;
-            Email = user.Email;
-            Role = user.Role;
-        }
     }
 }

@@ -96,9 +96,16 @@
 
 else
 {
+    if (Model.Portfolio.Scope == "Initial")
+    {
+        <div class="col-lg-4">
+            @Html.ActionLink("Create new contract", "Create", "Contract", null, new { @class = "btn btn-primary" })
+        </div>
+    }
+
     <div class="container" style="padding:50px;">
         <div class="alert alert-info">
-            <strong>Info!</strong> There is no contract yet in this portfolio.
+            <strong>Info!</strong> There is no contract in this portfolio yet.
         </div>
     </div>
 }

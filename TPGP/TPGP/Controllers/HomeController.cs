@@ -95,6 +95,8 @@ namespace TPGP.Controllers
         {
             Session["username"] = null;
             Session["role"] = null;
+            Session["id"] = null;
+            Session["Zone"] = null;
 
             return RedirectToAction("Index");
         }
