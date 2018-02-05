@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using LDAP;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -19,11 +21,14 @@ namespace TPGPServices.Controllers
      
         private readonly IContractRepository contractRepository;
         private readonly IPortfolioRepository portfolioRepository;
+        private readonly IGeographicalZoneRepository geographicalZoneRepository;
      
-         public ContractsController(IContractRepository contractRepository, IPortfolioRepository portfolioRepository)
+         public ContractsController(IContractRepository contractRepository, IPortfolioRepository portfolioRepository,
+             IGeographicalZoneRepository geographicalZoneRepository)
          {
-             this.contractRepository = contractRepository;
+            this.contractRepository = contractRepository;
             this.portfolioRepository = portfolioRepository;
+            this.geographicalZoneRepository = geographicalZoneRepository;
            
          }
 
@@ -89,21 +94,35 @@ namespace TPGPServices.Controllers
 
         }
 
-        
-       /* public IHttpActionResult PostCreate([FromBody] Product c)
+
+        public HttpResponseMessage PostCreate([FromBody] Contract_VM c)
         {
+            if (!IsConnected())
+               {
+                  return Request.CreateErrorResponse(HttpStatusCode.Unauthorized, "You must be connected");
+             }
+            long portfolioId = portfolioRepository.GetByFilter(p => p.Sector.Equals(c.Sector)).First().Id;
+            //string zone = LDAPService.Instance.GetLDAPUser(HttpContext.Current.Session["Username"].ToString()).Zone;
+           /* string zone = "France";
+           
+            var zonesFromDbs = geographicalZoneRepository.GetByFilter(z => z.Id.Equals(1));
 
-            // string name = o["name"].ToString();
-
-            string Name = c.Name;
-            /* DateTime InitDate =  
-        public DateTime EndDate { get; set; }
-        public double Bonus { get; set; }
-        public string Company { get; set; }
-        public Portfolio_VM Portfolio { get; set; }
-        public List<string> Zones { get; set; }*/
-            //return Ok("success "+ c.Name);
-        //}
+            var selectedZones = new List<GeographicalZone>();
+            zonesFromDbs.ToList().ForEach(z => selectedZones.Add(z));*/
+            Contract contract = new Contract
+            {
+                Name = c.Name,
+                InitDate = Convert.ToDateTime(c.InitDate),
+                EndDate = Convert.ToDateTime(c.EndDate),
+                Bonus = c.Bonus,
+                Company = c.Company,
+                PortfolioId = portfolioId,
+                //Zones = selectedZones
+            };         
+            contractRepository.Insert(contract);
+            contractRepository.SaveChanges();
+            return Request.CreateResponse(HttpStatusCode.Created, "Contract successfully created");
+        }
         //************************ Private Mehode ****************************************
         private HttpResponseMessage ContractById(int id)
         {
@@ -122,20 +141,6 @@ namespace TPGPServices.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, ContractTOjson(c));
 
         }
-
-
-        private Portfolio GetPortfolioById(long id)
-        {
-            Portfolio p = portfolioRepository.GetById(id);
-            return p;
-        }
-
-        private Portfolio GetPortfolioBySector(string sector)
-        {
-            Portfolio p = portfolioRepository.GetByFilter(port => port.Sector.Equals(sector)).First();
-            return p;
-        }
-
        
         private List<string> geographicalZonesTOjson(List<GeographicalZone> zones)
         {
@@ -150,21 +155,17 @@ namespace TPGPServices.Controllers
         private Contract_VM ContractTOjson(Contract c)
         {
             List<string> g = geographicalZonesTOjson(c.Zones.ToList());
-            Portfolio p = GetPortfolioById(c.PortfolioId);
-            Portfolio_VM p_vm = new Portfolio_VM()
-            {
-                Scope = p.Scope,
-                Sector = p.Sector
-            };
+            Portfolio p = portfolioRepository.GetById(c.PortfolioId);
+           
             Contract_VM c_vm = new Contract_VM()
             {
                 Id = c.Id,
                 Name = c.Name,
-                InitDate = c.InitDate,
-                EndDate = c.EndDate,
+                InitDate = c.InitDate.ToString("dd/MM/yyyy"),
+                EndDate = c.EndDate.ToString("dd/MM/yyyy"),
                 Bonus = c.Bonus,
                 Company = c.Company,
-                Portfolio = p_vm,
+                Sector = p.Sector,
                 Zones = g
 
             };

@@ -29,6 +29,7 @@ namespace TPGPServices
             container.RegisterType<IPortfolioRepository, PortfolioRepository>(new HierarchicalLifetimeManager());
             container.RegisterType<IUserRepository, UserRepository>(new HierarchicalLifetimeManager());
             container.RegisterType<IRoleRepository, RoleRepository>(new HierarchicalLifetimeManager());
+            container.RegisterType<IGeographicalZoneRepository, GeographicalZoneRepository>(new HierarchicalLifetimeManager());
             config.DependencyResolver = new UnityResolv(container);
         }
     }

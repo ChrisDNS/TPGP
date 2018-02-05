@@ -154,6 +154,8 @@
     <Compile Include="View_Model\User_VM.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Json\home.json" />
+    <Content Include="Json\contracts.json" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

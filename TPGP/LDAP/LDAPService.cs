@@ -42,5 +42,10 @@ namespace LDAP
 
             return null;
         }
+
+        public LDAPUser GetLDAPUser(string login)
+        {
+            return users.Find(u => u.Username == login);
+        }
     }
 }

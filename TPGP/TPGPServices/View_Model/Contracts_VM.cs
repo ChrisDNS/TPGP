@@ -11,11 +11,11 @@ namespace TPGPServices.Models
     {
         public long Id { get; set; }
         public string Name { get; set; }
-        public DateTime InitDate { get; set; }
-        public DateTime EndDate { get; set; }
+        public string InitDate { get; set; }
+        public string EndDate { get; set; }
         public double Bonus { get; set; }
         public string Company { get; set; }
-        public Portfolio_VM Portfolio { get; set; }
+        public string Sector { get; set; }
         public List<string> Zones { get; set; }
     }
 }
